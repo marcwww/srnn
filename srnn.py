@@ -289,7 +289,7 @@ input_lang, output_lang, pairs = prepareData('spa', 'en', True)
 print(random.choice(pairs))
 
 def create_stack(stack_size,stack_elem_size):
-    return np.array((([EMPTY_VAL] * stack_elem_size)) * stack_size)
+    return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)
 
 def shift_matrix(n):
     W_up=np.eye(n)
@@ -395,7 +395,7 @@ class EncoderSRNN(nn.Module):
         self.is_stack_empty=True
 
     def forward(self, input, hidden):
-        import crash_on_ipy
+        # import crash_on_ipy
         embedded = self.embedding(input).view(1, 1, -1)
         mid_hidden = self.input2hid(embedded)+self.hid2hid(hidden)
         for stack_index in range(self.nstack):
@@ -414,7 +414,9 @@ class EncoderSRNN(nn.Module):
                 act[NOOP]*self.stacks[stack_index]
 
             self.stacks[stack_index][0]=act[PUSH]*push_val
-            self.stacks[stack_index][self.stack_size-1]=act[POP]*EMPTY_VAL
+            self.stacks[stack_index][self.stack_size-1]=\
+                Variable(torch.
+                         Tensor(np.array([act[POP]*EMPTY_VAL]*self.stack_elem_size)))
 
         hidden=self.nonLinear(mid_hidden)
         output=hidden
@@ -473,6 +475,7 @@ class DecoderSRNN(nn.Module):
         self.nstack=nstack
         self.stack_size=stack_size
         self.stack_depth=stack_depth
+        self.stack_elem_size=stack_elem_size
         self.embedding = nn.Embedding(output_size, hidden_size)
         self.nonLinear=nn.Sigmoid()
         # self.gru = nn.GRU(hidden_size, hidden_size)
@@ -493,7 +496,7 @@ class DecoderSRNN(nn.Module):
                           for _ in range(nstack)] if use_cuda else \
                             [nn.Linear(stack_elem_size * stack_depth, hidden_size)
                              for _ in range(nstack)]
-
+        self.hid2out = nn.Linear(hidden_size,output_size)
 
         self.out = nn.Linear(hidden_size, output_size)
         self.log_softmax = nn.LogSoftmax(dim=1)
@@ -531,7 +534,9 @@ class DecoderSRNN(nn.Module):
                 act[POP]*self.W_up.matmul(self.stacks[stack_index])+\
                 act[NOOP]*self.stacks[stack_index]
             self.stacks[stack_index][0]=act[PUSH]*push_val
-            self.stacks[stack_index][self.stack_size-1]=act[POP]*EMPTY_VAL
+            self.stacks[stack_index][self.stack_size - 1] = \
+                Variable(torch.Tensor
+                         (np.array([act[POP] * EMPTY_VAL] * self.stack_elem_size)))
 
         hidden=self.nonLinear(mid_hidden)
         output=self.hid2out(hidden)[0]
