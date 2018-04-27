@@ -385,11 +385,11 @@ class EncoderSRNN(nn.Module):
         self.is_stack_empty=True
 
     def forward(self, input, hidden):
+        import crash_on_ipy
         embedded = self.embedding(input).view(1, 1, -1)
         mid_hidden = self.input2hid(embedded)+self.hid2hid(hidden)
         for stack_index in range(self.nstack):
             stack_vals=self.stacks[stack_index][0:self.stack_depth].view(-1)
-            import crash_on_ipy
             if use_cuda:
                 stack_vals=stack_vals.cuda()
             mid_hidden+=self.stack2hid[stack_index](stack_vals)
