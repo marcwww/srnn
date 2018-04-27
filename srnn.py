@@ -390,8 +390,8 @@ class EncoderSRNN(nn.Module):
         mid_hidden = self.input2hid(embedded)+self.hid2hid(hidden)
         for stack_index in range(self.nstack):
             stack_vals=self.stacks[stack_index][0:self.stack_depth].view(-1)
-            # if use_cuda:
-            #     stack_vals=stack_vals.cuda()
+            if use_cuda:
+                stack_vals=stack_vals.cuda()
             mid_hidden+=self.stack2hid[stack_index](stack_vals)
 
             act=self.hid2act[stack_index](hidden).view(-1)
