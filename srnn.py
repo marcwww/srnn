@@ -491,8 +491,8 @@ class DecoderSRNN(nn.Module):
                   for _ in range(nstack)]
         self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size).cuda()
                           for _ in range(nstack)] if use_cuda else \
-            [nn.Linear(stack_elem_size * stack_depth, hidden_size)
-             for _ in range(nstack)]
+                            [nn.Linear(stack_elem_size * stack_depth, hidden_size)
+                             for _ in range(nstack)]
 
 
         self.out = nn.Linear(hidden_size, output_size)
@@ -935,7 +935,7 @@ def evaluateRandomly(encoder, decoder, n=10):
 hidden_size = 256
 encoder1 = EncoderSRNN(input_lang.n_words, hidden_size,
                        nstack=1,stack_depth=2,stack_size=200,
-                       stack_elem_size=1)
+                       stack_elem_size=hidden_size)
 attn_decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
                             nstack=1,stack_depth=2,stack_size=200,
                             stack_elem_size=hidden_size)
