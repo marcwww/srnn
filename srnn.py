@@ -476,27 +476,42 @@ class DecoderSRNN(nn.Module):
         self.embedding = nn.Embedding(output_size, hidden_size)
         self.nonLinear=nn.Sigmoid()
         # self.gru = nn.GRU(hidden_size, hidden_size)
-        self.hid2hid=nn.Linear(hidden_size,hidden_size)
-        self.input2hid=nn.Linear(hidden_size,hidden_size)
+
+        self.hid2hid = nn.Linear(hidden_size, hidden_size).cuda() if use_cuda \
+            else nn.Linear(hidden_size, hidden_size)
+        self.input2hid = nn.Linear(hidden_size, hidden_size).cuda() if use_cuda \
+            else nn.Linear(hidden_size, hidden_size)
+        self.hid2act = [nn.Linear(hidden_size, NACT).cuda()
+                        for _ in range(nstack)] if use_cuda \
+            else [nn.Linear(hidden_size, NACT)
+                  for _ in range(nstack)]
+        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size).cuda()
+                          for _ in range(nstack)] if use_cuda \
+            else [nn.Linear(hidden_size, stack_elem_size)
+                  for _ in range(nstack)]
+        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size).cuda()
+                          for _ in range(nstack)] if use_cuda else \
+            [nn.Linear(stack_elem_size * stack_depth, hidden_size)
+             for _ in range(nstack)]
+
+
         self.out = nn.Linear(hidden_size, output_size)
         self.log_softmax = nn.LogSoftmax(dim=1)
         self.softmax=nn.Softmax()
-        self.hid2out=nn.Linear(hidden_size,output_size)
-        self.hid2act=[nn.Linear(hidden_size,NACT)
-                      for _ in range(nstack)]
-        self.hid2stack=[nn.Linear(hidden_size,stack_elem_size)
-                        for _ in range(nstack)]
-        self.stack2hid=[nn.Linear(stack_elem_size*stack_depth,hidden_size)
-                        for _ in range(nstack)]
+
         empty_stack=torch.Tensor(create_stack(stack_size,stack_elem_size))
-        self.stacks=[Variable(empty_stack)]*nstack
-        if use_cuda:
-            self.stacks=[self.stacks[i].cuda() for i in range(nstack)]
+        self.stacks=[Variable(empty_stack).cuda()]*nstack if use_cuda else \
+                        [Variable(empty_stack)] * nstack
+
         W_up, W_down = shift_matrix(stack_size)
-        self.W_up = Variable(torch.Tensor(W_up))
-        self.W_down = Variable(torch.Tensor(W_down))
-        self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size)
-                      for _ in range(nstack)]
+        self.W_up = Variable(torch.Tensor(W_up)).cuda() if use_cuda else \
+            Variable(torch.Tensor(W_up))
+        self.W_down = Variable(torch.Tensor(W_down)).cuda() if use_cuda else \
+            Variable(torch.Tensor(W_down))
+        self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size).cuda()
+                      for _ in range(nstack)] if use_cuda else \
+                        [nn.Linear(stack_elem_size, stack_elem_size)
+                            for _ in range(nstack)]
 
     def forward(self, input, hidden):
         emb = self.embedding(input).view(1, 1, -1)
