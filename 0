@@ -1,0 +1,70 @@
+digraph {
+	graph [size="12,12"]
+	node [align=left fontsize=12 height=0.2 ranksep=0.1 shape=box style=filled]
+	4450188200 [label=TanhBackward0]
+	4450188256 -> 4450188200
+	4450188256 [label=AddBackward1]
+	4450188480 -> 4450188256
+	4450188480 [label=AddBackward1]
+	4450188648 -> 4450188480
+	4450188648 [label=AddBackward1]
+	4450188816 -> 4450188648
+	4450188816 [label=ViewBackward]
+	4450188984 -> 4450188816
+	4450188984 [label=MmBackward]
+	4450189096 -> 4450188984
+	4450189096 [label=ViewBackward]
+	4450189264 -> 4450189096
+	4450189264 [label=ViewBackward]
+	4446170472 -> 4450189264
+	4446170472 [label=EmbeddingBackward]
+	4446169800 -> 4446170472
+	4446169800 [label=IndexBackward]
+	4450361528 -> 4446170472
+	4450361528 [label="
+ (3, 10)" fillcolor=lightblue]
+	4450235976 -> 4446170472
+	4450235976 [label="(1)" fillcolor=orange]
+	4450189152 -> 4450188984
+	4450189152 [label=TBackward]
+	4450361416 -> 4450189152
+	4450361416 [label="
+ (10, 10)" fillcolor=lightblue]
+	4450188872 -> 4450188648
+	4450188872 [label=ExpandBackward]
+	4450189040 -> 4450188872
+	4450189040 [label="
+ (10)" fillcolor=lightblue]
+	4450188704 -> 4450188480
+	4450188704 [label=AddBackward1]
+	4450188928 -> 4450188704
+	4450188928 [label=ViewBackward]
+	4450361472 -> 4450188928
+	4450361472 [label=MmBackward]
+	4450361752 -> 4450361472
+	4450361752 [label=TBackward]
+	4450361864 -> 4450361752
+	4450361864 [label="
+ (10, 10)" fillcolor=lightblue]
+	4450189208 -> 4450188704
+	4450189208 [label=ExpandBackward]
+	4450361584 -> 4450189208
+	4450361584 [label="
+ (10)" fillcolor=lightblue]
+	4450188536 -> 4450188256
+	4450188536 [label=ExpandBackward]
+	4450188760 -> 4450188536
+	4450188760 [label=AddBackward1]
+	4450361808 -> 4450188760
+	4450361808 [label=SqueezeBackward1]
+	4450361976 -> 4450361808
+	4450361976 [label=MmBackward]
+	4450362144 -> 4450361976
+	4450362144 [label=TBackward]
+	4450362256 -> 4450362144
+	4450362256 [label="
+ (10, 2)" fillcolor=lightblue]
+	4450362032 -> 4450188760
+	4450362032 [label="
+ (10)" fillcolor=lightblue]
+}
