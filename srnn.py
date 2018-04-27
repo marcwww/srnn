@@ -388,8 +388,10 @@ class EncoderSRNN(nn.Module):
                         [Variable(empty_stack)] * nstack
 
         W_up, W_down = shift_matrix(stack_size)
-        self.W_up = Variable(torch.Tensor(W_up))
-        self.W_down = Variable(torch.Tensor(W_down))
+        self.W_up = Variable(torch.Tensor(W_up)).cuda() if use_cuda else \
+                        Variable(torch.Tensor(W_up))
+        self.W_down = Variable(torch.Tensor(W_down)).cuda() if use_cuda else \
+                        Variable(torch.Tensor(W_down))
         self.is_stack_empty=True
 
     def forward(self, input, hidden):
