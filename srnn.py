@@ -414,9 +414,10 @@ class EncoderSRNN(nn.Module):
                 act[NOOP]*self.stacks[stack_index]
 
             self.stacks[stack_index][0]=act[PUSH]*push_val
-            self.stacks[stack_index][self.stack_size-1]=\
+            self.stacks[stack_index][self.stack_size-1]= \
                 Variable(torch.
-                         Tensor(np.array([act[POP]*EMPTY_VAL]*self.stack_elem_size)))
+                         Tensor(np.array([act[POP].data[0]*EMPTY_VAL]*
+                                         self.stack_elem_size)))
 
         hidden=self.nonLinear(mid_hidden)
         output=hidden
@@ -536,7 +537,7 @@ class DecoderSRNN(nn.Module):
             self.stacks[stack_index][0]=act[PUSH]*push_val
             self.stacks[stack_index][self.stack_size - 1] = \
                 Variable(torch.Tensor
-                         (np.array([act[POP] * EMPTY_VAL] * self.stack_elem_size)))
+                         (np.array([act[POP].data[0] * EMPTY_VAL] * self.stack_elem_size)))
 
         hidden=self.nonLinear(mid_hidden)
         output=self.hid2out(hidden)[0]
