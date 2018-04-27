@@ -406,6 +406,8 @@ class EncoderSRNN(nn.Module):
             self.stacks[stack_index][self.stack_size-1]=act[POP]*EMPTY_VAL
 
         hidden=self.nonLinear(mid_hidden)
+        if use_cuda:
+            hidden=hidden.cuda()
         output=hidden
 
         return output, hidden
@@ -510,6 +512,9 @@ class DecoderSRNN(nn.Module):
         hidden=self.nonLinear(mid_hidden)
         output=self.hid2out(hidden)[0]
         output=self.log_softmax(output)
+        if use_cuda:
+            hidden=hidden.cuda()
+            output=output.cuda()
         return output, hidden
 
     def init_stack(self, enc_stack):
@@ -912,7 +917,7 @@ encoder1 = EncoderSRNN(input_lang.n_words, hidden_size,
                        stack_elem_size=1)
 attn_decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
                             nstack=1,stack_depth=2,stack_size=200,
-                            stack_elem_size=1)
+                            stack_elem_size=hidden_size)
 
 
 if use_cuda:
