@@ -377,8 +377,8 @@ class EncoderSRNN(nn.Module):
         self.softmax=nn.Softmax()
         empty_stack=torch.Tensor(create_stack(stack_size,stack_elem_size))
         self.stacks=[Variable(empty_stack)]*nstack
-        if use_cuda:
-            self.stacks=[self.stacks[i].cuda() for i in range(nstack)]
+        # if use_cuda:
+        #     self.stacks=[self.stacks[i].cuda() for i in range(nstack)]
         W_up, W_down = shift_matrix(stack_size)
         self.W_up = Variable(torch.Tensor(W_up))
         self.W_down = Variable(torch.Tensor(W_down))
@@ -390,8 +390,8 @@ class EncoderSRNN(nn.Module):
         mid_hidden = self.input2hid(embedded)+self.hid2hid(hidden)
         for stack_index in range(self.nstack):
             stack_vals=self.stacks[stack_index][0:self.stack_depth].view(-1)
-            if use_cuda:
-                stack_vals=stack_vals.cuda()
+            # if use_cuda:
+            #     stack_vals=stack_vals.cuda()
             mid_hidden+=self.stack2hid[stack_index](stack_vals)
 
             act=self.hid2act[stack_index](hidden).view(-1)
@@ -419,8 +419,8 @@ class EncoderSRNN(nn.Module):
         empty_stack = create_stack(self.stack_size,self.stack_elem_size)
         empty_stack = torch.Tensor(empty_stack)
         self.stacks = [Variable(empty_stack)] * self.nstack
-        if use_cuda:
-            self.stacks=[self.stacks[i].cuda() for i in range(self.nstack)]
+        # if use_cuda:
+        #     self.stacks=[self.stacks[i].cuda() for i in range(self.nstack)]
 
     def init_hidden(self):
         result = Variable(torch.zeros(1, 1, self.hidden_size))
