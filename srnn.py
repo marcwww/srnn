@@ -828,7 +828,7 @@ def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, lear
             plot_losses.append(plot_loss_avg)
             plot_loss_total = 0
 
-    showPlot(plot_losses)
+    # showPlot(plot_losses)
 
 
 ######################################################################
@@ -886,9 +886,8 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
     decoder_attentions = torch.zeros(max_length, max_length)
 
     for di in range(max_length):
-        decoder_output, decoder_hidden, decoder_attention = decoder(
-            decoder_input, decoder_hidden, encoder_outputs)
-        decoder_attentions[di] = decoder_attention.data
+        decoder_output, decoder_hidden = decoder(
+            decoder_input, decoder_hidden)
         topv, topi = decoder_output.data.topk(1)
         ni = topi[0][0]
         if ni == EOS_token:
@@ -900,7 +899,7 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
         decoder_input = Variable(torch.LongTensor([[ni]]))
         decoder_input = decoder_input.cuda() if use_cuda else decoder_input
 
-    return decoded_words, decoder_attentions[:di + 1]
+    return decoded_words
 
 
 ######################################################################
@@ -942,7 +941,7 @@ hidden_size = 256
 encoder1 = EncoderSRNN(input_lang.n_words, hidden_size,
                        nstack=1,stack_depth=2,stack_size=200,
                        stack_elem_size=hidden_size)
-attn_decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
+decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
                             nstack=1,stack_depth=2,stack_size=200,
                             stack_elem_size=hidden_size)
 
@@ -951,12 +950,12 @@ if use_cuda:
     encoder1 = encoder1.cuda()
     attn_decoder1 = attn_decoder1.cuda()
 
-trainIters(encoder1, attn_decoder1, 75000, print_every=5000)
+trainIters(encoder1, decoder1, 75000, print_every=5000)
 
 ######################################################################
 #
 
-evaluateRandomly(encoder1, attn_decoder1)
+evaluateRandomly(encoder1, decoder1)
 
 
 ######################################################################
@@ -974,8 +973,7 @@ evaluateRandomly(encoder1, attn_decoder1)
 #
 
 output_words, attentions = evaluate(
-    encoder1, attn_decoder1, "¿ Qué tal ?")
-plt.matshow(attentions.numpy())
+    encoder1, decoder1, "¿ Qué tal ?")
 
 
 ######################################################################
