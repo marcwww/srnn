@@ -948,7 +948,7 @@ decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
 
 if use_cuda:
     encoder1 = encoder1.cuda()
-    attn_decoder1 = attn_decoder1.cuda()
+    decoder1 = decoder1.cuda()
 
 trainIters(encoder1, decoder1, 75000, print_every=5000)
 
