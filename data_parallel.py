@@ -46,6 +46,7 @@ model.to(device)
 
 for data in rand_loader:
     input=data.to(device)
+    print(input)
     output=model(input)
     print('Outside: input size',input.size(),
           'output_size',output.size())
