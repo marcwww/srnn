@@ -1,5 +1,5 @@
 import torch
-import torch as nn
+import torch.nn as nn
 from torch.utils.data import  Dataset, DataLoader
 
 input_size=5
