@@ -39,7 +39,7 @@ class Model(nn.Module):
 
 model=Model(input_size,output_size)
 if torch.cuda.device_count()>1:
-    print('Let\'s use', torch.cuda.device_count(),"GPUs!")
+    print('Let\'s use', min(2,torch.cuda.device_count()),"GPUs!")
     model=nn.DataParallel(model)
 
 model.to(device)
