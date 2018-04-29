@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86dbae9e-7f62-410f-b5a3-d3ae7c590fc0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/srnn.py" afterPath="$PROJECT_DIR$/srnn.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/data_parallel.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +23,9 @@
     <SUITE FILE_PATH="coverage/srnn_py$test.coverage" NAME="test Coverage Results" MODIFIED="1524834397083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/srnn_py$gen_samples.coverage" NAME="gen_samples Coverage Results" MODIFIED="1523854611574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/srnn_py$task1.coverage" NAME="task1 Coverage Results" MODIFIED="1523900109779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/srnn_py$srnn.coverage" NAME="srnn Coverage Results" MODIFIED="1524881041603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/srnn_py$srnn.coverage" NAME="srnn Coverage Results" MODIFIED="1524881158434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/srnn_py$gen_train_test.coverage" NAME="gen_train_test Coverage Results" MODIFIED="1524068310539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/srnn_py$data_parallel.coverage" NAME="data_parallel Coverage Results" MODIFIED="1524964696124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DockManager">
     <window id="1">
@@ -116,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="srnn.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="srnn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srnn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="950" column="4" lean-forward="true" selection-start-line="950" selection-start-column="4" selection-end-line="950" selection-end-column="4" />
+            <state relative-caret-position="20">
+              <caret line="729" column="63" lean-forward="true" selection-start-line="729" selection-start-column="63" selection-end-line="729" selection-end-column="63" />
               <folding>
                 <element signature="e#24#3091#1" expanded="false" />
                 <element signature="e#3402#3472#0" expanded="false" />
@@ -148,7 +150,6 @@
                 <element signature="e#22339#23890#0" expanded="false" />
                 <element signature="e#23893#23963#0" expanded="false" />
                 <element signature="e#24616#24678#0" expanded="false" />
-                <element signature="e#24977#25145#0" expanded="false" />
                 <element signature="e#25148#25218#0" expanded="false" />
                 <element signature="e#28576#28646#0" expanded="false" />
                 <element signature="e#28818#28886#0" expanded="false" />
@@ -166,6 +167,18 @@
                 <element signature="e#35800#35870#0" expanded="false" />
                 <element signature="e#36028#36518#0" expanded="false" />
                 <element signature="e#36571#36799#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data_parallel.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data_parallel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -244,6 +257,7 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/crash_on_ipy.py" />
         <option value="$PROJECT_DIR$/srnn.py" />
+        <option value="$PROJECT_DIR$/data_parallel.py" />
       </list>
     </option>
   </component>
@@ -283,11 +297,6 @@
               <item name="srnn_py" type="b2602c69:ProjectViewProjectNode" />
               <item name="srnn_py" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="srnn_py" type="b2602c69:ProjectViewProjectNode" />
-              <item name="srnn_py" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -322,7 +331,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.srnn">
+  <component name="RunManager" selected="Python.data_parallel">
+    <configuration name="data_parallel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="srnn_py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_parallel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="gen_train_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -380,25 +408,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="task1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="srnn_py" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simple_rnn_task1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -419,19 +428,19 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.task1" />
-      <item index="1" class="java.lang.String" itemvalue="Python.srnn_task1" />
-      <item index="2" class="java.lang.String" itemvalue="Python.gen_train_test" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.srnn" />
+      <item index="0" class="java.lang.String" itemvalue="Python.srnn_task1" />
+      <item index="1" class="java.lang.String" itemvalue="Python.gen_train_test" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.srnn" />
+      <item index="4" class="java.lang.String" itemvalue="Python.data_parallel" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.srnn" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.srnn_task1" />
-        <item index="3" class="java.lang.String" itemvalue="Python.gen_train_test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.task1" />
+        <item index="0" class="java.lang.String" itemvalue="Python.data_parallel" />
+        <item index="1" class="java.lang.String" itemvalue="Python.srnn" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.srnn_task1" />
+        <item index="4" class="java.lang.String" itemvalue="Python.gen_train_test" />
       </list>
     </recent_temporary>
   </component>
@@ -462,11 +471,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="720" y="23" width="720" height="838" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17291415" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3526245" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28802153" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2678331" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -546,14 +554,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gen_samples.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/corpus_test.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -987,8 +987,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srnn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="950" column="4" lean-forward="true" selection-start-line="950" selection-start-column="4" selection-end-line="950" selection-end-column="4" />
+        <state relative-caret-position="20">
+          <caret line="729" column="63" lean-forward="true" selection-start-line="729" selection-start-column="63" selection-end-line="729" selection-end-column="63" />
           <folding>
             <element signature="e#24#3091#1" expanded="false" />
             <element signature="e#3402#3472#0" expanded="false" />
@@ -1016,7 +1016,6 @@
             <element signature="e#22339#23890#0" expanded="false" />
             <element signature="e#23893#23963#0" expanded="false" />
             <element signature="e#24616#24678#0" expanded="false" />
-            <element signature="e#24977#25145#0" expanded="false" />
             <element signature="e#25148#25218#0" expanded="false" />
             <element signature="e#28576#28646#0" expanded="false" />
             <element signature="e#28818#28886#0" expanded="false" />
@@ -1034,6 +1033,16 @@
             <element signature="e#35800#35870#0" expanded="false" />
             <element signature="e#36028#36518#0" expanded="false" />
             <element signature="e#36571#36799#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_parallel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
