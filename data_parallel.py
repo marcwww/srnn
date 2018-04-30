@@ -7,7 +7,7 @@ output_size=2
 batch_size=30
 data_size=100
 
-device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device=torch.cuda.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class RandomDataset(Dataset):
 
@@ -42,7 +42,7 @@ if torch.cuda.device_count()>1:
     print('Let\'s use', min(2,torch.cuda.device_count()),"GPUs!")
     model=nn.DataParallel(model)
 
-model.to(device)
+# model.to(device)
 
 for data in rand_loader:
     input=data.to(device)

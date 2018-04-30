@@ -150,7 +150,11 @@ use_cuda = torch.cuda.is_available()
 
 SOS_token = 0
 EOS_token = 1
-
+NACT=3
+EMPTY_VAL=-1
+PUSH=0
+POP=1
+NOOP=2
 
 class Lang:
     def __init__(self, name):
@@ -284,6 +288,19 @@ def prepareData(lang1, lang2, reverse=False):
 input_lang, output_lang, pairs = prepareData('spa', 'en', True)
 print(random.choice(pairs))
 
+def create_stack(stack_size,stack_elem_size):
+    return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)
+
+def shift_matrix(n):
+    W_up=np.eye(n)
+    for i in range(n-1):
+        W_up[i,:]=W_up[i+1,:]
+    W_up[n-1,:]*=0
+    W_down=np.eye(n)
+    for i in range(n-1,0,-1):
+        W_down[i,:]=W_down[i-1,:]
+    W_down[0,:]*=0
+    return W_up,W_down
 
 ######################################################################
 # The Seq2Seq Model
@@ -335,21 +352,86 @@ print(random.choice(pairs))
 #
 #
 
-class EncoderRNN(nn.Module):
-    def __init__(self, input_size, hidden_size):
-        super(EncoderRNN, self).__init__()
+class EncoderSRNN(nn.Module):
+    def __init__(self, input_size, hidden_size,
+                 nstack, stack_depth, stack_size,
+                 stack_elem_size):
+        super(EncoderSRNN, self).__init__()
+        # here input dimention is equal to hidden dimention
         self.hidden_size = hidden_size
-
+        self.nstack=nstack
+        self.stack_size=stack_size
+        self.stack_depth=stack_depth
+        self.stack_elem_size=stack_elem_size
         self.embedding = nn.Embedding(input_size, hidden_size)
-        self.gru = nn.GRU(hidden_size, hidden_size)
+        self.nonLinear=nn.Sigmoid()
+        # self.gru = nn.GRU(hidden_size, hidden_size)
+        self.hid2hid=nn.Linear(hidden_size,hidden_size).cuda() if use_cuda \
+                        else nn.Linear(hidden_size,hidden_size)
+        self.input2hid=nn.Linear(hidden_size,hidden_size).cuda() if use_cuda \
+                        else nn.Linear(hidden_size,hidden_size)
+        self.hid2act=[nn.Linear(hidden_size,NACT).cuda()
+                      for _ in range(nstack)] if use_cuda \
+                        else [nn.Linear(hidden_size,NACT)
+                      for _ in range(nstack)]
+        self.hid2stack=[nn.Linear(hidden_size,stack_elem_size).cuda()
+                        for _ in range(nstack)] if use_cuda \
+                        else [nn.Linear(hidden_size,stack_elem_size)
+                        for _ in range(nstack)]
+        self.stack2hid=[nn.Linear(stack_elem_size*stack_depth,hidden_size).cuda()
+                        for _ in range(nstack)] if use_cuda else \
+                        [nn.Linear(stack_elem_size*stack_depth,hidden_size)
+                        for _ in range(nstack)]
+        self.softmax=nn.Softmax()
+        empty_stack=torch.Tensor(create_stack(stack_size,stack_elem_size))
+        self.stacks=[Variable(empty_stack).cuda()]*nstack if use_cuda else \
+                        [Variable(empty_stack)] * nstack
+
+        W_up, W_down = shift_matrix(stack_size)
+        self.W_up = Variable(torch.Tensor(W_up)).cuda() if use_cuda else \
+                        Variable(torch.Tensor(W_up))
+        self.W_down = Variable(torch.Tensor(W_down)).cuda() if use_cuda else \
+                        Variable(torch.Tensor(W_down))
+        self.is_stack_empty=True
 
     def forward(self, input, hidden):
-        embedded = self.embedding(input)
-        output = embedded
-        output, hidden = self.gru(output, hidden)
+        # import crash_on_ipy
+        embedded = self.embedding(input).view(1, 1, -1)
+        mid_hidden = self.input2hid(embedded)+self.hid2hid(hidden)
+        for stack_index in range(self.nstack):
+            stack_vals=self.stacks[stack_index][0:self.stack_depth].view(-1)
+            mid_hidden+=self.stack2hid[stack_index](stack_vals)
+
+            act=self.hid2act[stack_index](hidden).view(-1)
+            act=self.softmax(act)
+
+            push_val=self.hid2stack[stack_index](hidden)
+            push_val=self.nonLinear(push_val)
+
+            self.stacks[stack_index]=\
+                act[PUSH]*self.W_down.matmul(self.stacks[stack_index])+\
+                act[POP]*self.W_up.matmul(self.stacks[stack_index])+\
+                act[NOOP]*self.stacks[stack_index]
+
+            self.stacks[stack_index][0]=act[PUSH]*push_val
+            self.stacks[stack_index][self.stack_size-1]= \
+                Variable(torch.
+                         Tensor(np.array([act[POP].data[0]*EMPTY_VAL]*
+                                         self.stack_elem_size)))
+
+        hidden=self.nonLinear(mid_hidden)
+        output=hidden
+
         return output, hidden
 
-    def initHidden(self):
+    def emtpy_stack(self):
+        empty_stack = create_stack(self.stack_size,self.stack_elem_size)
+        empty_stack = torch.Tensor(empty_stack)
+        self.stacks = [Variable(empty_stack)] * self.nstack
+        if use_cuda:
+            self.stacks=[self.stacks[i].cuda() for i in range(self.nstack)]
+
+    def init_hidden(self):
         result = Variable(torch.zeros(1, 1, self.hidden_size))
         if use_cuda:
             return result.cuda()
@@ -384,108 +466,93 @@ class EncoderRNN(nn.Module):
 #
 #
 
-class DecoderRNN(nn.Module):
-    def __init__(self, hidden_size, output_size):
-        super(DecoderRNN, self).__init__()
+class DecoderSRNN(nn.Module):
+    def __init__(self, hidden_size, output_size,
+                 nstack, stack_depth, stack_size,
+                 stack_elem_size):
+        super(DecoderSRNN, self).__init__()
         self.hidden_size = hidden_size
 
+        self.nstack=nstack
+        self.stack_size=stack_size
+        self.stack_depth=stack_depth
+        self.stack_elem_size=stack_elem_size
         self.embedding = nn.Embedding(output_size, hidden_size)
-        self.gru = nn.GRU(hidden_size, hidden_size)
+        self.nonLinear=nn.Sigmoid()
+        # self.gru = nn.GRU(hidden_size, hidden_size)
+
+        self.hid2hid = nn.Linear(hidden_size, hidden_size).cuda() if use_cuda \
+            else nn.Linear(hidden_size, hidden_size)
+        self.input2hid = nn.Linear(hidden_size, hidden_size).cuda() if use_cuda \
+            else nn.Linear(hidden_size, hidden_size)
+        self.hid2act = [nn.Linear(hidden_size, NACT).cuda()
+                        for _ in range(nstack)] if use_cuda \
+            else [nn.Linear(hidden_size, NACT)
+                  for _ in range(nstack)]
+        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size).cuda()
+                          for _ in range(nstack)] if use_cuda \
+            else [nn.Linear(hidden_size, stack_elem_size)
+                  for _ in range(nstack)]
+        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size).cuda()
+                          for _ in range(nstack)] if use_cuda else \
+                            [nn.Linear(stack_elem_size * stack_depth, hidden_size)
+                             for _ in range(nstack)]
+        self.hid2out = nn.Linear(hidden_size,output_size)
+
         self.out = nn.Linear(hidden_size, output_size)
-        self.softmax = nn.LogSoftmax(dim=1)
+        self.log_softmax = nn.LogSoftmax(dim=1)
+        self.softmax=nn.Softmax()
+
+        empty_stack=torch.Tensor(create_stack(stack_size,stack_elem_size))
+        self.stacks=[Variable(empty_stack).cuda()]*nstack if use_cuda else \
+                        [Variable(empty_stack)] * nstack
+
+        W_up, W_down = shift_matrix(stack_size)
+        self.W_up = Variable(torch.Tensor(W_up)).cuda() if use_cuda else \
+            Variable(torch.Tensor(W_up))
+        self.W_down = Variable(torch.Tensor(W_down)).cuda() if use_cuda else \
+            Variable(torch.Tensor(W_down))
+        self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size).cuda()
+                      for _ in range(nstack)] if use_cuda else \
+                        [nn.Linear(stack_elem_size, stack_elem_size)
+                            for _ in range(nstack)]
 
     def forward(self, input, hidden):
-        output = self.embedding(input).view(1, 1, -1)
-        output = F.relu(output)
-        output, hidden = self.gru(output, hidden)
-        output = self.softmax(self.out(output[0]))
+        emb = self.embedding(input).view(1, 1, -1)
+        mid_hidden=self.input2hid(emb)+self.hid2hid(hidden)
+        for stack_index in range(self.nstack):
+            stack_vals=self.stacks[stack_index][0:self.stack_depth].view(-1)
+            mid_hidden+=self.stack2hid[stack_index](stack_vals)
+
+            act=self.hid2act[stack_index](hidden).view(-1)
+            act=self.softmax(act)
+
+            push_val=self.hid2stack[stack_index](hidden)
+            push_val=self.nonLinear(push_val)
+
+            self.stacks[stack_index]=\
+                act[PUSH]*self.W_down.matmul(self.stacks[stack_index])+\
+                act[POP]*self.W_up.matmul(self.stacks[stack_index])+\
+                act[NOOP]*self.stacks[stack_index]
+            self.stacks[stack_index][0]=act[PUSH]*push_val
+            self.stacks[stack_index][self.stack_size - 1] = \
+                Variable(torch.Tensor
+                         (np.array([act[POP].data[0] * EMPTY_VAL] * self.stack_elem_size)))
+
+        hidden=self.nonLinear(mid_hidden)
+        output=self.hid2out(hidden)[0]
+        output=self.log_softmax(output)
         return output, hidden
 
-    def initHidden(self):
+    def init_stack(self, enc_stack):
+        self.stacks=[enc_stack[i] for i in range(self.nstack)]
+
+    def init_hidden(self):
         result = Variable(torch.zeros(1, 1, self.hidden_size))
         if use_cuda:
             return result.cuda()
         else:
             return result
-
-######################################################################
-# I encourage you to train and observe the results of this model, but to
-# save space we'll be going straight for the gold and introducing the
-# Attention Mechanism.
-#
-
-
-######################################################################
-# Attention Decoder
-# ^^^^^^^^^^^^^^^^^
-#
-# If only the context vector is passed betweeen the encoder and decoder,
-# that single vector carries the burden of encoding the entire sentence.
-#
-# Attention allows the decoder network to "focus" on a different part of
-# the encoder's outputs for every step of the decoder's own outputs. First
-# we calculate a set of *attention weights*. These will be multiplied by
-# the encoder output vectors to create a weighted combination. The result
-# (called ``attn_applied`` in the code) should contain information about
-# that specific part of the input sequence, and thus help the decoder
-# choose the right output words.
-#
-# .. figure:: https://i.imgur.com/1152PYf.png
-#    :alt:
-#
-# Calculating the attention weights is done with another feed-forward
-# layer ``attn``, using the decoder's input and hidden state as inputs.
-# Because there are sentences of all sizes in the training data, to
-# actually create and train this layer we have to choose a maximum
-# sentence length (input length, for encoder outputs) that it can apply
-# to. Sentences of the maximum length will use all the attention weights,
-# while shorter sentences will only use the first few.
-#
-# .. figure:: /_static/img/seq-seq-images/attention-decoder-network.png
-#    :alt:
-#
-#
-
-class AttnDecoderRNN(nn.Module):
-    def __init__(self, hidden_size, output_size, dropout_p=0.1, max_length=MAX_LENGTH):
-        super(AttnDecoderRNN, self).__init__()
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.dropout_p = dropout_p
-        self.max_length = max_length
-
-        self.embedding = nn.Embedding(self.output_size, self.hidden_size)
-        self.attn = nn.Linear(self.hidden_size * 2, self.max_length)
-        self.attn_combine = nn.Linear(self.hidden_size * 2, self.hidden_size)
-        self.dropout = nn.Dropout(self.dropout_p)
-        self.gru = nn.GRU(self.hidden_size, self.hidden_size)
-        self.out = nn.Linear(self.hidden_size, self.output_size)
-
-    def forward(self, input, hidden, encoder_outputs):
-        embedded = self.embedding(input).view(1, 1, -1)
-        embedded = self.dropout(embedded)
-
-        attn_weights = F.softmax(
-            self.attn(torch.cat((embedded[0], hidden[0]), 1)), dim=1)
-        attn_applied = torch.bmm(attn_weights.unsqueeze(0),
-                                 encoder_outputs.unsqueeze(0))
-
-        output = torch.cat((embedded[0], attn_applied[0]), 1)
-        output = self.attn_combine(output).unsqueeze(0)
-
-        output = F.relu(output)
-        output, hidden = self.gru(output, hidden)
-
-        output = F.log_softmax(self.out(output[0]), dim=1)
-        return output, hidden, attn_weights
-
-    def initHidden(self):
-        result = Variable(torch.zeros(1, 1, self.hidden_size))
-        if use_cuda:
-            return result.cuda()
-        else:
-            return result
-
 
 ######################################################################
 # .. note:: There are other forms of attention that work around the length
@@ -509,13 +576,10 @@ def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
 
 
-def variableFromSentence(lang, sentences):
-    indexes_list = [indexesFromSentence(lang, sentence)+[EOS_token]
-               for sentence in sentences]
-    result = torch.\
-        stack([F.pad(torch.LongTensor(indexes),
-                              (0,MAX_LENGTH-len(indexes))).view(-1, 1)
-              for indexes in indexes_list])
+def variableFromSentence(lang, sentence):
+    indexes = indexesFromSentence(lang, sentence)
+    indexes.append(EOS_token)
+    result = Variable(torch.LongTensor(indexes).view(-1, 1))
     if use_cuda:
         return result.cuda()
     else:
@@ -559,7 +623,8 @@ teacher_forcing_ratio = 0.5
 
 
 def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion, max_length=MAX_LENGTH):
-    encoder_hidden = encoder.initHidden()
+    encoder_hidden = encoder.init_hidden()
+    encoder.emtpy_stack()
 
     encoder_optimizer.zero_grad()
     decoder_optimizer.zero_grad()
@@ -581,31 +646,29 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     decoder_input = decoder_input.cuda() if use_cuda else decoder_input
 
     decoder_hidden = encoder_hidden
+    decoder.init_stack(encoder.stacks)
 
     use_teacher_forcing = True if random.random() < teacher_forcing_ratio else False
 
     if use_teacher_forcing:
         # Teacher forcing: Feed the target as the next input
         for di in range(target_length):
-            decoder_output, decoder_hidden, decoder_attention = decoder(
-                decoder_input, decoder_hidden, encoder_outputs)
-
-            print(decoder_output,target_variable[di])
+            decoder_output, decoder_hidden = decoder(
+                decoder_input, decoder_hidden)
             loss += criterion(decoder_output, target_variable[di])
             decoder_input = target_variable[di]  # Teacher forcing
 
     else:
         # Without teacher forcing: use its own predictions as the next input
         for di in range(target_length):
-            decoder_output, decoder_hidden, decoder_attention = decoder(
-                decoder_input, decoder_hidden, encoder_outputs)
+            decoder_output, decoder_hidden = decoder(
+                decoder_input, decoder_hidden)
             topv, topi = decoder_output.data.topk(1)
             ni = topi[0][0]
 
             decoder_input = Variable(torch.LongTensor([[ni]]))
             decoder_input = decoder_input.cuda() if use_cuda else decoder_input
 
-            print(decoder_output, target_variable[di])
             loss += criterion(decoder_output, target_variable[di])
             if ni == EOS_token:
                 break
@@ -653,9 +716,7 @@ def timeSince(since, percent):
 # of examples, time so far, estimated time) and average loss.
 #
 
-def trainIters(encoder, decoder, n_iters,
-               print_every=1000, plot_every=100,
-               learning_rate=0.01, batch_size=5):
+def trainIters(encoder, decoder, n_iters, print_every=1000, plot_every=100, learning_rate=0.01):
     start = time.time()
     plot_losses = []
     print_loss_total = 0  # Reset every print_every
@@ -663,15 +724,8 @@ def trainIters(encoder, decoder, n_iters,
 
     encoder_optimizer = optim.SGD(encoder.parameters(), lr=learning_rate)
     decoder_optimizer = optim.SGD(decoder.parameters(), lr=learning_rate)
-    training_pairs=[]
-    for _ in range(n_iters):
-        res=[random.choice(pairs) for _ in range(batch_size)]
-        pair=([pair[0] for pair in res],[pair[1] for pair in res])
-        training_pairs.append(variablesFromPair(pair))
-
-    # training_pairs = [variablesFromPair(random.choice(pairs)) \
-    #                   for _ in range(n_iters)]
-
+    training_pairs = [variablesFromPair(random.choice(pairs))
+                      for i in range(n_iters)]
     criterion = nn.NLLLoss()
 
     for iter in range(1, n_iters + 1):
@@ -695,7 +749,7 @@ def trainIters(encoder, decoder, n_iters,
             plot_losses.append(plot_loss_avg)
             plot_loss_total = 0
 
-    showPlot(plot_losses)
+    # showPlot(plot_losses)
 
 
 ######################################################################
@@ -734,7 +788,7 @@ def showPlot(points):
 def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
     input_variable = variableFromSentence(input_lang, sentence)
     input_length = input_variable.size()[0]
-    encoder_hidden = encoder.initHidden()
+    encoder_hidden = encoder.init_hidden()
 
     encoder_outputs = Variable(torch.zeros(max_length, encoder.hidden_size))
     encoder_outputs = encoder_outputs.cuda() if use_cuda else encoder_outputs
@@ -753,9 +807,8 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
     decoder_attentions = torch.zeros(max_length, max_length)
 
     for di in range(max_length):
-        decoder_output, decoder_hidden, decoder_attention = decoder(
-            decoder_input, decoder_hidden, encoder_outputs)
-        decoder_attentions[di] = decoder_attention.data
+        decoder_output, decoder_hidden = decoder(
+            decoder_input, decoder_hidden)
         topv, topi = decoder_output.data.topk(1)
         ni = topi[0][0]
         if ni == EOS_token:
@@ -767,7 +820,7 @@ def evaluate(encoder, decoder, sentence, max_length=MAX_LENGTH):
         decoder_input = Variable(torch.LongTensor([[ni]]))
         decoder_input = decoder_input.cuda() if use_cuda else decoder_input
 
-    return decoded_words, decoder_attentions[:di + 1]
+    return decoded_words
 
 
 ######################################################################
@@ -806,20 +859,24 @@ def evaluateRandomly(encoder, decoder, n=10):
 #
 
 hidden_size = 256
-encoder1 = EncoderRNN(input_lang.n_words, hidden_size)
-attn_decoder1 = AttnDecoderRNN(hidden_size, output_lang.n_words, dropout_p=0.1)
+encoder1 = EncoderSRNN(input_lang.n_words, hidden_size,
+                       nstack=1,stack_depth=2,stack_size=200,
+                       stack_elem_size=hidden_size)
+decoder1 = DecoderSRNN(hidden_size, output_lang.n_words,
+                            nstack=1,stack_depth=2,stack_size=200,
+                            stack_elem_size=hidden_size)
 
 
 if use_cuda:
     encoder1 = encoder1.cuda()
-    attn_decoder1 = attn_decoder1.cuda()
+    decoder1 = decoder1.cuda()
 
-trainIters(encoder1, attn_decoder1, 75000, print_every=5000)
+trainIters(encoder1, decoder1, 75000, print_every=5000)
 
 ######################################################################
 #
 
-evaluateRandomly(encoder1, attn_decoder1)
+evaluateRandomly(encoder1, decoder1)
 
 
 ######################################################################
@@ -837,40 +894,8 @@ evaluateRandomly(encoder1, attn_decoder1)
 #
 
 output_words, attentions = evaluate(
-    encoder1, attn_decoder1, "¿ Qué tal ?")
-plt.matshow(attentions.numpy())
+    encoder1, decoder1, "¿ Qué tal ?")
 
-
-######################################################################
-# For a better viewing experience we will do the extra work of adding axes
-# and labels:
-#
-
-def showAttention(input_sentence, output_words, attentions):
-    # Set up figure with colorbar
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    cax = ax.matshow(attentions.numpy(), cmap='bone')
-    fig.colorbar(cax)
-
-    # Set up axes
-    ax.set_xticklabels([''] + input_sentence.split(' ') +
-                       ['<EOS>'], rotation=90)
-    ax.set_yticklabels([''] + output_words)
-
-    # Show label at every tick
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-
-    plt.show()
-
-
-def evaluateAndShowAttention(input_sentence):
-    output_words, attentions = evaluate(
-        encoder1, attn_decoder1, input_sentence)
-    print('input =', input_sentence)
-    print('output =', ' '.join(output_words))
-    showAttention(input_sentence, output_words, attentions)
 
 
 # evaluateAndShowAttention("elle a cinq ans de moins que moi .")
