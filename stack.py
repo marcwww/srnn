@@ -181,6 +181,12 @@ class DecoderSRNN(nn.Module):
         self.log_softmax = nn.LogSoftmax(dim=1)
         self.softmax=nn.Softmax()
 
+        if use_cuda:
+            for si in range(nstack):
+                self.hid2act[si]=self.hid2act[si].cuda()
+                self.hid2stack[si]=self.hid2stack[si].cuda()
+                self.stack2hid[si]=self.stack2hid[si].cuda()
+
         self.empty_elem = Variable(torch.randn(1, self.stack_elem_size),
                                    requires_grad=True)
 
@@ -199,6 +205,8 @@ class DecoderSRNN(nn.Module):
         # new_elem: bsz * elemsz
         # push_val: bsz * elemsz
         stack=stacks[:,si,:,:].clone()
+        if use_cuda:
+            stack=stack.cuda()
 
         p_push=p_push.unsqueeze(1)
         p_pop=p_pop.unsqueeze(1)
