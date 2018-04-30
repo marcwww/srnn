@@ -28,15 +28,23 @@ def to_batch(input_lang, output_lang,
     batch_tar=[]
     pairs=list(random.sample(pairs,len(pairs)))
 
+    max_length_src=0
+    max_length_tar=0
+
     for i in range(len(pairs)):
         indices_src=indexesFromSentence(input_lang,pairs[i][0])
         indices_tar=indexesFromSentence(output_lang,pairs[i][1])
         batch_src.append(indices_src)
         batch_tar.append(indices_tar)
+        max_length_src=max(max_length_src,len(indices_src))
+        max_length_tar=max(max_length_tar,len(indices_tar))
         if (i+1) % batch_size == 0:
-            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length-len(sen)))
+            max_length_src=min(max_length_src,MAX_LENGTH)
+            max_length_tar=min(max_length_tar,MAX_LENGTH)
+
+            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length_src+1-len(sen)))
                         for sen in batch_src]
-            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length-len(sen)))
+            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length_tar+1-len(sen)))
                         for sen in batch_tar]
 
             res.append((
@@ -49,6 +57,8 @@ def to_batch(input_lang, output_lang,
                        )
             batch_src=[]
             batch_tar=[]
+            max_length_src=0
+            max_length_tar=0
 
     # res: list of batch pairs
     return res
@@ -75,7 +85,7 @@ if use_cuda:
     enc.cuda()
     dec.cuda()
 
-def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
+def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1,teaching_rate=0.5):
 
     total_loss=0
     t=time.time()
@@ -90,7 +100,13 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         dec_inputs=tar[:-1,:]
         dec_tar=tar[1:,:]
         _, hidden, stacks = enc(src,hidden,stacks,batch_size=BATCH_SIZE)
-        outputs, _ = dec(dec_inputs,hidden,stacks,batch_size=BATCH_SIZE)
+
+        if random.random() > teaching_rate:
+            outputs, _ = dec(dec_inputs,hidden,stacks,
+                             batch_size=BATCH_SIZE,teaching=True)
+        else:
+            outputs, _ = dec(dec_inputs, hidden, stacks,
+                             batch_size=BATCH_SIZE,teaching=False)
 
         loss=0.0
         for oi in range(len(outputs)):
@@ -110,7 +126,6 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
             t=time.time()
 
     return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
-
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()

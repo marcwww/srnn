@@ -225,15 +225,19 @@ class DecoderSRNN(nn.Module):
 
         return stack
 
-    def forward(self, inputs, hidden, stacks, batch_size):
+    def forward(self, inputs, hidden, stacks, batch_size, teaching=False):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
 
         outputs = []
-        for input in embs:
+        input = None
+        for input_teaching in embs:
             # input: bsz * embdsz
+            if teaching or input==None:
+                input=input_teaching
+
             mid_hidden = self.input2hid(input) + self.hid2hid(hidden)
 
             # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
@@ -268,7 +272,13 @@ class DecoderSRNN(nn.Module):
             hidden = self.nonLinear(mid_hidden)
             output = self.hid2out(hidden)
             output = self.log_softmax(output)
+            # output: bsz * tar_vacabulary_size
             outputs.append(output)
+
+            if not teaching:
+                topv,topi=torch.topk(output,1,dim=1)
+                input=self.embedding(topi)
+
 
         return outputs, hidden
 
