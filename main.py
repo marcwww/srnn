@@ -85,7 +85,7 @@ if use_cuda:
     enc.cuda()
     dec.cuda()
 
-def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1,teaching_rate=0.5):
+def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
     total_loss=0
     t=time.time()
@@ -101,12 +101,8 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1,teaching_rat
         dec_tar=tar[1:,:]
         _, hidden, stacks = enc(src,hidden,stacks,batch_size=BATCH_SIZE)
 
-        if random.random() > teaching_rate:
-            outputs, _ = dec(dec_inputs,hidden,stacks,
-                             batch_size=BATCH_SIZE,teaching=True)
-        else:
-            outputs, _ = dec(dec_inputs, hidden, stacks,
-                             batch_size=BATCH_SIZE,teaching=False)
+        outputs, _, _ = dec(dec_inputs,hidden,stacks,
+                             batch_size=BATCH_SIZE)
 
         loss=0.0
         for oi in range(len(outputs)):
@@ -124,8 +120,29 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1,teaching_rat
                    total_loss/(i*BATCH_SIZE),
                    time.time()-t))
             t=time.time()
+            pair=random.choice(pairs)
+            print(eval(pair[0]),pair[1])
 
     return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
+
+def eval(src):
+    indices=indexesFromSentence(input_lang,src)
+    res=torch.LongTensor(indices).expand(BATCH_SIZE,len(indices))
+    res=res.t()
+
+    hidden = enc.init_hidden(BATCH_SIZE)
+    stacks = enc.init_stack(BATCH_SIZE)
+
+    dec_inputs=torch.LongTensor([SOS]*MAX_LENGTH).expand(BATCH_SIZE,MAX_LENGTH)
+    dec_inputs=dec_inputs.t()
+
+    _, hidden, stacks = enc(res, hidden, stacks, batch_size=BATCH_SIZE)
+
+    outputs, _, indices = dec(dec_inputs, hidden, stacks,
+                        batch_size=BATCH_SIZE)
+
+    indices=indices[0]
+    return ' '.join([output_lang.index2word[index] for index in indices])
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()

@@ -225,13 +225,14 @@ class DecoderSRNN(nn.Module):
 
         return stack
 
-    def forward(self, inputs, hidden, stacks, batch_size, teaching=False):
+    def forward(self, inputs, hidden, stacks, batch_size, teaching=True):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
 
         outputs = []
+        outputs_indices=[]
         input = None
         for input_teaching in embs:
             # input: bsz * embdsz
@@ -278,9 +279,9 @@ class DecoderSRNN(nn.Module):
             if not teaching:
                 topv,topi=torch.topk(output,1,dim=1)
                 input=self.embedding(topi)
+                outputs_indices.append(topi)
 
-
-        return outputs, hidden
+        return outputs, hidden, outputs_indices
 
     def init_stack(self,batch_size):
         return self.empty_elem.expand(batch_size,
