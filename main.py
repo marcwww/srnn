@@ -7,6 +7,7 @@ import stack
 from torch import nn
 from torch import optim
 import time
+import crash_on_ipy
 
 SOS=1
 EOS=0
