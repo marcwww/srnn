@@ -139,7 +139,7 @@ def eval(src):
     _, hidden, stacks = enc(res, hidden, stacks, batch_size=BATCH_SIZE)
 
     outputs, _, indices = dec(dec_inputs, hidden, stacks,
-                        batch_size=BATCH_SIZE)
+                        batch_size=BATCH_SIZE,teaching=False)
 
     indices=indices[0]
     return ' '.join([output_lang.index2word[index] for index in indices])
@@ -148,9 +148,20 @@ if __name__ == '__main__':
     criterion=nn.NLLLoss()
     enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
     dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
+    best_loss=None
+    name=''.join(str(time.time()).split('.'))
+    enc_file='/'+'enc_'+name+'.pt'
+    dec_file='/'+'dec_'+name+'.pt'
+
     for epoch in range(NEPOCHS):
         epoch_start_time=time.time()
         loss=train(enc_optim,dec_optim,criterion,epoch)
+        if best_loss is None or loss<best_loss:
+            best_loss=loss
+            with open(enc_file,'wb') as f:
+                torch.save(enc,f)
+            with open(dec_file,'wb') as f:
+                torch.save(dec,f)
 
         print('end of epoch %d | time: %f s | loss: %f' %
               (epoch,
