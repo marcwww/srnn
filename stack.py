@@ -79,7 +79,7 @@ class EncoderSRNN(nn.Module):
         # push_val: bsz * elemsz
         stack=stacks[:,si,:,:].clone()
         if use_cuda:
-            stack=stack
+            stack=stack.cuda()
 
         p_push=p_push.unsqueeze(1)
         p_pop=p_pop.unsqueeze(1)
