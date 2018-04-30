@@ -2,9 +2,9 @@ import torch
 
 SOS=1
 EOS=0
-MAX_LENGTH=50
+MAX_LENGTH=10
 use_cuda = torch.cuda.is_available()
-BATCH_SIZE=64
+BATCH_SIZE=512
 LR=0.1
 NEPOCHS=10
 NACT=3
