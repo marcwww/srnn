@@ -2,15 +2,16 @@ from torch import nn
 import torch
 from torch.autograd import Variable
 import numpy as np
+import params
 
-NACT=3
-use_cuda = torch.cuda.is_available()
-PUSH=0
-POP=1
-NOOP=2
-EMPTY_VAL=-1
-SOS=1
-EOS=0
+NACT = params.NACT
+use_cuda = params.use_cuda
+PUSH=params.PUSH
+POP=params.POP
+NOOP=params.NOOP
+EMPTY_VAL=params.EMPTY_VAL
+SOS=params.SOS
+EOS=params.EOS
 
 def create_stack(stack_size,stack_elem_size):
     return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)

@@ -8,14 +8,15 @@ from torch import nn
 from torch import optim
 import time
 import crash_on_ipy
+import params
 
-SOS=1
-EOS=0
-MAX_LENGTH=10
-use_cuda = torch.cuda.is_available()
-BATCH_SIZE=64
-LR=0.1
-NEPOCHS=10
+SOS=params.SOS
+EOS=params.EOS
+MAX_LENGTH=params.MAX_LENGTH
+use_cuda = params.use_cuda
+BATCH_SIZE=params.BATCH_SIZE
+LR=params.LR
+NEPOCHS=params.NEPOCHS
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]

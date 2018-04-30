@@ -1,9 +1,11 @@
 import re
 import unicodedata
 import random
+import params
 
-SOS=1
-EOS=0
+SOS=params.SOS
+EOS=params.EOS
+MAX_LENGTH=params.MAX_LENGTH
 
 class Lang:
     def __init__(self, name):
@@ -73,17 +75,6 @@ def readLangs(lang1, lang2, reverse=False):
     return input_lang, output_lang, pairs
 
 
-######################################################################
-# Since there are a *lot* of example sentences and we want to train
-# something quickly, we'll trim the data set to only relatively short and
-# simple sentences. Here the maximum length is 10 words (that includes
-# ending punctuation) and we're filtering to sentences that translate to
-# the form "I am" or "He is" etc. (accounting for apostrophes replaced
-# earlier).
-#
-
-MAX_LENGTH = 10
-
 eng_prefixes = (
     "i am ", "i m ",
     "he is", "he s ",
@@ -96,8 +87,8 @@ eng_prefixes = (
 
 def filterPair(p):
     return len(p[0].split(' ')) < MAX_LENGTH and \
-        len(p[1].split(' ')) < MAX_LENGTH and \
-        p[1].startswith(eng_prefixes)
+        len(p[1].split(' ')) < MAX_LENGTH
+        # and p[1].startswith(eng_prefixes)
 
 
 def filterPairs(pairs):
