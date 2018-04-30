@@ -106,11 +106,13 @@ class EncoderSRNN(nn.Module):
                 view(batch_size,
                      self.nstack,
                      self.stack_depth*self.stack_elem_size).clone()
+            if use_cuda:
+                stack_vals=stack_vals.cuda()
 
             # for each stack:
             for si in range(self.nstack):
                 # put each previous stack vals into the mid hidden:
-                mid_hidden+=self.stack2hid[si](stack_vals[:,si,:]).cuda()
+                mid_hidden+=self.stack2hid[si](stack_vals[:,si,:])
 
                 stacks=stacks.clone()
                 # using the current hidden to compute the actions:
