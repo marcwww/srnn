@@ -46,13 +46,16 @@ class EncoderSRNN(nn.Module):
         self.input2hid=nn.Linear(hidden_size,hidden_size)
         self.hid2act=[nn.Linear(hidden_size,NACT)
                       for _ in range(nstack)]
-        if use_cuda:
-            for i in range(len(self.hid2act)):
-                self.hid2act[i]=self.hid2act[i].cuda()
         self.hid2stack=[nn.Linear(hidden_size,stack_elem_size)
                         for _ in range(nstack)]
         self.stack2hid=[nn.Linear(stack_elem_size*stack_depth,hidden_size)
                         for _ in range(nstack)]
+
+        if use_cuda:
+            for si in range(nstack):
+                self.hid2act[si]=self.hid2act[si].cuda()
+                self.hid2stack[si]=self.hid2stack[si].cuda()
+                self.stack2hid[si]=self.stack2hid[si].cuda()
 
         self.softmax=nn.Softmax()
         self.empty_elem = Variable(torch.randn(1,self.stack_elem_size),
