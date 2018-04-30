@@ -241,6 +241,8 @@ class DecoderSRNN(nn.Module):
                 view(batch_size,
                      self.nstack,
                      self.stack_depth * self.stack_elem_size).clone()
+            if use_cuda:
+                stack_vals=stack_vals.cuda()
 
             # for each stack:
             for si in range(self.nstack):
