@@ -235,7 +235,7 @@ class DecoderSRNN(nn.Module):
         input = None
         for input_teaching in embs:
             # input: bsz * embdsz
-            if teaching or input==None:
+            if teaching or (input is None):
                 input=input_teaching
 
             mid_hidden = self.input2hid(input) + self.hid2hid(hidden)
