@@ -12,3 +12,4 @@ PUSH=0
 POP=1
 NOOP=2
 EMPTY_VAL=-1
+OUTPUT='output'

@@ -17,6 +17,7 @@ use_cuda = params.use_cuda
 BATCH_SIZE=params.BATCH_SIZE
 LR=params.LR
 NEPOCHS=params.NEPOCHS
+OUTPUT=params.OUTPUT
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -150,8 +151,8 @@ if __name__ == '__main__':
     dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
     best_loss=None
     name=''.join(str(time.time()).split('.'))
-    enc_file='/'+'enc_'+name+'.pt'
-    dec_file='/'+'dec_'+name+'.pt'
+    enc_file=OUTPUT+'/'+'enc_'+name+'.pt'
+    dec_file=OUTPUT+'/'+'dec_'+name+'.pt'
 
     for epoch in range(NEPOCHS):
         epoch_start_time=time.time()
