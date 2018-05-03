@@ -228,65 +228,56 @@ class DecoderSRNN(nn.Module):
 
         return stack
 
-    def forward(self, inputs, hidden, stacks, teaching=True):
-        # inputs: length * bsz
+    def forward(self, input, hidden, stacks):
+        # input: shape of [bsz]
         # stacks: bsz * nstack * stacksz * stackelemsz
-        embs = self.embedding(inputs)
+        emb = self.embedding(input)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
 
-        batch_size = inputs.shape[1]
+        batch_size = input.shape[0]
 
-        outputs = []
-        outputs_indices=[]
-        input = None
-        for input_teaching in embs:
-            # input: bsz * embdsz
-            if teaching or (input is None):
-                input=input_teaching
+        # emb: bsz * embdsz
 
-            mid_hidden = self.input2hid(input) + self.hid2hid(hidden)
+        mid_hidden = self.input2hid(emb) + self.hid2hid(hidden)
 
-            # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
-            # catenate all the readed vectors:
-            stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
-                view(batch_size,
-                     self.nstack,
-                     self.stack_depth * self.stack_elem_size).clone()
-            if use_cuda:
-                stack_vals=stack_vals.cuda()
+        # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
+        # catenate all the readed vectors:
+        stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
+            view(batch_size,
+                 self.nstack,
+                 self.stack_depth * self.stack_elem_size).clone()
+        if use_cuda:
+            stack_vals=stack_vals.cuda()
 
-            # for each stack:
-            for si in range(self.nstack):
-                # put each previous stack vals into the mid hidden:
-                mid_hidden += self.stack2hid[si](stack_vals[:, si, :])
+        # for each stack:
+        for si in range(self.nstack):
+            # put each previous stack vals into the mid hidden:
+            mid_hidden += self.stack2hid[si](stack_vals[:, si, :])
 
-                stacks = stacks.clone()
-                # using the current hidden to compute the actions:
-                # act: bsz * 3
-                act = self.hid2act[si](hidden)
-                p_push, p_pop, p_noop = act.chunk(NACT, dim=1)
+            stacks = stacks.clone()
+            # using the current hidden to compute the actions:
+            # act: bsz * 3
+            act = self.hid2act[si](hidden)
+            p_push, p_pop, p_noop = act.chunk(NACT, dim=1)
 
-                # using the current hidden to compute the vals to push:
-                push_val = self.hid2stack[si](hidden)
-                push_val = self.nonLinear(push_val)
+            # using the current hidden to compute the vals to push:
+            push_val = self.hid2stack[si](hidden)
+            push_val = self.nonLinear(push_val)
 
-                # update stack si:
-                stacks[:, si, :, :] = self.update_stack(stacks, si,
-                                                        p_push, p_pop, p_noop,
-                                                        push_val).clone()
+            # update stack si:
+            stacks[:, si, :, :] = self.update_stack(stacks, si,
+                                                    p_push, p_pop, p_noop,
+                                                    push_val).clone()
 
-            hidden = self.nonLinear(mid_hidden)
-            output = self.hid2out(hidden)
-            output = self.log_softmax(output)
-            # output: bsz * tar_vacabulary_size
-            outputs.append(output)
+        hidden = self.nonLinear(mid_hidden)
+        output = self.hid2out(hidden)
+        output = self.log_softmax(output)
+        # output: bsz * tar_vacabulary_size
 
-            if not teaching:
-                topv,topi=torch.topk(output,1,dim=1)
-                input=self.embedding(topi)
-                outputs_indices.append(topi)
+        topv, topi = torch.topk(output,1,dim=1)
+        output_index = topi
 
-        return outputs, hidden, outputs_indices
+        return output, hidden, output_index
 
     def init_stack(self,batch_size):
         return self.empty_elem.expand(batch_size,

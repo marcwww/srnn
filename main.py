@@ -93,16 +93,24 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
     for i in range(len(batch_pairs)):
         # one source batch and one target batch:
+        # src: length * batch_size
+        # tar: length * batch_size
         src=batch_pairs[i][0]
         tar=batch_pairs[i][1]
         hidden=enc.init_hidden(BATCH_SIZE)
         stacks=enc.init_stack(BATCH_SIZE)
 
+        # dec_inputs start with [BOS]
         dec_inputs=tar[:-1,:]
+        # dec_outputs end with [EOS]
         dec_tar=tar[1:,:]
         _, hidden, stacks = enc(src,hidden,stacks)
 
-        outputs, _, _ = dec(dec_inputs,hidden,stacks)
+        outputs=[]
+        for dec_input in dec_inputs:
+            # dec_input: shape of [batch_size]
+            output, hidden, output_index = dec(dec_input,hidden,stacks)
+            outputs.append(output)
 
         loss=0.0
         for oi in range(len(outputs)):
@@ -125,23 +133,23 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
     return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
 
-def eval(src):
-    indices=indexesFromSentence(input_lang,src)
-    res=torch.LongTensor(indices).expand(BATCH_SIZE,len(indices))
-    res=res.t()
-
-    hidden = enc.init_hidden(BATCH_SIZE)
-    stacks = enc.init_stack(BATCH_SIZE)
-
-    dec_inputs=torch.LongTensor([SOS]*MAX_LENGTH).expand(BATCH_SIZE,MAX_LENGTH)
-    dec_inputs=dec_inputs.t()
-
-    _, hidden, stacks = enc(res, hidden, stacks)
-
-    outputs, _, indices = dec(dec_inputs, hidden, stacks,teaching=False)
-
-    indices=indices[0]
-    return ' '.join([output_lang.index2word[index] for index in indices])
+# def eval(src):
+#     indices=indexesFromSentence(input_lang,src)
+#     res=torch.LongTensor(indices).expand(BATCH_SIZE,len(indices))
+#     res=res.t()
+#
+#     hidden = enc.init_hidden(BATCH_SIZE)
+#     stacks = enc.init_stack(BATCH_SIZE)
+#
+#     dec_inputs=torch.LongTensor([SOS]*MAX_LENGTH).expand(BATCH_SIZE,MAX_LENGTH)
+#     dec_inputs=dec_inputs.t()
+#
+#     _, hidden, stacks = enc(res, hidden, stacks)
+#
+#     outputs, _, indices = dec(dec_inputs, hidden, stacks,teaching=False)
+#
+#     indices=indices[0]
+#     return ' '.join([output_lang.index2word[index] for index in indices])
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()
