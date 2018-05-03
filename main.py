@@ -74,15 +74,13 @@ enc=stack.EncoderSRNN(input_lang.n_words,
                   nstack=2,
                   stack_depth=2,
                   stack_size=10,
-                  stack_elem_size=256,
-                  batch_size=BATCH_SIZE)
+                  stack_elem_size=256)
 dec=stack.DecoderSRNN(hidden_size=256,
                   output_size=output_lang.n_words,
                   nstack=2,
                   stack_depth=2,
                   stack_size=10,
-                  stack_elem_size=256,
-                  batch_size=BATCH_SIZE)
+                  stack_elem_size=256)
 if use_cuda:
     enc.cuda()
     dec.cuda()
@@ -139,10 +137,9 @@ def eval(src):
     dec_inputs=torch.LongTensor([SOS]*MAX_LENGTH).expand(BATCH_SIZE,MAX_LENGTH)
     dec_inputs=dec_inputs.t()
 
-    _, hidden, stacks = enc(res, hidden, stacks, batch_size=BATCH_SIZE)
+    _, hidden, stacks = enc(res, hidden, stacks)
 
-    outputs, _, indices = dec(dec_inputs, hidden, stacks,
-                        batch_size=BATCH_SIZE,teaching=False)
+    outputs, _, indices = dec(dec_inputs, hidden, stacks,teaching=False)
 
     indices=indices[0]
     return ' '.join([output_lang.index2word[index] for index in indices])

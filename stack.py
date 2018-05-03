@@ -30,7 +30,7 @@ def shift_matrix(n):
 class EncoderSRNN(nn.Module):
     def __init__(self, input_size, hidden_size,
                  nstack, stack_depth, stack_size,
-                 stack_elem_size, batch_size):
+                 stack_elem_size):
         super(EncoderSRNN, self).__init__()
         # here input dimention is equal to hidden dimention
         self.hidden_size = hidden_size
@@ -73,11 +73,12 @@ class EncoderSRNN(nn.Module):
         if use_cuda:
             self.W_down=self.W_down.cuda()
 
-    def update_stack(self, stacks, si, batch_size,
+    def update_stack(self, stacks, si,
                      p_push, p_pop, p_noop, push_val):
         # stacks: bsz * nstack * stacksz * stackelemsz
         # new_elem: bsz * elemsz
         # push_val: bsz * elemsz
+        batch_size=stacks.shape[0]
         stack=stacks[:,si,:,:].clone()
         if use_cuda:
             stack=stack.cuda()
@@ -98,11 +99,13 @@ class EncoderSRNN(nn.Module):
 
         return stack
 
-    def forward(self, inputs, hidden, stacks, batch_size):
+    def forward(self, inputs, hidden, stacks):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
+
+        batch_size=inputs.shape[1]
 
         outputs=[]
         for input in embs:
@@ -134,7 +137,7 @@ class EncoderSRNN(nn.Module):
                 push_val=self.nonLinear(push_val)
 
                 # update stack si:
-                stacks[:, si, :, :]=self.update_stack(stacks,si,batch_size,
+                stacks[:, si, :, :]=self.update_stack(stacks,si,
                                                    p_push,p_pop,p_noop,
                                                    push_val).clone()
 
@@ -156,7 +159,7 @@ class EncoderSRNN(nn.Module):
 class DecoderSRNN(nn.Module):
     def __init__(self, hidden_size, output_size,
                  nstack, stack_depth, stack_size,
-                 stack_elem_size, batch_size):
+                 stack_elem_size):
         super(DecoderSRNN, self).__init__()
         self.hidden_size = hidden_size
 
@@ -199,11 +202,12 @@ class DecoderSRNN(nn.Module):
         self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size)
                       for _ in range(nstack)]
 
-    def update_stack(self, stacks, si, batch_size,
+    def update_stack(self, stacks, si,
                      p_push, p_pop, p_noop, push_val):
         # stacks: bsz * nstack * stacksz * stackelemsz
         # new_elem: bsz * elemsz
         # push_val: bsz * elemsz
+        batch_size = stacks.shape[0]
         stack=stacks[:,si,:,:].clone()
         if use_cuda:
             stack=stack.cuda()
@@ -224,11 +228,13 @@ class DecoderSRNN(nn.Module):
 
         return stack
 
-    def forward(self, inputs, hidden, stacks, batch_size, teaching=True):
+    def forward(self, inputs, hidden, stacks, teaching=True):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
+
+        batch_size = inputs.shape[1]
 
         outputs = []
         outputs_indices=[]
