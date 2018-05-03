@@ -136,7 +136,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 def eval_one_sen(src,max_length=MAX_LENGTH):
     indices=indexesFromSentence(input_lang,src)
     # src_batch: length * (batch_size=1)
-    src_batch=torch.LongTensor(indices).unsqueeze().t()
+    src_batch=torch.LongTensor(indices).unsqueeze(0).t()
 
     hidden = enc.init_hidden(batch_size=1)
     stacks = enc.init_stack(batch_size=1)
