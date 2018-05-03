@@ -18,7 +18,7 @@ BATCH_SIZE=params.BATCH_SIZE
 LR=params.LR
 NEPOCHS=params.NEPOCHS
 OUTPUT=params.OUTPUT
-USE_STACK=params.USES_TACK
+USE_STACK=params.USES_STACK
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
