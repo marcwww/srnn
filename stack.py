@@ -12,6 +12,7 @@ NOOP=params.NOOP
 EMPTY_VAL=params.EMPTY_VAL
 SOS=params.SOS
 EOS=params.EOS
+USE_STACK=params.USES_TACK
 
 def create_stack(stack_size,stack_elem_size):
     return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)
@@ -112,34 +113,35 @@ class EncoderSRNN(nn.Module):
             # input: bsz * embdsz
             mid_hidden=self.input2hid(input)+self.hid2hid(hidden)
 
-            # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
-            # catenate all the readed vectors:
-            stack_vals=stacks[:,:,:self.stack_depth,:].contiguous().\
-                view(batch_size,
-                     self.nstack,
-                     self.stack_depth*self.stack_elem_size).clone()
-            if use_cuda:
-                stack_vals=stack_vals.cuda()
+            if USE_STACK:
+                # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
+                # catenate all the readed vectors:
+                stack_vals=stacks[:,:,:self.stack_depth,:].contiguous().\
+                    view(batch_size,
+                         self.nstack,
+                         self.stack_depth*self.stack_elem_size).clone()
+                if use_cuda:
+                    stack_vals=stack_vals.cuda()
 
-            # for each stack:
-            for si in range(self.nstack):
-                # put each previous stack vals into the mid hidden:
-                mid_hidden+=self.stack2hid[si](stack_vals[:,si,:])
+                # for each stack:
+                for si in range(self.nstack):
+                    # put each previous stack vals into the mid hidden:
+                    mid_hidden+=self.stack2hid[si](stack_vals[:,si,:])
 
-                stacks=stacks.clone()
-                # using the current hidden to compute the actions:
-                # act: bsz * 3
-                act=self.hid2act[si](hidden)
-                p_push, p_pop, p_noop=act.chunk(NACT,dim=1)
+                    stacks=stacks.clone()
+                    # using the current hidden to compute the actions:
+                    # act: bsz * 3
+                    act=self.hid2act[si](hidden)
+                    p_push, p_pop, p_noop=act.chunk(NACT,dim=1)
 
-                # using the current hidden to compute the vals to push:
-                push_val=self.hid2stack[si](hidden)
-                push_val=self.nonLinear(push_val)
+                    # using the current hidden to compute the vals to push:
+                    push_val=self.hid2stack[si](hidden)
+                    push_val=self.nonLinear(push_val)
 
-                # update stack si:
-                stacks[:, si, :, :]=self.update_stack(stacks,si,
-                                                   p_push,p_pop,p_noop,
-                                                   push_val).clone()
+                    # update stack si:
+                    stacks[:, si, :, :]=self.update_stack(stacks,si,
+                                                       p_push,p_pop,p_noop,
+                                                       push_val).clone()
 
             hidden=self.nonLinear(mid_hidden)
             output=hidden
@@ -240,34 +242,35 @@ class DecoderSRNN(nn.Module):
 
         mid_hidden = self.input2hid(emb) + self.hid2hid(hidden)
 
-        # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
-        # catenate all the readed vectors:
-        stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
-            view(batch_size,
-                 self.nstack,
-                 self.stack_depth * self.stack_elem_size).clone()
-        if use_cuda:
-            stack_vals=stack_vals.cuda()
+        if USE_STACK:
+            # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
+            # catenate all the readed vectors:
+            stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
+                view(batch_size,
+                     self.nstack,
+                     self.stack_depth * self.stack_elem_size).clone()
+            if use_cuda:
+                stack_vals=stack_vals.cuda()
 
-        # for each stack:
-        for si in range(self.nstack):
-            # put each previous stack vals into the mid hidden:
-            mid_hidden += self.stack2hid[si](stack_vals[:, si, :])
+            # for each stack:
+            for si in range(self.nstack):
+                # put each previous stack vals into the mid hidden:
+                mid_hidden += self.stack2hid[si](stack_vals[:, si, :])
 
-            stacks = stacks.clone()
-            # using the current hidden to compute the actions:
-            # act: bsz * 3
-            act = self.hid2act[si](hidden)
-            p_push, p_pop, p_noop = act.chunk(NACT, dim=1)
+                stacks = stacks.clone()
+                # using the current hidden to compute the actions:
+                # act: bsz * 3
+                act = self.hid2act[si](hidden)
+                p_push, p_pop, p_noop = act.chunk(NACT, dim=1)
 
-            # using the current hidden to compute the vals to push:
-            push_val = self.hid2stack[si](hidden)
-            push_val = self.nonLinear(push_val)
+                # using the current hidden to compute the vals to push:
+                push_val = self.hid2stack[si](hidden)
+                push_val = self.nonLinear(push_val)
 
-            # update stack si:
-            stacks[:, si, :, :] = self.update_stack(stacks, si,
-                                                    p_push, p_pop, p_noop,
-                                                    push_val).clone()
+                # update stack si:
+                stacks[:, si, :, :] = self.update_stack(stacks, si,
+                                                        p_push, p_pop, p_noop,
+                                                        push_val).clone()
 
         hidden = self.nonLinear(mid_hidden)
         output = self.hid2out(hidden)

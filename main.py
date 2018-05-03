@@ -18,6 +18,7 @@ BATCH_SIZE=params.BATCH_SIZE
 LR=params.LR
 NEPOCHS=params.NEPOCHS
 OUTPUT=params.OUTPUT
+USE_STACK=params.USES_TACK
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -88,6 +89,7 @@ if use_cuda:
 def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
     total_loss=0
+    pre_loss=total_loss
     t=time.time()
     print_every=int(len(batch_pairs)*print_per_percent)
 
@@ -128,13 +130,16 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
             print('epoch %d | percent %f | loss %f | interval %f s' %
                   (epoch,
                    i/len(batch_pairs),
-                   total_loss/(i*BATCH_SIZE),
+                   total_loss/print_every,
                    time.time()-t))
             t=time.time()
+            pre_loss = total_loss / print_every
+            total_loss=0
+
             pair = random.choice(pairs)
             print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
 
-    return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
+    return pre_loss
 
 def trans_one_sen(src,max_length=MAX_LENGTH):
     indices=indexesFromSentence(input_lang,src)
