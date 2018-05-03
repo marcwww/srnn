@@ -271,7 +271,7 @@ class DecoderSRNN(nn.Module):
                 push_val = self.nonLinear(push_val)
 
                 # update stack si:
-                stacks[:, si, :, :] = self.update_stack(stacks, si, batch_size,
+                stacks[:, si, :, :] = self.update_stack(stacks, si,
                                                         p_push, p_pop, p_noop,
                                                         push_val).clone()
 
