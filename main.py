@@ -123,8 +123,8 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         dec_optim.step()
         total_loss+=loss.data
 
-        pair = random.choice(pairs)
-        print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
+        # pair = random.choice(pairs)
+        # print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
 
         if (i+1) % print_every == 0:
             print('epoch %d | percent %f | loss %f | interval %f s' %
