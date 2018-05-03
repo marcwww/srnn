@@ -149,9 +149,8 @@ def eval_one_sen(src,max_length=MAX_LENGTH):
 
     _, hidden, stacks = enc(src_batch, hidden, stacks)
 
-    i=0
     output_indices=[]
-    while i<max_length:
+    while len(output_indices)<max_length:
         # dec_input: shape of [batch_size=1]
         _, hidden, output_index = dec(dec_input, hidden, stacks)
         if output_index.data[0,0]==EOS:
