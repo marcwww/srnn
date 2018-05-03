@@ -121,6 +121,9 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         dec_optim.step()
         total_loss+=loss.data
 
+        pair = random.choice(pairs)
+        print(eval_one_sen(pair[0]), pair[1])
+
         if (i+1) % print_every == 0:
             print('epoch %d | percent %f | loss %f | interval %f s' %
                   (epoch,
@@ -155,8 +158,8 @@ def eval_one_sen(src,max_length=MAX_LENGTH):
         _, hidden, output_index = dec(dec_input, hidden, stacks)
         if output_index.data[0,0]==EOS:
             break
-        output_indices.append(output_index.data[0,0].cpu()
-                              if use_cuda else output_index.data[0,0])
+        output_indices.append(output_index.data[0,0].cpu().numpy()
+                              if use_cuda else output_index.data[0,0].numpy())
         dec_input = output_index.squeeze(0)
 
     return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
