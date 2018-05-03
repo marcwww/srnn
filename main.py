@@ -155,7 +155,8 @@ def eval_one_sen(src,max_length=MAX_LENGTH):
         _, hidden, output_index = dec(dec_input, hidden, stacks)
         if output_index.data[0,0]==EOS:
             break
-        output_indices.append(output_index.data[0,0])
+        output_indices.append(output_index.data[0,0].cpu()
+                              if use_cuda else output_index.data[0,0])
         dec_input = output_index.squeeze(0)
 
     return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
