@@ -48,6 +48,7 @@ def to_batch(input_lang, output_lang,
             padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length_tar+1-len(sen)))
                         for sen in batch_tar]
 
+            # the transposing makes the data of the size: length * batch_size
             res.append((
                         torch.stack(padded_src).t().contiguous().cuda()
                         if use_cuda else torch.stack(padded_src).t().contiguous(),
@@ -93,6 +94,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
     print_every=int(len(batch_pairs)*print_per_percent)
 
     for i in range(len(batch_pairs)):
+        # one source batch and one target batch:
         src=batch_pairs[i][0]
         tar=batch_pairs[i][1]
         hidden=enc.init_hidden(BATCH_SIZE)

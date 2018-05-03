@@ -64,12 +64,12 @@ class EncoderSRNN(nn.Module):
 
         W_up, W_down = shift_matrix(stack_size)
         self.W_up = Variable(torch.Tensor(W_up))
-        self.W_up = self.W_up.expand(batch_size,stack_size,stack_size)
+        # self.W_up = self.W_up.expand(batch_size,stack_size,stack_size)
         if use_cuda:
             self.W_up=self.W_up.cuda()
 
         self.W_down = Variable(torch.Tensor(W_down))
-        self.W_down = self.W_down.expand(batch_size,stack_size,stack_size)
+        # self.W_down = self.W_down.expand(batch_size,stack_size,stack_size)
         if use_cuda:
             self.W_down=self.W_down.cuda()
 
@@ -152,7 +152,6 @@ class EncoderSRNN(nn.Module):
     def init_hidden(self,batch_size):
         weight = next(self.parameters()).data
         return Variable(weight.new(batch_size,self.hidden_size))
-
 
 class DecoderSRNN(nn.Module):
     def __init__(self, hidden_size, output_size,
