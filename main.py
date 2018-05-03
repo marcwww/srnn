@@ -129,7 +129,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
                    time.time()-t))
             t=time.time()
             pair=random.choice(pairs)
-            print(eval(pair[0]),pair[1])
+            print(eval_one_sen(pair[0]),pair[1])
 
     return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
 
