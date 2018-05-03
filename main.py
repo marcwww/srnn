@@ -40,8 +40,8 @@ def to_batch(input_lang, output_lang,
         max_length_src=max(max_length_src,len(indices_src))
         max_length_tar=max(max_length_tar,len(indices_tar))
         if (i+1) % batch_size == 0:
-            max_length_src=min(max_length_src,MAX_LENGTH)
-            max_length_tar=min(max_length_tar,MAX_LENGTH)
+            max_length_src=min(max_length_src,max_length)
+            max_length_tar=min(max_length_tar,max_length)
 
             padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length_src+1-len(sen)))
                         for sen in batch_src]
@@ -137,11 +137,15 @@ def eval_one_sen(src,max_length=MAX_LENGTH):
     indices=indexesFromSentence(input_lang,src)
     # src_batch: length * (batch_size=1)
     src_batch=torch.LongTensor(indices).unsqueeze(0).t()
+    if use_cuda:
+        src_batch = src_batch.cuda()
 
     hidden = enc.init_hidden(batch_size=1)
     stacks = enc.init_stack(batch_size=1)
 
-    dec_input=torch.LongTensor([SOS])
+    dec_input = torch.LongTensor([SOS])
+    if use_cuda:
+        dec_input = dec_input.cuda()
 
     _, hidden, stacks = enc(src_batch, hidden, stacks)
 
