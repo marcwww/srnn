@@ -122,7 +122,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         total_loss+=loss.data
 
         pair = random.choice(pairs)
-        print(eval_one_sen(pair[0]), pair[1])
+        print(pair[0],eval_one_sen(pair[0]),pair[1])
 
         if (i+1) % print_every == 0:
             print('epoch %d | percent %f | loss %f | interval %f s' %
