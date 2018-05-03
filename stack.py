@@ -276,6 +276,7 @@ class DecoderSRNN(nn.Module):
 
         topv, topi = torch.topk(output,1,dim=1)
         output_index = topi
+        # output_index: bsz * 1
 
         return output, hidden, output_index
 

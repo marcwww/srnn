@@ -128,28 +128,34 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
                    total_loss/(i*BATCH_SIZE),
                    time.time()-t))
             t=time.time()
-            # pair=random.choice(pairs)
-            # print(eval(pair[0]),pair[1])
+            pair=random.choice(pairs)
+            print(eval(pair[0]),pair[1])
 
     return total_loss/(len(batch_pairs)*BATCH_SIZE+.0)
 
-# def eval(src):
-#     indices=indexesFromSentence(input_lang,src)
-#     res=torch.LongTensor(indices).expand(BATCH_SIZE,len(indices))
-#     res=res.t()
-#
-#     hidden = enc.init_hidden(BATCH_SIZE)
-#     stacks = enc.init_stack(BATCH_SIZE)
-#
-#     dec_inputs=torch.LongTensor([SOS]*MAX_LENGTH).expand(BATCH_SIZE,MAX_LENGTH)
-#     dec_inputs=dec_inputs.t()
-#
-#     _, hidden, stacks = enc(res, hidden, stacks)
-#
-#     outputs, _, indices = dec(dec_inputs, hidden, stacks,teaching=False)
-#
-#     indices=indices[0]
-#     return ' '.join([output_lang.index2word[index] for index in indices])
+def eval_one_sen(src,max_length=MAX_LENGTH):
+    indices=indexesFromSentence(input_lang,src)
+    # src_batch: length * (batch_size=1)
+    src_batch=torch.LongTensor(indices).unsqueeze().t()
+
+    hidden = enc.init_hidden(batch_size=1)
+    stacks = enc.init_stack(batch_size=1)
+
+    dec_input=torch.LongTensor([SOS])
+
+    _, hidden, stacks = enc(src_batch, hidden, stacks)
+
+    i=0
+    output_indices=[]
+    while i<max_length:
+        # dec_input: shape of [batch_size=1]
+        _, hidden, output_index = dec(dec_input, hidden, stacks)
+        if output_index.data[0,0]==EOS:
+            break
+        output_indices.append(output_index.data[0,0])
+        dec_input = output_index.squeeze(0)
+
+    return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()
