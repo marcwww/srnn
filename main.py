@@ -121,7 +121,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         loss.backward()
         enc_optim.step()
         dec_optim.step()
-        total_loss+=loss.data
+        total_loss+=loss.data/len(outputs)
 
         # pair = random.choice(pairs)
         # print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
