@@ -123,8 +123,8 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         dec_optim.step()
         total_loss+=loss.data
 
-        # pair = random.choice(pairs)
-        # print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
+        pair = random.choice(pairs)
+        print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
 
         if (i+1) % print_every == 0:
             print('epoch %d | percent %f | loss %f | interval %f s' %
@@ -144,7 +144,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 def trans_one_sen(src,max_length=MAX_LENGTH):
     indices=indexesFromSentence(input_lang,src)
     # src_batch: length * (batch_size=1)
-    src_batch=torch.LongTensor(indices).unsqueeze(0).t()
+    src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t()
     if use_cuda:
         src_batch = src_batch.cuda()
 
