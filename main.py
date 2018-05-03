@@ -100,10 +100,9 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
         dec_inputs=tar[:-1,:]
         dec_tar=tar[1:,:]
-        _, hidden, stacks = enc(src,hidden,stacks,batch_size=BATCH_SIZE)
+        _, hidden, stacks = enc(src,hidden,stacks)
 
-        outputs, _, _ = dec(dec_inputs,hidden,stacks,
-                             batch_size=BATCH_SIZE)
+        outputs, _, _ = dec(dec_inputs,hidden,stacks)
 
         loss=0.0
         for oi in range(len(outputs)):
