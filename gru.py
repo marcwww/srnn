@@ -22,7 +22,7 @@ class Encoder(nn.Module):
 
         self.empty_elem = torch.randn(1, args.stack_elem_size, requires_grad=True)
 
-    def forward(self, inputs, hidden=None):
+    def forward(self, inputs, hidden=None, stacks=None):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
@@ -30,7 +30,7 @@ class Encoder(nn.Module):
 
         outputs,hidden=self.gru(embs,hidden)
 
-        return outputs, hidden
+        return outputs, hidden, stacks
 
     def init_stack(self,batch_size):
         return self.empty_elem.expand(batch_size,
@@ -52,7 +52,7 @@ class Decoder(nn.Module):
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
-    def forward(self, input, hidden, stacks):
+    def forward(self, input, hidden, stacks=None):
         # input: shape of [bsz]
         # emb: 1 * bsz * embdsz
         emb = self.embedding(input).unsqueeze(0)
