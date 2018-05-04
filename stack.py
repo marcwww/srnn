@@ -13,6 +13,7 @@ EMPTY_VAL=params.EMPTY_VAL
 SOS=params.SOS
 EOS=params.EOS
 USE_STACK=params.USES_STACK
+DEVICE=params.device
 
 def create_stack(stack_size,stack_elem_size):
     return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)
