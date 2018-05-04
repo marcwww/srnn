@@ -119,8 +119,9 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
         output_index=None
         for dec_input in dec_inputs:
             # dec_input: shape of [batch_size]
-            if random.random() < args.teaching:
-                dec_input = output_index
+            if random.random() < args.teaching and \
+                    output_index is not None:
+                dec_input = output_index.squeeze(1)
             output, hidden, output_index = dec(dec_input,hidden,stacks)
             outputs.append(output)
             output_indices.append(output_index)
@@ -160,7 +161,9 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
         indices=indexesFromSentence(input_lang,src)
         # src_batch: length * (batch_size=1)
         # src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
-        padded_src = F.pad(torch.LongTensor(indices + [EOS]), (PAD, max_length + 1 - len(indices)))
+        padded_src = F.pad(torch.LongTensor(indices + [EOS]),
+                           (0, max_length + 1 - len(indices)),
+                           value=PAD)
         padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
