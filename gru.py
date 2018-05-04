@@ -65,8 +65,9 @@ class Decoder(nn.Module):
         output = self.log_softmax(output)
         # output: bsz * tar_vacabulary_size
 
-        topv, topi = torch.topk(output,1,dim=1)
-        output_index = topi
+        top1 = output.data.max(1)[1]
+        # topv, topi = torch.topk(output,1,dim=1)
+        # output_index = topi
         # output_index: bsz * 1
 
-        return output, hidden, output_index
+        return output, hidden, top1
