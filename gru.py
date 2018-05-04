@@ -60,7 +60,7 @@ class Decoder(nn.Module):
 
         # 1 * bsz * hsz -> bsz * hsz:
         output, hidden = self.gru(emb,hidden)
-        output = self.log_softmax(output.squeeze(0),dim=1)
+        output = self.log_softmax(output.squeeze(0))
         # output: bsz * tar_vacabulary_size
 
         topv, topi = torch.topk(output,1,dim=1)
