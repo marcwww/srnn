@@ -8,8 +8,6 @@ NACT = params.NACT
 PUSH=params.PUSH
 POP=params.POP
 NOOP=params.NOOP
-SOS=params.SOS
-EOS=params.EOS
 PAD=params.PAD
 USE_STACK=args.use_stack
 DEVICE=params.device
@@ -259,12 +257,3 @@ class DecoderSRNN(nn.Module):
         # output_index: bsz * 1
 
         return output, hidden, output_index
-
-    def init_stack(self,batch_size):
-        return self.empty_elem.expand(batch_size,
-                                               self.nstack,
-                                               self.stack_size,
-                                               self.stack_elem_size).contiguous()
-    def init_hidden(self,batch_size):
-        weight = next(self.parameters()).data
-        return weight.new(batch_size,self.hidden_size)

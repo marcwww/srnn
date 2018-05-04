@@ -19,7 +19,9 @@ class Encoder(nn.Module):
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
-    def forward(self, inputs, hidden):
+        self.empty_elem = torch.randn(1, self.stack_elem_size, requires_grad=True)
+
+    def forward(self, inputs, hidden=None):
         # inputs: length * bsz
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
@@ -28,6 +30,16 @@ class Encoder(nn.Module):
         outputs,hidden=self.gru(embs,hidden)
 
         return outputs, hidden
+
+    def init_stack(self,batch_size):
+        return self.empty_elem.expand(batch_size,
+                                               self.nstack,
+                                               self.stack_size,
+                                               self.stack_elem_size).contiguous()
+    def init_hidden(self,batch_size):
+        weight = next(self.parameters()).data
+        return weight.new(batch_size,self.hidden_size)
+
 
 class Decoder(nn.Module):
     def __init__(self, hidden_size, output_size):
