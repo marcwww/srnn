@@ -51,6 +51,7 @@ class Decoder(nn.Module):
                                       padding_idx=PAD)
         self.log_softmax=nn.LogSoftmax(dim=1)
         self.gru = nn.GRU(hidden_size, hidden_size)
+        self.out = nn.Linear(hidden_size, output_size)
 
     def forward(self, input, hidden, stacks=None):
         # input: shape of [bsz]
@@ -60,7 +61,8 @@ class Decoder(nn.Module):
 
         # 1 * bsz * hsz -> bsz * hsz:
         output, hidden = self.gru(emb,hidden)
-        output = self.log_softmax(output.squeeze(0))
+        output = self.out(output).squeeze(0)
+        output = self.log_softmax(output)
         # output: bsz * tar_vacabulary_size
 
         topv, topi = torch.topk(output,1,dim=1)
