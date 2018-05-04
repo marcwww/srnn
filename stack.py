@@ -2,16 +2,15 @@ from torch import nn
 import torch
 import numpy as np
 import params
+from params import args
 
 NACT = params.NACT
-use_cuda = params.use_cuda
 PUSH=params.PUSH
 POP=params.POP
 NOOP=params.NOOP
-EMPTY_VAL=params.EMPTY_VAL
 SOS=params.SOS
 EOS=params.EOS
-USE_STACK=params.USES_STACK
+USE_STACK=args.use_stack
 DEVICE=params.device
 NONLINEAR=params.NONLINEAR
 

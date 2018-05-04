@@ -2,11 +2,13 @@ import re
 import unicodedata
 import random
 import params
+from params import args
 
 SOS=params.SOS
 EOS=params.EOS
 PAD=params.PAD
-MAX_LENGTH=params.MAX_LENGTH
+MAX_LENGTH=args.max_length
+
 
 class Lang:
     def __init__(self, name):

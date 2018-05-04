@@ -8,20 +8,23 @@ from torch import optim
 import time
 import crash_on_ipy
 import params
+from params import args
+from params import device
+import argparse
 from torch.nn.utils import clip_grad_norm
 
 SOS=params.SOS
 EOS=params.EOS
 PAD=params.PAD
-GRAD_CLIP=params.GRAD_CLIP
-MAX_LENGTH=params.MAX_LENGTH
-use_cuda = params.use_cuda
-BATCH_SIZE=params.BATCH_SIZE
-LR=params.LR
-NEPOCHS=params.NEPOCHS
-OUTPUT=params.OUTPUT
-USE_STACK=params.USES_STACK
-DEVICE=params.device
+GRAD_CLIP=args.grad_clip
+MAX_LENGTH=args.max_length
+BATCH_SIZE=args.batch_size
+LR=args.lr
+NEPOCHS=args.epochs
+OUTPUT=args.output
+USE_STACK=args.use_stack
+DEVICE=device
+TEACHING_RATIO=args.teaching
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -61,18 +64,20 @@ input_lang, output_lang, pairs = data.prepareData('spa', 'en', True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
 
-enc=stack.EncoderSRNN(input_lang.n_words,
-                  hidden_size=256,
-                  nstack=2,
-                  stack_depth=2,
-                  stack_size=10,
-                  stack_elem_size=256).to(DEVICE)
-dec=stack.DecoderSRNN(hidden_size=256,
-                  output_size=output_lang.n_words,
-                  nstack=2,
-                  stack_depth=2,
-                  stack_size=10,
-                  stack_elem_size=256).to(DEVICE)
+enc = stack.EncoderSRNN(input_size=input_lang.n_words,
+                            hidden_size=args.hidden,
+                            nstack=args.nstack,
+                            stack_depth=args.stack_depth,
+                            stack_size=args.stack_size,
+                            stack_elem_size=args.stack_elem_size).\
+                            to(DEVICE)
+dec = stack.DecoderSRNN(output_size=output_lang.n_words,
+                            hidden_size=args.hidden,
+                            nstack=args.nstack,
+                            stack_depth=args.stack_depth,
+                            stack_size=args.stack_size,
+                            stack_elem_size=args.stack_elem_size)\
+                            .to(DEVICE)
 
 def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
@@ -172,11 +177,12 @@ def eval_randomly(n=1):
         print('')
 
 def train_epochs():
-    criterion = nn.NLLLoss()
     # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
     # dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
-    enc_optim = optim.SGD(enc.parameters(), lr=LR)
-    dec_optim = optim.SGD(dec.parameters(), lr=LR)
+    # enc_optim = optim.SGD(enc.parameters(), lr=LR)
+    # dec_optim = optim.SGD(dec.parameters(), lr=LR)
+    enc_optim = optim.Adam(enc.parameters(), lr=LR)
+    dec_optim = optim.Adam(dec.parameters(), lr=LR)
     best_loss = None
     name = ''.join(str(time.time()).split('.'))
     enc_file = OUTPUT + '/' + 'enc_' + name + '.pt'
@@ -196,6 +202,7 @@ def train_epochs():
               (epoch,
                time.time() - epoch_start_time,
                loss))
+
 
 if __name__ == '__main__':
     # name='15254220464367697'
