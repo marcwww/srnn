@@ -27,7 +27,7 @@ class Encoder(nn.Module):
         # stacks: bsz * nstack * stacksz * stackelemsz
         embs = self.embedding(inputs)
         # inputs(length,bsz)->embd(length,bsz,embdsz)
-
+        hidden=None
         outputs,hidden=self.gru(embs,hidden)
 
         return outputs, hidden, stacks
