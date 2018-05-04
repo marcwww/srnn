@@ -6,6 +6,7 @@ from params import args
 
 SOS=params.SOS
 EOS=params.EOS
+PAD=params.PAD
 
 
 class Encoder(nn.Module):
@@ -15,7 +16,7 @@ class Encoder(nn.Module):
         self.hidden_size = hidden_size
         self.embedding = nn.Embedding(input_size,
                                       hidden_size,
-                                      padding_idx=EOS)
+                                      padding_idx=PAD)
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
@@ -47,7 +48,7 @@ class Decoder(nn.Module):
         self.hidden_size = hidden_size
         self.embedding = nn.Embedding(output_size,
                                       hidden_size,
-                                      padding_idx=EOS)
+                                      padding_idx=PAD)
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
