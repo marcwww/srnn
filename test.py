@@ -341,8 +341,8 @@ class EncoderRNN(nn.Module):
         self.hidden_size = hidden_size
 
         self.embedding = nn.Embedding(input_size, hidden_size)
-        # self.gru = nn.GRU(hidden_size, hidden_size)
-        self.gru = nn.RNN(hidden_size,hidden_size)
+        self.gru = nn.GRU(hidden_size, hidden_size)
+        # self.gru = nn.RNN(hidden_size,hidden_size)
 
     def forward(self, input, hidden):
         embedded = self.embedding(input).view(1, 1, -1)
@@ -387,8 +387,8 @@ class DecoderRNN(nn.Module):
         self.hidden_size = hidden_size
 
         self.embedding = nn.Embedding(output_size, hidden_size)
-        # self.gru = nn.GRU(hidden_size, hidden_size)
-        self.gru = nn.RNN(hidden_size, hidden_size)
+        self.gru = nn.GRU(hidden_size, hidden_size)
+        # self.gru = nn.RNN(hidden_size, hidden_size)
         self.out = nn.Linear(hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
 
@@ -452,8 +452,8 @@ class AttnDecoderRNN(nn.Module):
         self.attn = nn.Linear(self.hidden_size * 2, self.max_length)
         self.attn_combine = nn.Linear(self.hidden_size * 2, self.hidden_size)
         self.dropout = nn.Dropout(self.dropout_p)
-        # self.gru = nn.GRU(self.hidden_size, self.hidden_size)
-        self.gru = nn.RNN(hidden_size, hidden_size)
+        self.gru = nn.GRU(self.hidden_size, self.hidden_size)
+        # self.gru = nn.RNN(hidden_size, hidden_size)
         self.out = nn.Linear(self.hidden_size, self.output_size)
 
     def forward(self, input, hidden, encoder_outputs):
