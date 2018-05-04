@@ -95,8 +95,8 @@ import torch.nn as nn
 from torch import optim
 import torch.nn.functional as F
 
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+gpu_index=7
+device = torch.device(gpu_index if torch.cuda.is_available() else "cpu")
 
 ######################################################################
 # Loading data files
