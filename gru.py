@@ -66,6 +66,7 @@ class Decoder(nn.Module):
         # output: bsz * tar_vacabulary_size
 
         top1 = output.data.max(1)[1]
+        top1 = top1.unsqueeze(1)
         # topv, topi = torch.topk(output,1,dim=1)
         # output_index = topi
         # output_index: bsz * 1
