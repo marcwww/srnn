@@ -30,23 +30,16 @@ def to_batch(input_lang, output_lang,
     batch_tar=[]
     pairs=list(random.sample(pairs,len(pairs)))
 
-    max_length_src=0
-    max_length_tar=0
-
     for i in range(len(pairs)):
         indices_src=indexesFromSentence(input_lang,pairs[i][0])
         indices_tar=indexesFromSentence(output_lang,pairs[i][1])
         batch_src.append(indices_src)
         batch_tar.append(indices_tar)
-        max_length_src=max(max_length_src,len(indices_src))
-        max_length_tar=max(max_length_tar,len(indices_tar))
-        if (i+1) % batch_size == 0:
-            max_length_src=min(max_length_src,max_length)
-            max_length_tar=min(max_length_tar,max_length)
 
-            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length_src+1-len(sen)))
+        if (i+1) % batch_size == 0:
+            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length+1-len(sen)))
                         for sen in batch_src]
-            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length_tar+1-len(sen)))
+            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length+1-len(sen)))
                         for sen in batch_tar]
 
             # the transposing makes the data of the size: length * batch_size
@@ -57,8 +50,6 @@ def to_batch(input_lang, output_lang,
                        )
             batch_src=[]
             batch_tar=[]
-            max_length_src=0
-            max_length_tar=0
 
     # res: list of batch pairs
     return res
@@ -106,10 +97,15 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         _, hidden, stacks = enc(src,hidden,stacks)
 
         outputs=[]
+        output_indices=[]
         for dec_input in dec_inputs:
             # dec_input: shape of [batch_size]
             output, hidden, output_index = dec(dec_input,hidden,stacks)
             outputs.append(output)
+            output_indices.append(output_index)
+
+        # print(' '.join([output_lang.index2word[index[0].item()] for index in output_indices]))
+        # print(' '.join([output_lang.index2word[index.item()] for index in dec_tar[:,0]]))
 
         loss=0.0
         for oi in range(len(outputs)):
@@ -133,8 +129,7 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
             pre_loss = total_loss / print_every
             total_loss=0
 
-            pair = random.choice(pairs)
-            print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
+            eval_randomly(n=5)
 
     return pre_loss
 
@@ -142,14 +137,16 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
     with torch.no_grad():
         indices=indexesFromSentence(input_lang,src)
         # src_batch: length * (batch_size=1)
-        src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
+        # src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
+        padded_src = F.pad(torch.LongTensor(indices + [EOS]), (0, max_length + 1 - len(indices)))
+        padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
         stacks = enc.init_stack(batch_size=1)
 
+        _, hidden, stacks = enc(padded_src, hidden, stacks)
+        print(hidden)
         dec_input = torch.LongTensor([SOS]).to(DEVICE)
-
-        _, hidden, stacks = enc(src_batch, hidden, stacks)
 
         output_indices=[]
         while len(output_indices)<max_length:
@@ -162,30 +159,52 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
 
         return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
 
-if __name__ == '__main__':
-    criterion=nn.NLLLoss()
+def eval_randomly(n=1):
+    for i in range(n):
+        pair = random.choice(pairs)
+        print('>', pair[0])
+        print('=', pair[1])
+        output_words = trans_one_sen(pair[0])
+        output_sentence = ' '.join(output_words)
+        print('<', output_sentence)
+        print('')
+
+def train_epochs():
+    criterion = nn.NLLLoss()
     # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
     # dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
     enc_optim = optim.SGD(enc.parameters(), lr=LR)
     dec_optim = optim.SGD(dec.parameters(), lr=LR)
-    best_loss=None
-    name=''.join(str(time.time()).split('.'))
-    enc_file=OUTPUT+'/'+'enc_'+name+'.pt'
-    dec_file=OUTPUT+'/'+'dec_'+name+'.pt'
+    best_loss = None
+    name = ''.join(str(time.time()).split('.'))
+    enc_file = OUTPUT + '/' + 'enc_' + name + '.pt'
+    dec_file = OUTPUT + '/' + 'dec_' + name + '.pt'
 
     for epoch in range(NEPOCHS):
-        epoch_start_time=time.time()
-        loss=train(enc_optim,dec_optim,criterion,epoch)
-        if best_loss is None or loss<best_loss:
-            best_loss=loss
-            with open(enc_file,'wb') as f:
-                torch.save(enc,f)
-            with open(dec_file,'wb') as f:
-                torch.save(dec,f)
+        epoch_start_time = time.time()
+        loss = train(enc_optim, dec_optim, criterion, epoch)
+        if best_loss is None or loss < best_loss:
+            best_loss = loss
+            with open(enc_file, 'wb') as f:
+                torch.save(enc, f)
+            with open(dec_file, 'wb') as f:
+                torch.save(dec, f)
 
         print('end of epoch %d | time: %f s | loss: %f' %
               (epoch,
-               time.time()-epoch_start_time,
+               time.time() - epoch_start_time,
                loss))
+
+if __name__ == '__main__':
+    # name='15254220464367697'
+    # enc_file = OUTPUT + '/' + 'enc_' + name + '.pt'
+    # dec_file = OUTPUT + '/' + 'dec_' + name + '.pt'
+    # with open(enc_file, 'rb') as f:
+    #     enc=torch.load(f,map_location='cpu')
+    # with open(dec_file, 'rb') as f:
+    #     dec=torch.load(f,map_location='cpu')
+
+    train_epochs()
+    # eval_randomly(100)
 
 
