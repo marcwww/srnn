@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86dbae9e-7f62-410f-b5a3-d3ae7c590fc0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/gru.py" afterPath="$PROJECT_DIR$/gru.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gru.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gru.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gru.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="68" column="31" lean-forward="false" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+            <state relative-caret-position="202">
+              <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -116,28 +117,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="167" column="39" lean-forward="true" selection-start-line="167" selection-start-column="39" selection-end-line="167" selection-end-column="39" />
+            <state relative-caret-position="231">
+              <caret line="121" column="20" lean-forward="false" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
               <folding>
                 <element signature="e#583#645#0" expanded="false" />
                 <element signature="e#734#1776#0" expanded="false" />
                 <element signature="e#1965#2021#0" expanded="false" />
                 <element signature="e#3320#3360#0" expanded="false" />
-                <element signature="e#4069#4157#0" expanded="false" />
-                <element signature="e#4625#4654#0" expanded="false" />
-                <element signature="e#4794#5145#0" expanded="false" />
-                <element signature="e#4917#5026#0" expanded="false" />
-                <element signature="e#5300#5336#0" expanded="false" />
-                <element signature="e#6504#7500#0" expanded="false" />
-                <element signature="e#6504#6553#0" expanded="false" />
-                <element signature="e#7033#7500#0" expanded="false" />
-                <element signature="e#7176#7350#0" expanded="false" />
-                <element signature="e#7425#7498#0" expanded="false" />
-                <element signature="e#7534#7883#0" expanded="false" />
-                <element signature="e#7534#7560#0" expanded="false" />
+                <element signature="e#4638#4667#0" expanded="false" />
+                <element signature="e#4807#5158#0" expanded="false" />
+                <element signature="e#4930#5039#0" expanded="false" />
+                <element signature="e#5313#5349#0" expanded="false" />
+                <element signature="e#6517#7513#0" expanded="false" />
+                <element signature="e#6517#6566#0" expanded="false" />
+                <element signature="e#7046#7513#0" expanded="false" />
+                <element signature="e#7189#7363#0" expanded="false" />
+                <element signature="e#7438#7511#0" expanded="false" />
+                <element signature="e#7547#7896#0" expanded="false" />
+                <element signature="e#7547#7573#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -238,8 +238,8 @@
         <option value="$PROJECT_DIR$/data.py" />
         <option value="$PROJECT_DIR$/params.py" />
         <option value="$PROJECT_DIR$/stack.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/gru.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -467,7 +467,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21130551" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28683835" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46971735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35397038" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SFDX" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1047,37 +1047,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gru.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="167" column="39" lean-forward="true" selection-start-line="167" selection-start-column="39" selection-end-line="167" selection-end-column="39" />
+        <state relative-caret-position="231">
+          <caret line="121" column="20" lean-forward="false" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
           <folding>
             <element signature="e#583#645#0" expanded="false" />
             <element signature="e#734#1776#0" expanded="false" />
             <element signature="e#1965#2021#0" expanded="false" />
             <element signature="e#3320#3360#0" expanded="false" />
-            <element signature="e#4069#4157#0" expanded="false" />
-            <element signature="e#4625#4654#0" expanded="false" />
-            <element signature="e#4794#5145#0" expanded="false" />
-            <element signature="e#4917#5026#0" expanded="false" />
-            <element signature="e#5300#5336#0" expanded="false" />
-            <element signature="e#6504#7500#0" expanded="false" />
-            <element signature="e#6504#6553#0" expanded="false" />
-            <element signature="e#7033#7500#0" expanded="false" />
-            <element signature="e#7176#7350#0" expanded="false" />
-            <element signature="e#7425#7498#0" expanded="false" />
-            <element signature="e#7534#7883#0" expanded="false" />
-            <element signature="e#7534#7560#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gru.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="68" column="31" lean-forward="false" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#4638#4667#0" expanded="false" />
+            <element signature="e#4807#5158#0" expanded="false" />
+            <element signature="e#4930#5039#0" expanded="false" />
+            <element signature="e#5313#5349#0" expanded="false" />
+            <element signature="e#6517#7513#0" expanded="false" />
+            <element signature="e#6517#6566#0" expanded="false" />
+            <element signature="e#7046#7513#0" expanded="false" />
+            <element signature="e#7189#7363#0" expanded="false" />
+            <element signature="e#7438#7511#0" expanded="false" />
+            <element signature="e#7547#7896#0" expanded="false" />
+            <element signature="e#7547#7573#0" expanded="false" />
           </folding>
         </state>
       </provider>
