@@ -145,7 +145,6 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
         stacks = enc.init_stack(batch_size=1)
 
         _, hidden, stacks = enc(padded_src, hidden, stacks)
-        print(hidden)
         dec_input = torch.LongTensor([SOS]).to(DEVICE)
 
         output_indices=[]
