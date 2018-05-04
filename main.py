@@ -85,9 +85,11 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
     total_loss=0
     pre_loss=total_loss
     t=time.time()
-    print_every=int(len(batch_pairs)*print_per_percent)
 
-    batch_pairs_shuffle=random.sample(batch_pairs,k=len(batch_pairs))
+    batch_pairs_shuffle=to_batch(input_lang,output_lang,pairs,
+                     batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
+
+    print_every=int(len(batch_pairs)*print_per_percent)
     for i in range(len(batch_pairs_shuffle)):
         # one source batch and one target batch:
         # src: length * batch_size
