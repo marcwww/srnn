@@ -44,9 +44,13 @@ def to_batch(input_lang, output_lang,
         batch_tar.append(indices_tar)
 
         if (i+1) % batch_size == 0:
-            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(PAD,max_length+1-len(sen)))
+            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),
+                              (0,max_length+1-len(sen)),
+                              value=PAD)
                         for sen in batch_src]
-            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(PAD,1+max_length+1-len(sen)))
+            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),
+                              (0,1+max_length+1-len(sen)),
+                              value=PAD)
                         for sen in batch_tar]
 
             # the transposing makes the data of the size: length * batch_size
@@ -112,8 +116,11 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
         outputs=[]
         output_indices=[]
+        output_index=None
         for dec_input in dec_inputs:
             # dec_input: shape of [batch_size]
+            if random.random() < args.teaching:
+                dec_input = output_index
             output, hidden, output_index = dec(dec_input,hidden,stacks)
             outputs.append(output)
             output_indices.append(output_index)
