@@ -143,7 +143,7 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
         if (i+1) % print_every == 0:
             total_loss=total_loss/print_every
-            with open(params.log_file,'w+') as f:
+            with open(params.log_file,'a+') as f:
                 print('epoch %d | percent %f | loss %f | interval %f s' %
                       (epoch,
                        i/len(batch_pairs),
@@ -187,11 +187,12 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
 def eval_randomly(n=1):
     for i in range(n):
         pair = random.choice(pairs)
-        print('>', pair[0])
-        print('=', pair[1])
-        output_words = trans_one_sen(pair[0])
-        print('<', output_words)
-        print('')
+        with open(params.log_file, 'a+') as f:
+            print('>', pair[0],file=f)
+            print('=', pair[1],file=f)
+            output_words = trans_one_sen(pair[0])
+            print('<', output_words,file=f)
+            print('',file=f)
 
 def train_epochs():
     # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
@@ -211,11 +212,11 @@ def train_epochs():
                 torch.save(enc, f)
             with open(params.dec_file, 'wb') as f:
                 torch.save(dec, f)
-
-        print('end of epoch %d | time: %f s | loss: %f' %
-              (epoch,
-               time.time() - epoch_start_time,
-               loss))
+        with open(params.log_file, 'a+') as f:
+            print('end of epoch %d | time: %f s | loss: %f' %
+                  (epoch,
+                   time.time() - epoch_start_time,
+                   loss),file=f)
 
 
 if __name__ == '__main__':
