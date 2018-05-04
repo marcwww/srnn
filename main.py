@@ -164,10 +164,10 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()
-    enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
-    dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
-    # enc_optim = optim.SGD(enc.parameters(), lr=LR)
-    # dec_optim = optim.SGD(dec.parameters(), lr=LR)
+    # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
+    # dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
+    enc_optim = optim.SGD(enc.parameters(), lr=LR)
+    dec_optim = optim.SGD(dec.parameters(), lr=LR)
     best_loss=None
     name=''.join(str(time.time()).split('.'))
     enc_file=OUTPUT+'/'+'enc_'+name+'.pt'
