@@ -9,7 +9,7 @@ EOS=params.EOS
 
 
 class Encoder(nn.Module):
-    def __init__(self, input_size, hidden_size):
+    def __init__(self, input_size, hidden_size, stack_elem_size):
         super(Encoder, self).__init__()
         # here input dimention is equal to hidden dimention
         self.hidden_size = hidden_size
@@ -19,7 +19,7 @@ class Encoder(nn.Module):
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
-        self.empty_elem = torch.randn(1, self.stack_elem_size, requires_grad=True)
+        self.empty_elem = torch.randn(1, stack_elem_size, requires_grad=True)
 
     def forward(self, inputs, hidden=None):
         # inputs: length * bsz

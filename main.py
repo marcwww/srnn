@@ -80,7 +80,8 @@ batch_pairs=to_batch(input_lang,output_lang,pairs,
 #                             stack_elem_size=args.stack_elem_size)\
 #                             .to(DEVICE)
 enc = gru.Encoder(input_size=input_lang.n_words,
-                  hidden_size=args.hidden)
+                  hidden_size=args.hidden,
+                  stack_elem_size=args.stack_elem_size)
 dec = gru.Decoder(output_size=output_lang.n_words,
                   hidden_size=args.hidden)
 
