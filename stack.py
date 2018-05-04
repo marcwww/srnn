@@ -10,6 +10,7 @@ POP=params.POP
 NOOP=params.NOOP
 SOS=params.SOS
 EOS=params.EOS
+PAD=params.PAD
 USE_STACK=args.use_stack
 DEVICE=params.device
 NONLINEAR=params.NONLINEAR
@@ -41,7 +42,7 @@ class EncoderSRNN(nn.Module):
         self.stack_elem_size=stack_elem_size
         self.embedding = nn.Embedding(input_size,
                                       hidden_size,
-                                      padding_idx=EOS)
+                                      padding_idx=PAD)
         self.nonLinear=NONLINEAR()
         # self.gru = nn.GRU(hidden_size, hidden_size)
         self.hid2hid=nn.Linear(hidden_size,hidden_size)
@@ -152,16 +153,21 @@ class DecoderSRNN(nn.Module):
         self.stack_size=stack_size
         self.stack_depth=stack_depth
         self.stack_elem_size=stack_elem_size
-        self.embedding = nn.Embedding(output_size, hidden_size)
+        self.embedding = nn.Embedding(output_size,
+                                      hidden_size,
+                                      padding_idx=PAD)
         self.nonLinear=NONLINEAR()
         # self.gru = nn.GRU(hidden_size, hidden_size)
 
         self.hid2hid = nn.Linear(hidden_size, hidden_size)
         self.input2hid = nn.Linear(hidden_size, hidden_size)
-        self.hid2act = [nn.Linear(hidden_size, NACT).to(DEVICE) for _ in range(nstack)]
-        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size).to(DEVICE)
+        self.hid2act = [nn.Linear(hidden_size, NACT).to(DEVICE)
+                        for _ in range(nstack)]
+        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size).
+                              to(DEVICE)
                             for _ in range(nstack)]
-        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size).to(DEVICE)
+        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size)
+                              .to(DEVICE)
                           for _ in range(nstack)]
         self.hid2out = nn.Linear(hidden_size,output_size)
 
