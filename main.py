@@ -164,8 +164,7 @@ def eval_randomly(n=1):
         print('>', pair[0])
         print('=', pair[1])
         output_words = trans_one_sen(pair[0])
-        output_sentence = ' '.join(output_words)
-        print('<', output_sentence)
+        print('<', output_words)
         print('')
 
 def train_epochs():
