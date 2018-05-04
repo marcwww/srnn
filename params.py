@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import argparse
+import time
 
 def parse_arguments():
     p = argparse.ArgumentParser(description='Hyperparams')
@@ -16,6 +17,8 @@ def parse_arguments():
                    help='maximum sequence length')
     p.add_argument('-output', type=str, default='output',
                    help='output directory for model saving')
+    p.add_argument('-log', type=str, default='log',
+                   help='log file directory')
     p.add_argument('-hidden', type=int, default=256,
                    help='dimension of hidden states')
     p.add_argument('-stack_size', type=int, default=10,
@@ -36,6 +39,10 @@ def parse_arguments():
 
 args=parse_arguments()
 device = torch.device(args.gpu if torch.cuda.is_available() else "cpu")
+name = ''.join(str(time.time()).split('.'))
+enc_file = args.output + '/' + 'enc_' + name + '.pt'
+dec_file = args.output + '/' + 'dec_' + name + '.pt'
+log_file = args.output + '/' + 'log_' + name + '.txt'
 
 SOS=0
 EOS=1

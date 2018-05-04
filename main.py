@@ -143,11 +143,12 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
         if (i+1) % print_every == 0:
             total_loss=total_loss/print_every
-            print('epoch %d | percent %f | loss %f | interval %f s' %
-                  (epoch,
-                   i/len(batch_pairs),
-                   total_loss,
-                   time.time()-t))
+            with open(params.log_file,'w+') as f:
+                print('epoch %d | percent %f | loss %f | interval %f s' %
+                      (epoch,
+                       i/len(batch_pairs),
+                       total_loss,
+                       time.time()-t),file=f)
             t=time.time()
             pre_loss = total_loss
             total_loss=0
@@ -200,18 +201,15 @@ def train_epochs():
     enc_optim = optim.Adam(enc.parameters(), lr=LR)
     dec_optim = optim.Adam(dec.parameters(), lr=LR)
     best_loss = None
-    name = ''.join(str(time.time()).split('.'))
-    enc_file = OUTPUT + '/' + 'enc_' + name + '.pt'
-    dec_file = OUTPUT + '/' + 'dec_' + name + '.pt'
 
     for epoch in range(NEPOCHS):
         epoch_start_time = time.time()
         loss = train(enc_optim, dec_optim, epoch)
         if best_loss is None or loss < best_loss:
             best_loss = loss
-            with open(enc_file, 'wb') as f:
+            with open(params.enc_file, 'wb') as f:
                 torch.save(enc, f)
-            with open(dec_file, 'wb') as f:
+            with open(params.dec_file, 'wb') as f:
                 torch.save(dec, f)
 
         print('end of epoch %d | time: %f s | loss: %f' %
@@ -222,11 +220,9 @@ def train_epochs():
 
 if __name__ == '__main__':
     # name='15254220464367697'
-    # enc_file = OUTPUT + '/' + 'enc_' + name + '.pt'
-    # dec_file = OUTPUT + '/' + 'dec_' + name + '.pt'
-    # with open(enc_file, 'rb') as f:
+    # with open(params.enc_file, 'rb') as f:
     #     enc=torch.load(f,map_location='cpu')
-    # with open(dec_file, 'rb') as f:
+    # with open(params.dec_file, 'rb') as f:
     #     dec=torch.load(f,map_location='cpu')
 
     train_epochs()
