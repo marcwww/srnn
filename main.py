@@ -93,12 +93,13 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
     t=time.time()
     print_every=int(len(batch_pairs)*print_per_percent)
 
-    for i in range(len(batch_pairs)):
+    batch_pairs_shuffle=random.sample(batch_pairs,k=len(batch_pairs))
+    for i in range(len(batch_pairs_shuffle)):
         # one source batch and one target batch:
         # src: length * batch_size
         # tar: length * batch_size
-        src=batch_pairs[i][0]
-        tar=batch_pairs[i][1]
+        src=batch_pairs_shuffle[i][0]
+        tar=batch_pairs_shuffle[i][1]
         hidden=enc.init_hidden(BATCH_SIZE)
         stacks=enc.init_stack(BATCH_SIZE)
 
