@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 
 SOS=1
 EOS=0
@@ -11,6 +12,7 @@ BATCH_SIZE=5
 LR=0.0001
 NEPOCHS=30
 NACT=3
+NONLINEAR=nn.Tanh
 PUSH=0
 POP=1
 NOOP=2

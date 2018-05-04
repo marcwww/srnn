@@ -13,6 +13,7 @@ SOS=params.SOS
 EOS=params.EOS
 USE_STACK=params.USES_STACK
 DEVICE=params.device
+NONLINEAR=params.NONLINEAR
 
 def create_stack(stack_size,stack_elem_size):
     return np.array([([EMPTY_VAL] * stack_elem_size)] * stack_size)
@@ -42,7 +43,7 @@ class EncoderSRNN(nn.Module):
         self.embedding = nn.Embedding(input_size,
                                       hidden_size,
                                       padding_idx=EOS)
-        self.nonLinear=nn.Sigmoid()
+        self.nonLinear=NONLINEAR()
         # self.gru = nn.GRU(hidden_size, hidden_size)
         self.hid2hid=nn.Linear(hidden_size,hidden_size)
         self.input2hid=nn.Linear(hidden_size,hidden_size)
@@ -153,7 +154,7 @@ class DecoderSRNN(nn.Module):
         self.stack_depth=stack_depth
         self.stack_elem_size=stack_elem_size
         self.embedding = nn.Embedding(output_size, hidden_size)
-        self.nonLinear=nn.Sigmoid()
+        self.nonLinear=NONLINEAR()
         # self.gru = nn.GRU(hidden_size, hidden_size)
 
         self.hid2hid = nn.Linear(hidden_size, hidden_size)
