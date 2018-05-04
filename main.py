@@ -8,9 +8,12 @@ from torch import optim
 import time
 import crash_on_ipy
 import params
+from torch.nn.utils import clip_grad_norm
 
 SOS=params.SOS
 EOS=params.EOS
+PAD=params.PAD
+GRAD_CLIP=params.GRAD_CLIP
 MAX_LENGTH=params.MAX_LENGTH
 use_cuda = params.use_cuda
 BATCH_SIZE=params.BATCH_SIZE
@@ -37,9 +40,9 @@ def to_batch(input_lang, output_lang,
         batch_tar.append(indices_tar)
 
         if (i+1) % batch_size == 0:
-            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(0,max_length+1-len(sen)))
+            padded_src=[F.pad(torch.LongTensor(sen+[EOS]),(PAD,max_length+1-len(sen)))
                         for sen in batch_src]
-            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(0,1+max_length+1-len(sen)))
+            padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),(PAD,1+max_length+1-len(sen)))
                         for sen in batch_tar]
 
             # the transposing makes the data of the size: length * batch_size
@@ -71,7 +74,7 @@ dec=stack.DecoderSRNN(hidden_size=256,
                   stack_size=10,
                   stack_elem_size=256).to(DEVICE)
 
-def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
+def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
     total_loss=0
     pre_loss=total_loss
@@ -107,29 +110,30 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
         # print(' '.join([output_lang.index2word[index[0].item()] for index in output_indices]))
         # print(' '.join([output_lang.index2word[index.item()] for index in dec_tar[:,0]]))
 
-        loss=0.0
-        for oi in range(len(outputs)):
-            loss+=criterion(outputs[oi],dec_tar[oi])
+        loss=F.cross_entropy(outputs,dec_tar,ignore_index=PAD)
+        clip_grad_norm(enc.parameters(), max_norm=GRAD_CLIP)
+        clip_grad_norm(dec.parameters(),max_norm=GRAD_CLIP)
 
         loss.backward()
         enc_optim.step()
         dec_optim.step()
-        total_loss+=loss.data/len(outputs)
+        total_loss+=loss.item()
 
         # pair = random.choice(pairs)
         # print('src:',pair[0],'tar_pred:',trans_one_sen(pair[0]),'tar_ground:',pair[1])
 
         if (i+1) % print_every == 0:
+            total_loss=total_loss/print_every
             print('epoch %d | percent %f | loss %f | interval %f s' %
                   (epoch,
                    i/len(batch_pairs),
-                   total_loss/print_every,
+                   total_loss,
                    time.time()-t))
             t=time.time()
-            pre_loss = total_loss / print_every
+            pre_loss = total_loss
             total_loss=0
 
-            eval_randomly(n=5)
+            eval_randomly(n=1)
 
     return pre_loss
 
@@ -138,7 +142,7 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
         indices=indexesFromSentence(input_lang,src)
         # src_batch: length * (batch_size=1)
         # src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
-        padded_src = F.pad(torch.LongTensor(indices + [EOS]), (0, max_length + 1 - len(indices)))
+        padded_src = F.pad(torch.LongTensor(indices + [EOS]), (PAD, max_length + 1 - len(indices)))
         padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
@@ -180,7 +184,7 @@ def train_epochs():
 
     for epoch in range(NEPOCHS):
         epoch_start_time = time.time()
-        loss = train(enc_optim, dec_optim, criterion, epoch)
+        loss = train(enc_optim, dec_optim, epoch)
         if best_loss is None or loss < best_loss:
             best_loss = loss
             with open(enc_file, 'wb') as f:

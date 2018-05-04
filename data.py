@@ -5,6 +5,7 @@ import params
 
 SOS=params.SOS
 EOS=params.EOS
+PAD=params.PAD
 MAX_LENGTH=params.MAX_LENGTH
 
 class Lang:
@@ -12,8 +13,8 @@ class Lang:
         self.name = name
         self.word2index = {}
         self.word2count = {}
-        self.index2word = {SOS: "SOS", EOS: "EOS"}
-        self.n_words = 2  # Count SOS and EOS
+        self.index2word = {SOS: "<SOS>", EOS: "<EOS>", PAD: "<PAD>"}
+        self.n_words = 3  # Count SOS and EOS
 
     def addSentence(self, sentence):
         for word in sentence.split(' '):

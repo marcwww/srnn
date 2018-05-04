@@ -1,12 +1,14 @@
 import torch
 import torch.nn as nn
 
-SOS=1
-EOS=0
+SOS=0
+EOS=1
+PAD=2
 MAX_LENGTH=10
 use_cuda = torch.cuda.is_available()
 gpu_index=0
 device = torch.device(gpu_index if torch.cuda.is_available() else "cpu")
+GRAD_CLIP=15
 # BATCH_SIZE=512
 BATCH_SIZE=5
 LR=1e-6
