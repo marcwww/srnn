@@ -1,1 +1,1 @@
-scp cip:~/exp_wkx/srnn/log/* .
+scp cip:~/exp_wkx/srnn/log/* ./log

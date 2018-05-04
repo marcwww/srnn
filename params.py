@@ -42,7 +42,7 @@ device = torch.device(args.gpu if torch.cuda.is_available() else "cpu")
 name = ''.join(str(time.time()).split('.'))
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
-log_file = args.output + '/' + 'log_' + name + '.txt'
+log_file = args.log + '/' + 'log_' + name + '.txt'
 
 SOS=0
 EOS=1
