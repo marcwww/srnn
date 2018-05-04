@@ -10,7 +10,7 @@ PAD=params.PAD
 
 
 class Encoder(nn.Module):
-    def __init__(self, input_size, hidden_size, stack_elem_size):
+    def __init__(self, input_size, hidden_size):
         super(Encoder, self).__init__()
         # here input dimention is equal to hidden dimention
         self.hidden_size = hidden_size
@@ -20,7 +20,7 @@ class Encoder(nn.Module):
 
         self.gru = nn.GRU(hidden_size, hidden_size)
 
-        self.empty_elem = torch.randn(1, stack_elem_size, requires_grad=True)
+        self.empty_elem = torch.randn(1, args.stack_elem_size, requires_grad=True)
 
     def forward(self, inputs, hidden=None):
         # inputs: length * bsz
@@ -34,9 +34,9 @@ class Encoder(nn.Module):
 
     def init_stack(self,batch_size):
         return self.empty_elem.expand(batch_size,
-                                               self.nstack,
-                                               self.stack_size,
-                                               self.stack_elem_size).contiguous()
+                                      args.nstack,
+                                      args.stack_size,
+                                      args.stack_elem_size).contiguous()
     def init_hidden(self,batch_size):
         weight = next(self.parameters()).data
         return weight.new(batch_size,self.hidden_size)
