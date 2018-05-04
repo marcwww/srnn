@@ -1,6 +1,5 @@
 import data
 import torch.nn.functional as F
-from torch.autograd import Variable
 import torch
 import random
 import stack
@@ -19,6 +18,7 @@ LR=params.LR
 NEPOCHS=params.NEPOCHS
 OUTPUT=params.OUTPUT
 USE_STACK=params.USES_STACK
+DEVICE=params.device
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -51,11 +51,8 @@ def to_batch(input_lang, output_lang,
 
             # the transposing makes the data of the size: length * batch_size
             res.append((
-                        torch.stack(padded_src).t().contiguous().cuda()
-                        if use_cuda else torch.stack(padded_src).t().contiguous(),
-
-                        torch.stack(padded_tar).t().contiguous().cuda()
-                        if use_cuda else torch.stack(padded_tar).t().contiguous()
+                        torch.stack(padded_src).t().contiguous().to(DEVICE),
+                        torch.stack(padded_tar).t().contiguous().to(DEVICE)
                         )
                        )
             batch_src=[]
@@ -75,16 +72,13 @@ enc=stack.EncoderSRNN(input_lang.n_words,
                   nstack=2,
                   stack_depth=2,
                   stack_size=10,
-                  stack_elem_size=256)
+                  stack_elem_size=256).to(DEVICE)
 dec=stack.DecoderSRNN(hidden_size=256,
                   output_size=output_lang.n_words,
                   nstack=2,
                   stack_depth=2,
                   stack_size=10,
-                  stack_elem_size=256)
-if use_cuda:
-    enc.cuda()
-    dec.cuda()
+                  stack_elem_size=256).to(DEVICE)
 
 def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
 
@@ -143,32 +137,28 @@ def train(enc_optim,dec_optim,criterion,epoch,print_per_percent=0.1):
     return pre_loss
 
 def trans_one_sen(src,max_length=MAX_LENGTH):
-    indices=indexesFromSentence(input_lang,src)
-    # src_batch: length * (batch_size=1)
-    src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t()
-    if use_cuda:
-        src_batch = src_batch.cuda()
+    with torch.no_grad():
+        indices=indexesFromSentence(input_lang,src)
+        # src_batch: length * (batch_size=1)
+        src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
 
-    hidden = enc.init_hidden(batch_size=1)
-    stacks = enc.init_stack(batch_size=1)
+        hidden = enc.init_hidden(batch_size=1)
+        stacks = enc.init_stack(batch_size=1)
 
-    dec_input = torch.LongTensor([SOS])
-    if use_cuda:
-        dec_input = dec_input.cuda()
+        dec_input = torch.LongTensor([SOS]).to(DEVICE)
 
-    _, hidden, stacks = enc(src_batch, hidden, stacks)
+        _, hidden, stacks = enc(src_batch, hidden, stacks)
 
-    output_indices=[]
-    while len(output_indices)<max_length:
-        # dec_input: shape of [batch_size=1]
-        _, hidden, output_index = dec(dec_input, hidden, stacks)
-        if output_index.data[0,0]==EOS:
-            break
-        output_indices.append(output_index.data.cpu().numpy()[0,0]
-                              if use_cuda else output_index.data.numpy()[0,0])
-        dec_input = output_index.squeeze(0)
+        output_indices=[]
+        while len(output_indices)<max_length:
+            # dec_input: shape of [batch_size=1]
+            _, hidden, output_index = dec(dec_input, hidden, stacks)
+            if output_index.item()==EOS:
+                break
+            output_indices.append(output_index.item())
+            dec_input = output_index.squeeze(0)
 
-    return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
+        return ' '.join([output_lang.index2word[output_index] for output_index in output_indices])
 
 if __name__ == '__main__':
     criterion=nn.NLLLoss()

@@ -1,6 +1,5 @@
 from torch import nn
 import torch
-from torch.autograd import Variable
 import numpy as np
 import params
 
@@ -47,33 +46,20 @@ class EncoderSRNN(nn.Module):
         # self.gru = nn.GRU(hidden_size, hidden_size)
         self.hid2hid=nn.Linear(hidden_size,hidden_size)
         self.input2hid=nn.Linear(hidden_size,hidden_size)
-        self.hid2act=[nn.Linear(hidden_size,NACT)
+        self.hid2act=[nn.Linear(hidden_size,NACT).to(DEVICE)
                       for _ in range(nstack)]
-        self.hid2stack=[nn.Linear(hidden_size,stack_elem_size)
+        self.hid2stack=[nn.Linear(hidden_size,stack_elem_size).to(DEVICE)
                         for _ in range(nstack)]
-        self.stack2hid=[nn.Linear(stack_elem_size*stack_depth,hidden_size)
+        self.stack2hid=[nn.Linear(stack_elem_size*stack_depth,hidden_size).to(DEVICE)
                         for _ in range(nstack)]
-
-        if use_cuda:
-            for si in range(nstack):
-                self.hid2act[si]=self.hid2act[si].cuda()
-                self.hid2stack[si]=self.hid2stack[si].cuda()
-                self.stack2hid[si]=self.stack2hid[si].cuda()
 
         self.softmax=nn.Softmax()
-        self.empty_elem = Variable(torch.randn(1,self.stack_elem_size),
-                                   requires_grad=True)
+        self.empty_elem =torch.randn(1,self.stack_elem_size,requires_grad=True)
 
         W_up, W_down = shift_matrix(stack_size)
-        self.W_up = Variable(torch.Tensor(W_up))
-        # self.W_up = self.W_up.expand(batch_size,stack_size,stack_size)
-        if use_cuda:
-            self.W_up=self.W_up.cuda()
+        self.W_up = torch.Tensor(W_up).to(DEVICE)
 
-        self.W_down = Variable(torch.Tensor(W_down))
-        # self.W_down = self.W_down.expand(batch_size,stack_size,stack_size)
-        if use_cuda:
-            self.W_down=self.W_down.cuda()
+        self.W_down = torch.Tensor(W_down).to(DEVICE)
 
     def update_stack(self, stacks, si,
                      p_push, p_pop, p_noop, push_val):
@@ -81,9 +67,7 @@ class EncoderSRNN(nn.Module):
         # new_elem: bsz * elemsz
         # push_val: bsz * elemsz
         batch_size=stacks.shape[0]
-        stack=stacks[:,si,:,:].clone()
-        if use_cuda:
-            stack=stack.cuda()
+        stack=stacks[:,si,:,:].clone().to(DEVICE)
 
         p_push=p_push.unsqueeze(1)
         p_pop=p_pop.unsqueeze(1)
@@ -120,9 +104,7 @@ class EncoderSRNN(nn.Module):
                 stack_vals=stacks[:,:,:self.stack_depth,:].contiguous().\
                     view(batch_size,
                          self.nstack,
-                         self.stack_depth*self.stack_elem_size).clone()
-                if use_cuda:
-                    stack_vals=stack_vals.cuda()
+                         self.stack_depth*self.stack_elem_size).clone().to(DEVICE)
 
                 # for each stack:
                 for si in range(self.nstack):
@@ -157,7 +139,7 @@ class EncoderSRNN(nn.Module):
                                                self.stack_elem_size).contiguous()
     def init_hidden(self,batch_size):
         weight = next(self.parameters()).data
-        return Variable(weight.new(batch_size,self.hidden_size))
+        return weight.new(batch_size,self.hidden_size)
 
 class DecoderSRNN(nn.Module):
     def __init__(self, hidden_size, output_size,
@@ -176,10 +158,10 @@ class DecoderSRNN(nn.Module):
 
         self.hid2hid = nn.Linear(hidden_size, hidden_size)
         self.input2hid = nn.Linear(hidden_size, hidden_size)
-        self.hid2act = [nn.Linear(hidden_size, NACT) for _ in range(nstack)]
-        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size)
+        self.hid2act = [nn.Linear(hidden_size, NACT).to(DEVICE) for _ in range(nstack)]
+        self.hid2stack = [nn.Linear(hidden_size, stack_elem_size).to(DEVICE)
                             for _ in range(nstack)]
-        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size)
+        self.stack2hid = [nn.Linear(stack_elem_size * stack_depth, hidden_size).to(DEVICE)
                           for _ in range(nstack)]
         self.hid2out = nn.Linear(hidden_size,output_size)
 
@@ -187,22 +169,14 @@ class DecoderSRNN(nn.Module):
         self.log_softmax = nn.LogSoftmax(dim=1)
         self.softmax=nn.Softmax()
 
-        if use_cuda:
-            for si in range(nstack):
-                self.hid2act[si]=self.hid2act[si].cuda()
-                self.hid2stack[si]=self.hid2stack[si].cuda()
-                self.stack2hid[si]=self.stack2hid[si].cuda()
 
-        self.empty_elem = Variable(torch.randn(1, self.stack_elem_size),
-                                   requires_grad=True)
+        self.empty_elem = torch.randn(1, self.stack_elem_size,requires_grad=True)
 
         W_up, W_down = shift_matrix(stack_size)
-        self.W_up = Variable(torch.Tensor(W_up)).cuda() if use_cuda else \
-            Variable(torch.Tensor(W_up))
-        self.W_down = Variable(torch.Tensor(W_down)).cuda() if use_cuda else \
-            Variable(torch.Tensor(W_down))
+        self.W_up = torch.Tensor(W_up).to(DEVICE)
+        self.W_down = torch.Tensor(W_down).to(DEVICE)
 
-        self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size)
+        self.enc2dec=[nn.Linear(stack_elem_size,stack_elem_size).to(DEVICE)
                       for _ in range(nstack)]
 
     def update_stack(self, stacks, si,
@@ -211,9 +185,7 @@ class DecoderSRNN(nn.Module):
         # new_elem: bsz * elemsz
         # push_val: bsz * elemsz
         batch_size = stacks.shape[0]
-        stack=stacks[:,si,:,:].clone()
-        if use_cuda:
-            stack=stack.cuda()
+        stack=stacks[:,si,:,:].clone().to(DEVICE)
 
         p_push=p_push.unsqueeze(1)
         p_pop=p_pop.unsqueeze(1)
@@ -249,9 +221,7 @@ class DecoderSRNN(nn.Module):
             stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
                 view(batch_size,
                      self.nstack,
-                     self.stack_depth * self.stack_elem_size).clone()
-            if use_cuda:
-                stack_vals=stack_vals.cuda()
+                     self.stack_depth * self.stack_elem_size).clone().to(DEVICE)
 
             # for each stack:
             for si in range(self.nstack):
@@ -291,4 +261,4 @@ class DecoderSRNN(nn.Module):
                                                self.stack_elem_size).contiguous()
     def init_hidden(self,batch_size):
         weight = next(self.parameters()).data
-        return Variable(weight.new(batch_size,self.hidden_size))
+        return weight.new(batch_size,self.hidden_size)
