@@ -539,7 +539,7 @@ def tensorsFromPair(pair):
 # ``teacher_forcing_ratio`` up to use more of it.
 #
 
-teacher_forcing_ratio = 1.0
+teacher_forcing_ratio = 0.5
 
 
 def train(input_tensor, target_tensor, encoder, decoder, encoder_optimizer, decoder_optimizer, criterion, max_length=MAX_LENGTH):
