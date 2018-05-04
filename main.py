@@ -126,8 +126,8 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
             outputs.append(output)
             output_indices.append(output_index)
 
-        print('pred: ',' '.join([output_lang.index2word[index[0].item()] for index in output_indices]))
-        print('tar: ',' '.join([output_lang.index2word[index.item()] for index in dec_tar[:,0]]))
+        # print('pred: ',' '.join([output_lang.index2word[index[0].item()] for index in output_indices]))
+        # print('tar: ',' '.join([output_lang.index2word[index.item()] for index in dec_tar[:,0]]))
         outputs=torch.stack(outputs).view(-1,output_lang.n_words)
         loss=F.cross_entropy(outputs,dec_tar.view(-1),ignore_index=PAD)
         clip_grad_norm(enc.parameters(), max_norm=GRAD_CLIP)
