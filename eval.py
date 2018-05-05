@@ -32,7 +32,7 @@ def train_accuracy(enc,dec):
         dec_tar = tar[1:, :]
         res, outputs = trans_one_batch(enc,dec,src)
         for i in range(BATCH_SIZE):
-            if cmp(np.array((res[i])),dec_tar[:,i].numpy()):
+            if cmp(np.array((res[i])),dec_tar[:,i].cpu().numpy()):
                num+=1
 
         total+=BATCH_SIZE
