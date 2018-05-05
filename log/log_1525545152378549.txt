@@ -1,0 +1,82 @@
+Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=20, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
+epoch 0 | percent 0.064516 | loss 3.341036 | interval 0.977729 s
+> e e e e e e e e e
+= e e e e e e e e e
+< t t t t t t t t t t t t t t t t t t t t
+
+epoch 0 | percent 0.161290 | loss 3.294830 | interval 0.907226 s
+> f f f f f f f f
+= f f f f f f f f
+< t e e e e e e e e e e e e e e e e e e e
+
+epoch 0 | percent 0.258065 | loss 3.233789 | interval 1.048549 s
+> i i i i i
+= i i i i i
+< t e e e e e e e e e e e e e e e e e e e
+
+epoch 0 | percent 0.354839 | loss 3.173449 | interval 0.847384 s
+> c c c c c c c
+= c c c c c c c
+< e e e e e e e e e e e e e e e e e e e e
+
+epoch 0 | percent 0.451613 | loss 3.200893 | interval 1.170758 s
+> e e e e
+= e e e e
+< e e e e e e e e e e e e e e e e e e e e
+
+epoch 0 | percent 0.548387 | loss 3.110377 | interval 0.946175 s
+> b b b b b b
+= b b b b b b
+< 
+
+epoch 0 | percent 0.645161 | loss 3.039115 | interval 0.954421 s
+> f f f
+= f f f
+< 
+
+epoch 0 | percent 0.741935 | loss 3.049911 | interval 0.999621 s
+> v v v v v v v v v
+= v v v v v v v v v
+< 
+
+epoch 0 | percent 0.838710 | loss 3.066417 | interval 0.910019 s
+> v v
+= v v
+< 
+
+epoch 0 | percent 0.935484 | loss 2.989420 | interval 0.823987 s
+> g g
+= g g
+< 
+
+end of epoch 0 | time: 9.971170 s | loss: 2.989420
+epoch 1 | percent 0.064516 | loss 3.072148 | interval 0.888229 s
+> t t t
+= t t t
+< 
+
+epoch 1 | percent 0.161290 | loss 2.777824 | interval 0.860860 s
+> t t t t
+= t t t t
+< t
+
+epoch 1 | percent 0.258065 | loss 2.745432 | interval 0.985770 s
+> o o o o
+= o o o o
+< f f f f f f f f f f f f f f f f f f f f
+
+epoch 1 | percent 0.354839 | loss 2.626013 | interval 0.976224 s
+> v v v v v
+= v v v v v
+< v v v v v v v v v v v v v v v v v v v v
+
+epoch 1 | percent 0.451613 | loss 2.687604 | interval 0.924404 s
+> p p p p p p p p
+= p p p p p p p p
+< t t t t t t t t t t t t t t t t t t t t
+
+epoch 1 | percent 0.548387 | loss 2.452327 | interval 1.393353 s
+> i i
+= i i
+< d d d d d d d d d d d d d d d d d d d d
+

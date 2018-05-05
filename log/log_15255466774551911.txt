@@ -1,0 +1,83 @@
+Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=20, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
+epoch 0 | percent 0.064516 | loss 3.376583 | interval 0.863220 s
+> h h h h h h
+= h h h h h h
+< j b a q b a g j b a g j b a j b a j b a
+
+epoch 0 | percent 0.161290 | loss 3.336569 | interval 0.844928 s
+> t t t t t t t t
+= t t t t t t t t
+< b a s a s a s a s a s a s a s a s a s a
+
+epoch 0 | percent 0.258065 | loss 3.257626 | interval 0.702622 s
+> c c c c c c
+= c c c c c c
+< b b b b b b b b b b b b b b b b b b b b
+
+epoch 0 | percent 0.354839 | loss 3.210004 | interval 0.801061 s
+> i i
+= i i
+< b b b b b b b b b b b b b b b b b b b b
+
+epoch 0 | percent 0.451613 | loss 3.167421 | interval 0.737730 s
+> y
+= y
+< 
+
+epoch 0 | percent 0.548387 | loss 3.203024 | interval 0.822732 s
+> d d d d d d d
+= d d d d d d d
+< 
+
+epoch 0 | percent 0.645161 | loss 3.043043 | interval 0.855111 s
+> x
+= x
+< 
+
+epoch 0 | percent 0.741935 | loss 3.070603 | interval 0.822903 s
+> d d d d d d d d
+= d d d d d d d d
+< 
+
+epoch 0 | percent 0.838710 | loss 3.041980 | interval 1.047708 s
+> p p p p p p p p
+= p p p p p p p p
+< 
+
+epoch 0 | percent 0.935484 | loss 3.048372 | interval 0.934992 s
+> a a
+= a a
+< 
+
+end of epoch 0 | time: 119.143774 s | loss: 3.048372
+epoch 1 | percent 0.064516 | loss 2.967822 | interval 1.389690 s
+> u u u u u
+= u u u u u
+< 
+
+epoch 1 | percent 0.161290 | loss 2.775719 | interval 0.811857 s
+> x x x x x
+= x x x x x
+< 
+
+epoch 1 | percent 0.258065 | loss 2.981186 | interval 1.027173 s
+> i i i i i i i i
+= i i i i i i i i
+< i i i i i i i i i i i i i i i i i i i i
+
+epoch 1 | percent 0.354839 | loss 2.650017 | interval 0.888749 s
+> s s s s s s s s s s
+= s s s s s s s s s s
+< f f f f f f f f f f f f f f f f f f f f
+
+epoch 1 | percent 0.451613 | loss 2.567605 | interval 0.998729 s
+> q q q q q q
+= q q q q q q
+< f f f f f f f f f f f f f f f f f f f f
+
+epoch 1 | percent 0.548387 | loss 2.615195 | interval 0.957962 s
+> d d d d d d d d
+= d d d d d d d d
+< d d d d d d d d d d d d d d d d d d d d
+
+epoch 1 | percent 0.645161 | loss 2.420967 | interval 1.057757 s

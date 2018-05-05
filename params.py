@@ -13,7 +13,7 @@ def parse_arguments():
                    help='initial learning rate')
     p.add_argument('-grad_clip', type=float, default=10.0,
                    help='initial learning rate')
-    p.add_argument('-max_length', type=int, default=100,
+    p.add_argument('-max_length', type=int, default=20,
                    help='maximum sequence length')
     p.add_argument('-output', type=str, default='output',
                    help='output directory for model saving')

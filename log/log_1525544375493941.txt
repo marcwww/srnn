@@ -1,0 +1,26 @@
+Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=20, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
+epoch 0 | percent 0.064516 | loss 3.374488 | interval 0.999225 s
+> j j j j j j j j
+= j j j j j j j j
+< v l y l y l y l y l y l y l y l y l y l
+
+epoch 0 | percent 0.161290 | loss 3.309285 | interval 0.922589 s
+> a a a a a a
+= a a a a a a
+< v v v v v v v v v v v v v v v v v v v v
+
+epoch 0 | percent 0.258065 | loss 3.269443 | interval 1.042197 s
+> f f f f f f f f f
+= f f f f f f f f f
+< 
+
+epoch 0 | percent 0.354839 | loss 3.186912 | interval 0.958662 s
+> q q q q q q
+= q q q q q q
+< 
+
+epoch 0 | percent 0.451613 | loss 3.161792 | interval 0.852636 s
+> c c c c
+= c c c c
+< 
+

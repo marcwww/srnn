@@ -108,6 +108,33 @@ dec = stack_ex.DecoderSRNN(output_size=output_lang.n_words,
 # dec = gru.Decoder(output_size=output_lang.n_words,
 #                   hidden_size=args.hidden).to(DEVICE)
 
+def no_teaching(hidden,stacks,dec,max_length=MAX_LENGTH):
+    dec_input = torch.LongTensor([SOS]).expand(BATCH_SIZE)
+
+    outputs = []
+    output_indices = []
+    batch_ends = [False] * BATCH_SIZE
+
+    def ends(batch_ends):
+        for end in batch_ends:
+            if end == False:
+                return False
+        return True
+
+    while len(output_indices) < max_length:
+        # dec_input: shape of [batch_size]
+        output, hidden, output_index, stacks = dec(dec_input, hidden, stacks)
+        outputs.append(output)
+        output_indices.append(output_index)
+        for i in range(BATCH_SIZE):
+            if output_index[i].item() == EOS:
+                batch_ends[i] = False
+        if ends(batch_ends):
+            break
+
+        dec_input = output_index.squeeze(1)
+
+    return outputs, output_indices
 
 def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
@@ -115,10 +142,12 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
     pre_loss=total_loss
     t=time.time()
 
-    batch_pairs_shuffle=to_batch(input_lang,
-                                 output_lang,
-                                 pairs,
-                                 batch_size=BATCH_SIZE)
+    # batch_pairs_shuffle=to_batch(input_lang,
+    #                              output_lang,
+    #                              pairs,
+    #                              batch_size=BATCH_SIZE)
+    #
+    batch_pairs_shuffle=batch_pairs
 
     print_every=int(len(batch_pairs)*print_per_percent)
     for i in range(len(batch_pairs_shuffle)):
@@ -137,19 +166,16 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
         _, hidden, stacks = enc(src,hidden,stacks)
 
         outputs=[]
-        output_indices=[]
-        output_index=None
-        for dec_input in dec_inputs:
-            # dec_input: shape of [batch_size]
-            if random.random() < args.teaching and \
-                    output_index is not None:
-                dec_input = output_index.squeeze(1)
-            output, hidden, output_index, stacks = dec(dec_input,hidden,stacks)
-            outputs.append(output)
-            output_indices.append(output_index)
+        teaching=random.random() < args.teaching
+        if teaching:
+            for dec_input in dec_inputs:
+                # dec_input: shape of [batch_size]
+                output, hidden, output_index, stacks = dec(dec_input,hidden,stacks)
+                outputs.append(output)
+        else:
+            outputs,_ =no_teaching(hidden,stacks,dec)
+            outputs=outputs[:len(dec_tar)]
 
-        # print('pred: ',' '.join([output_lang.index2word[index[0].item()] for index in output_indices]))
-        # print('tar: ',' '.join([output_lang.index2word[index.item()] for index in dec_tar[:,0]]))
         outputs=torch.stack(outputs).view(-1,output_lang.n_words)
         loss=F.cross_entropy(outputs,dec_tar.view(-1),ignore_index=PAD)
         clip_grad_norm(enc.parameters(), max_norm=GRAD_CLIP)
@@ -177,6 +203,26 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
             eval_randomly(n=1)
 
     return pre_loss
+
+def trans_one_batch(enc,dec,src_batch,max_length=MAX_LENGTH):
+    with torch.no_grad():
+        hidden = enc.init_hidden(BATCH_SIZE)
+        stacks = enc.init_stack(BATCH_SIZE)
+
+        _, hidden, stacks = enc(src_batch, hidden, stacks)
+
+        outputs, output_indices = no_teaching(hidden,stacks,dec)
+
+        res=[]
+        for i in range(BATCH_SIZE):
+            one_batch=[]
+            for j in range(len(output_indices)):
+                idx=output_indices[j][i].item()
+                # word=output_lang.index2word[idx]
+                # res[i].append(word)
+                one_batch.append(idx)
+            res.append(one_batch)
+        return res, outputs
 
 def trans_one_sen(enc,dec,src,max_length=MAX_LENGTH):
     with torch.no_grad():
