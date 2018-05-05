@@ -45,12 +45,15 @@ def to_batch(input_lang, output_lang,
         batch_tar.append(indices_tar)
 
         if (i+1) % batch_size == 0:
+            max_length_src = max([len(src) for src in batch_src])
+            max_length_tar = max([len(tar) for tar in batch_tar])
+
             padded_src=[F.pad(torch.LongTensor(sen+[EOS]),
-                              (0,max_length+1-len(sen)),
+                              (0,max_length_src+1-len(sen+[EOS])),
                               value=PAD)
                         for sen in batch_src]
             padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),
-                              (0,1+max_length+1-len(sen)),
+                              (0,1+max_length_tar+1-len([SOS]+sen+[EOS])),
                               value=PAD)
                         for sen in batch_tar]
 
@@ -178,9 +181,10 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
         indices=indexesFromSentence(input_lang,src)
         # src_batch: length * (batch_size=1)
         # src_batch=torch.LongTensor(indices+[EOS]).unsqueeze(0).t().to(DEVICE)
-        padded_src = F.pad(torch.LongTensor(indices + [EOS]),
-                           (0, max_length + 1 - len(indices)),
-                           value=PAD)
+        # padded_src = F.pad(torch.LongTensor(indices + [EOS]),
+        #                    (0, max_length + 1 - len(indices)),
+        #                    value=PAD)
+        padded_src = torch.LongTensor(indices + [EOS])
         padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
