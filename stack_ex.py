@@ -141,7 +141,7 @@ class EncoderSRNN(nn.Module):
                                                self.stack_size,
                                                self.stack_elem_size).contiguous()
     def init_hidden(self,batch_size):
-        return torch.zeros(batch_size,self.hidden_size)
+        return torch.zeros(batch_size,self.hidden_size).to(DEVICE)
 
 class DecoderSRNN(nn.Module):
     def __init__(self, hidden_size, output_size,
