@@ -252,8 +252,9 @@ class DecoderSRNN(nn.Module):
         output = self.log_softmax(output)
         # output: bsz * tar_vacabulary_size
 
-        topv, topi = torch.topk(output,1,dim=1)
-        output_index = topi
+        top1 = output.data.max(1)[1]
+        top1 = top1.unsqueeze(1)
+        output_index=top1
         # output_index: bsz * 1
 
         return output, hidden, output_index, stacks
