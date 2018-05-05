@@ -109,7 +109,8 @@ dec = stack_ex.DecoderSRNN(output_size=output_lang.n_words,
 #                   hidden_size=args.hidden).to(DEVICE)
 
 def no_teaching(hidden,stacks,dec,max_length=MAX_LENGTH):
-    dec_input = torch.LongTensor([SOS]).expand(BATCH_SIZE)
+    dec_input = torch.LongTensor([SOS]).\
+        expand(BATCH_SIZE).to(DEVICE)
 
     outputs = []
     output_indices = []
