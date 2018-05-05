@@ -50,6 +50,8 @@ class EncoderSRNN(nn.Module):
         self.hid2stack=nn.Linear(hidden_size,nstack*stack_elem_size)
         self.stack2hid=nn.Linear(stack_elem_size*stack_depth,hidden_size)
 
+        self.gru = nn.GRU(hidden_size, hidden_size)
+
         self.empty_elem =torch.randn(1,self.stack_elem_size,requires_grad=True)
 
         W_up, W_down = shift_matrix(stack_size)
@@ -166,6 +168,7 @@ class DecoderSRNN(nn.Module):
         self.log_softmax = nn.LogSoftmax(dim=1)
         self.softmax=nn.Softmax()
 
+        self.gru = nn.GRU(hidden_size, hidden_size)
 
         self.empty_elem = torch.randn(1, self.stack_elem_size,requires_grad=True)
 
