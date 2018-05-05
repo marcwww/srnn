@@ -1,0 +1,1122 @@
+epoch 0 | percent 0.037037 | loss 3.359550 | interval 0.231831 s
+> s s s s
+= e e e e
+< l
+
+epoch 0 | percent 0.111111 | loss 3.345845 | interval 0.270707 s
+> z
+= j
+< l
+
+epoch 0 | percent 0.185185 | loss 3.323730 | interval 0.165269 s
+> j j j
+= b b b
+< l
+
+epoch 0 | percent 0.259259 | loss 3.269094 | interval 0.152697 s
+> j
+= u
+< l
+
+epoch 0 | percent 0.333333 | loss 3.243482 | interval 0.153922 s
+> j j j j j j
+= m m m m m m
+< l
+
+epoch 0 | percent 0.407407 | loss 3.241343 | interval 0.148109 s
+> i i i i
+= p p p p
+< l
+
+epoch 0 | percent 0.481481 | loss 3.255274 | interval 0.154185 s
+> e e e e e e e e e
+= d d d d d d d d d
+< l
+
+epoch 0 | percent 0.555556 | loss 3.098882 | interval 0.147602 s
+> l l l l l l
+= r r r r r r
+< l
+
+epoch 0 | percent 0.629630 | loss 3.163663 | interval 0.148238 s
+> z z z z z z z
+= t t t t t t t
+< l
+
+epoch 0 | percent 0.703704 | loss 3.111069 | interval 0.147949 s
+> k k
+= v v
+< l
+
+epoch 0 | percent 0.777778 | loss 3.034753 | interval 0.144580 s
+> k
+= x
+< l
+
+epoch 0 | percent 0.851852 | loss 2.970637 | interval 0.152734 s
+> x x
+= s s
+< l
+
+epoch 0 | percent 0.925926 | loss 2.937160 | interval 0.150858 s
+> m m m m m m
+= q q q q q q
+< l
+
+end of epoch 0 | time: 2.282526 s | loss: 2.937160
+epoch 1 | percent 0.037037 | loss 2.808573 | interval 0.199266 s
+> z z z z z z z
+= a a a a a a a
+< l
+
+epoch 1 | percent 0.111111 | loss 2.887571 | interval 0.147778 s
+> f f f f f
+= p p p p p
+< l
+
+epoch 1 | percent 0.185185 | loss 2.665457 | interval 0.149902 s
+> s s s s s
+= r r r r r
+< l
+
+epoch 1 | percent 0.259259 | loss 2.857062 | interval 0.150488 s
+> a a a
+= b b b
+< l
+
+epoch 1 | percent 0.333333 | loss 2.577442 | interval 0.151035 s
+> j j j j j j j j j
+= b b b b b b b b b
+< o o o o o o o o o o
+
+epoch 1 | percent 0.407407 | loss 2.511429 | interval 0.159517 s
+> w w w w w w w
+= o o o o o o o
+< l
+
+epoch 1 | percent 0.481481 | loss 2.565148 | interval 0.153401 s
+> g g
+= q q
+< l
+
+epoch 1 | percent 0.555556 | loss 2.426765 | interval 0.151754 s
+> l l l l l l
+= r r r r r r
+< l
+
+epoch 1 | percent 0.629630 | loss 2.956582 | interval 0.162239 s
+> t t t t t t t t t
+= f f f f f f f f f
+< l
+
+epoch 1 | percent 0.703704 | loss 2.242492 | interval 0.150101 s
+> z z z z z z z z z
+= o o o o o o o o o
+< o o o o o o o o o o
+
+epoch 1 | percent 0.777778 | loss 2.374347 | interval 0.154741 s
+> v v v v v
+= s s s s s
+< l
+
+epoch 1 | percent 0.851852 | loss 2.492947 | interval 0.154970 s
+> c c c c c c c
+= a a a a a a a
+< o o o o o o o o o o
+
+epoch 1 | percent 0.925926 | loss 2.422311 | interval 0.153569 s
+> i
+= a
+< l
+
+end of epoch 1 | time: 2.138733 s | loss: 2.422311
+epoch 2 | percent 0.037037 | loss 2.089940 | interval 0.197841 s
+> i i i i i i i i i
+= q q q q q q q q q
+< x x x x x x x x x x
+
+epoch 2 | percent 0.111111 | loss 2.213641 | interval 0.152859 s
+> k k k k k k k
+= h h h h h h h
+< x x x x x x x x x x
+
+epoch 2 | percent 0.185185 | loss 2.872972 | interval 0.150289 s
+> i i i i i
+= r r r r r
+< l
+
+epoch 2 | percent 0.259259 | loss 2.449633 | interval 0.148556 s
+> n n n
+= x x x
+< l
+
+epoch 2 | percent 0.333333 | loss 2.332318 | interval 0.145689 s
+> k k k k k k k
+= x x x x x x x
+< x x x x x x x x x x
+
+epoch 2 | percent 0.407407 | loss 2.060100 | interval 0.153104 s
+> g g
+= q q
+< o o o o o o o o o o
+
+epoch 2 | percent 0.481481 | loss 2.612309 | interval 0.151963 s
+> v v v v v
+= x x x x x
+< o o o o o o o o o o
+
+epoch 2 | percent 0.555556 | loss 2.009765 | interval 0.151428 s
+> w w w w w w w w
+= n n n n n n n n
+< d d d d d d d d d d
+
+epoch 2 | percent 0.629630 | loss 2.115963 | interval 0.150552 s
+> t t
+= u u
+< o o o o o o o o o o
+
+epoch 2 | percent 0.703704 | loss 1.782220 | interval 0.154452 s
+> k k k k
+= l l l l
+< o o o o o o o o o o
+
+epoch 2 | percent 0.777778 | loss 1.890784 | interval 0.146464 s
+> u u u u
+= l l l l
+< l l l l l l l l l l
+
+epoch 2 | percent 0.851852 | loss 2.049056 | interval 0.155109 s
+> d d
+= w w
+< o o o o o o o o o o
+
+epoch 2 | percent 0.925926 | loss 2.091814 | interval 0.149284 s
+> m m m m m m m m m
+= z z z z z z z z z
+< d d d d d d d d d d
+
+end of epoch 2 | time: 2.113102 s | loss: 2.091814
+epoch 3 | percent 0.037037 | loss 2.180473 | interval 0.200563 s
+> o o o
+= i i i
+< z z z z z z z z z z
+
+epoch 3 | percent 0.111111 | loss 2.505242 | interval 0.153400 s
+> c c c c c
+= l l l l l
+< z z z z z z z z z z
+
+epoch 3 | percent 0.185185 | loss 1.727298 | interval 0.153423 s
+> c c c c c c c c c
+= w w w w w w w w w
+< a a a a a a a a a a
+
+epoch 3 | percent 0.259259 | loss 2.198925 | interval 0.152696 s
+> q q q q q q q
+= l l l l l l l
+< d d d d d d d d d d
+
+epoch 3 | percent 0.333333 | loss 2.180796 | interval 0.156128 s
+> l l
+= y y
+< z z z z z z z z z z
+
+epoch 3 | percent 0.407407 | loss 1.474098 | interval 0.155910 s
+> g g g g g g g g
+= p p p p p p p p
+< d d d d d d d d d d
+
+epoch 3 | percent 0.481481 | loss 2.212684 | interval 0.153552 s
+> j j j j j j j j
+= q q q q q q q q
+< h h h h h h h h h h
+
+epoch 3 | percent 0.555556 | loss 1.344986 | interval 0.154084 s
+> r r r r r
+= g g g g g
+< z z z z z z z z z z
+
+epoch 3 | percent 0.629630 | loss 2.085779 | interval 0.155752 s
+> e e e e e e e e e
+= d d d d d d d d d
+< x x x x x x x x x x
+
+epoch 3 | percent 0.703704 | loss 1.786220 | interval 0.153765 s
+> o o o o
+= h h h h
+< l l l l l l l l l l
+
+epoch 3 | percent 0.777778 | loss 2.023601 | interval 0.159223 s
+> g g g g g g g g
+= w w w w w w w w
+< x x x x x x x x x x
+
+epoch 3 | percent 0.851852 | loss 1.971658 | interval 0.157171 s
+> a a a a a a a
+= z z z z z z z
+< x x x x x x x x x x
+
+epoch 3 | percent 0.925926 | loss 1.734170 | interval 0.152307 s
+> t t t t t t t t t
+= d d d d d d d d d
+< x x x x x x x x x x
+
+end of epoch 3 | time: 2.167221 s | loss: 1.734170
+epoch 4 | percent 0.037037 | loss 2.027387 | interval 0.200553 s
+> j j
+= y y
+< x x x x x x x x x x
+
+epoch 4 | percent 0.111111 | loss 1.589570 | interval 0.152736 s
+> p p p
+= n n n
+< x x x x x x x x x x
+
+epoch 4 | percent 0.185185 | loss 1.328349 | interval 0.151372 s
+> b b b b b b b b b
+= j j j j j j j j j
+< x x x x x x x x x x
+
+epoch 4 | percent 0.259259 | loss 1.666881 | interval 0.154749 s
+> h h h h h h
+= j j j j j j
+< x x x x x x x
+
+epoch 4 | percent 0.333333 | loss 1.295115 | interval 0.153057 s
+> i i i i i
+= r r r r r
+< x x x x x x
+
+epoch 4 | percent 0.407407 | loss 2.454177 | interval 0.149549 s
+> i i i i i
+= h h h h h
+< x x x x x
+
+epoch 4 | percent 0.481481 | loss 1.292999 | interval 0.148135 s
+> u u u u u u u
+= k k k k k k k
+< x x x x x x
+
+epoch 4 | percent 0.555556 | loss 1.490771 | interval 0.164874 s
+> b b b b b b
+= o o o o o o
+< x x x x x
+
+epoch 4 | percent 0.629630 | loss 1.432514 | interval 0.156681 s
+> l l
+= g g
+< o o o o o o o o o o
+
+epoch 4 | percent 0.703704 | loss 1.099503 | interval 0.207547 s
+> g g g g g g g g g
+= z z z z z z z z z
+< h h h h h h h h h h
+
+epoch 4 | percent 0.777778 | loss 1.600434 | interval 0.168310 s
+> m m m
+= l l l
+< v v v v v v v v v v
+
+epoch 4 | percent 0.851852 | loss 2.313628 | interval 0.162815 s
+> u u
+= w w
+< p p p p p p p p p p
+
+epoch 4 | percent 0.925926 | loss 1.928251 | interval 0.198702 s
+> f f f f f
+= o o o o o
+< m m m m m m m m
+
+end of epoch 4 | time: 2.314400 s | loss: 1.928251
+epoch 5 | percent 0.037037 | loss 1.078285 | interval 0.238690 s
+> i
+= j
+< 
+
+epoch 5 | percent 0.111111 | loss 0.971630 | interval 0.167907 s
+> p p p p p p p p p
+= x x x x x x x x x
+< d d d d d d d d d d
+
+epoch 5 | percent 0.185185 | loss 1.300823 | interval 0.159830 s
+> u u u u u
+= e e e e e
+< n n n n n n n n
+
+epoch 5 | percent 0.259259 | loss 1.295424 | interval 0.176037 s
+> v v v v v
+= p p p p p
+< g g g g g
+
+epoch 5 | percent 0.333333 | loss 1.752634 | interval 0.220459 s
+> v v v v v v
+= s s s s s s
+< g g g g g g
+
+epoch 5 | percent 0.407407 | loss 2.418604 | interval 0.151663 s
+> p p p p
+= g g g g
+< f f f
+
+epoch 5 | percent 0.481481 | loss 1.637509 | interval 0.160714 s
+> n n n n n n
+= p p p p p p
+< t t t t t t t
+
+epoch 5 | percent 0.555556 | loss 1.375104 | interval 0.180412 s
+> a a a a a a a a
+= l l l l l l l l
+< j j j j j j j j j j
+
+epoch 5 | percent 0.629630 | loss 1.853876 | interval 0.185579 s
+> f f f
+= i i i
+< 
+
+epoch 5 | percent 0.703704 | loss 1.370636 | interval 0.153300 s
+> i
+= c
+< 
+
+epoch 5 | percent 0.777778 | loss 2.622156 | interval 0.150849 s
+> x x x x x x x x x
+= h h h h h h h h h
+< m m m m m m m m m
+
+epoch 5 | percent 0.851852 | loss 1.626135 | interval 0.155057 s
+> o o o o o o o o o
+= b b b b b b b b b
+< t t t t t t t t t t
+
+epoch 5 | percent 0.925926 | loss 1.678563 | interval 0.159769 s
+> y y y y
+= p p p p
+< t t t t t t t t
+
+end of epoch 5 | time: 2.375096 s | loss: 1.678563
+epoch 6 | percent 0.037037 | loss 1.025578 | interval 0.253706 s
+> n n n n n n n n n
+= y y y y y y y y y
+< y y y y y y y y
+
+epoch 6 | percent 0.111111 | loss 1.306187 | interval 0.153834 s
+> v v v v
+= t t t t
+< d d d d d d d d d d
+
+epoch 6 | percent 0.185185 | loss 1.247282 | interval 0.151974 s
+> o o o
+= q q q
+< l l l l l l l l l l
+
+epoch 6 | percent 0.259259 | loss 2.691279 | interval 0.155261 s
+> h
+= r
+< z z z z z z z z z z
+
+epoch 6 | percent 0.333333 | loss 1.535828 | interval 0.151409 s
+> q q q q q q
+= o o o o o o
+< l l l l l l l l l l
+
+epoch 6 | percent 0.407407 | loss 1.664956 | interval 0.154263 s
+> m m
+= j j
+< 
+
+epoch 6 | percent 0.481481 | loss 2.750405 | interval 0.147944 s
+> z z z
+= l l l
+< l l l l l l
+
+epoch 6 | percent 0.555556 | loss 1.288351 | interval 0.152483 s
+> y y y
+= d d d
+< 
+
+epoch 6 | percent 0.629630 | loss 1.360259 | interval 0.146219 s
+> g g g g g g g
+= x x x x x x x
+< e e e e e
+
+epoch 6 | percent 0.703704 | loss 1.362271 | interval 0.146529 s
+> z
+= j
+< 
+
+epoch 6 | percent 0.777778 | loss 2.741260 | interval 0.150202 s
+> x x x x x x
+= j j j j j j
+< l l l l l
+
+epoch 6 | percent 0.851852 | loss 1.554685 | interval 0.155050 s
+> l l l l l l l
+= k k k k k k k
+< i i i i
+
+epoch 6 | percent 0.925926 | loss 2.096379 | interval 0.149066 s
+> o o o o o
+= b b b b b
+< e e e
+
+end of epoch 6 | time: 2.151609 s | loss: 2.096379
+epoch 7 | percent 0.037037 | loss 1.781300 | interval 0.198067 s
+> l l
+= d d
+< 
+
+epoch 7 | percent 0.111111 | loss 2.687739 | interval 0.143050 s
+> q q q q q q q q q
+= u u u u u u u u u
+< u u u u u u u u
+
+epoch 7 | percent 0.185185 | loss 1.278331 | interval 0.150846 s
+> d d d d d d
+= x x x x x x
+< b b b b
+
+epoch 7 | percent 0.259259 | loss 1.352547 | interval 0.147288 s
+> m m m m m m m m m
+= g g g g g g g g g
+< z z z z z z z z z z
+
+epoch 7 | percent 0.333333 | loss 0.929361 | interval 0.157518 s
+> r r r r r r r r
+= v v v v v v v v
+< z z z z z z z z z z
+
+epoch 7 | percent 0.407407 | loss 1.025723 | interval 0.147576 s
+> p p p p p
+= e e e e e
+< x x x x x x x x x x
+
+epoch 7 | percent 0.481481 | loss 2.123939 | interval 0.154107 s
+> y y y y y
+= u u u u u
+< e e e e e e
+
+epoch 7 | percent 0.555556 | loss 1.816203 | interval 0.149531 s
+> m m m m m m m
+= v v v v v v v
+< z z z z z z z z z z
+
+epoch 7 | percent 0.629630 | loss 1.976288 | interval 0.168166 s
+> a a a a a a a
+= j j j j j j j
+< o o o o o o o o o o
+
+epoch 7 | percent 0.703704 | loss 1.075446 | interval 0.161461 s
+> a a a a a a a a
+= v v v v v v v v
+< o o o o o o o o o o
+
+epoch 7 | percent 0.777778 | loss 1.529819 | interval 0.166163 s
+> m m m m m m m
+= z z z z z z z
+< z z z z z z z z z z
+
+epoch 7 | percent 0.851852 | loss 2.556005 | interval 0.167749 s
+> j j j j j j j
+= h h h h h h h
+< x x x x x x x x x x
+
+epoch 7 | percent 0.925926 | loss 1.730744 | interval 0.166474 s
+> y y y y y y y y
+= h h h h h h h h
+< m m m m m m m m m m
+
+end of epoch 7 | time: 2.170368 s | loss: 1.730744
+epoch 8 | percent 0.037037 | loss 1.276031 | interval 0.258873 s
+> n n n n
+= q q q q
+< z z z z z z z z z z
+
+epoch 8 | percent 0.111111 | loss 2.261594 | interval 0.183631 s
+> y y y y y y y
+= t t t t t t t
+< m m m m m m m m m m
+
+epoch 8 | percent 0.185185 | loss 2.424183 | interval 0.248628 s
+> u u
+= d d
+< x x x x x x
+
+epoch 8 | percent 0.259259 | loss 1.158111 | interval 0.207690 s
+> q q q q q q q q q
+= t t t t t t t t t
+< d d d d d d d d d d
+
+epoch 8 | percent 0.333333 | loss 1.814182 | interval 0.287734 s
+> m m m m m m m
+= v v v v v v v
+< d d d d d d d d d d
+
+epoch 8 | percent 0.407407 | loss 1.695774 | interval 0.221489 s
+> g g g g g g g g g
+= x x x x x x x x x
+< x x x x x x
+
+epoch 8 | percent 0.481481 | loss 1.267588 | interval 0.251044 s
+> m
+= j
+< f f f f f f f f f f
+
+epoch 8 | percent 0.555556 | loss 1.481648 | interval 0.189647 s
+> z z z z
+= b b b b
+< m m m m m m m m m m
+
+epoch 8 | percent 0.629630 | loss 2.188002 | interval 0.175299 s
+> t t t t t t
+= g g g g g g
+< d d d d d d d d d d
+
+epoch 8 | percent 0.703704 | loss 1.622439 | interval 0.157577 s
+> d d d d d d d d
+= t t t t t t t t
+< t t t t t t t t t t
+
+epoch 8 | percent 0.777778 | loss 1.205893 | interval 0.148073 s
+> b b b
+= l l l
+< f f f f f f f f f f
+
+epoch 8 | percent 0.851852 | loss 2.216907 | interval 0.147603 s
+> w w w
+= s s s
+< i i i i i i i i i
+
+epoch 8 | percent 0.925926 | loss 1.359357 | interval 0.157054 s
+> e e e
+= q q q
+< p p p p p p p
+
+end of epoch 8 | time: 2.739384 s | loss: 1.359357
+epoch 9 | percent 0.037037 | loss 1.829801 | interval 0.202581 s
+> s s s s
+= e e e e
+< t t t t t t t t
+
+epoch 9 | percent 0.111111 | loss 2.395184 | interval 0.154531 s
+> e e e e e e e e
+= a a a a a a a a
+< g g g g g g
+
+epoch 9 | percent 0.185185 | loss 1.572151 | interval 0.149724 s
+> o
+= b
+< f f f f
+
+epoch 9 | percent 0.259259 | loss 1.776516 | interval 0.147258 s
+> g
+= n
+< p p p
+
+epoch 9 | percent 0.333333 | loss 2.095382 | interval 0.162328 s
+> o
+= i
+< p p p
+
+epoch 9 | percent 0.407407 | loss 1.428229 | interval 0.162641 s
+> n n n n n n
+= z z z z z z
+< l l l l l l l l l l
+
+epoch 9 | percent 0.481481 | loss 1.131645 | interval 0.172769 s
+> d d d d d d d d d
+= v v v v v v v v v
+< t t t t t
+
+epoch 9 | percent 0.555556 | loss 2.083437 | interval 0.164196 s
+> b b
+= t t
+< p p
+
+epoch 9 | percent 0.629630 | loss 1.020814 | interval 0.206870 s
+> p p p p p
+= g g g g g
+< i i i
+
+epoch 9 | percent 0.703704 | loss 2.414276 | interval 0.194780 s
+> o o o o o o o
+= f f f f f f f
+< p p p
+
+epoch 9 | percent 0.777778 | loss 1.213409 | interval 0.229429 s
+> s s s s
+= z z z z
+< v v v v
+
+epoch 9 | percent 0.851852 | loss 1.167753 | interval 0.152526 s
+> q q q q q
+= l l l l l
+< u u u u u u
+
+epoch 9 | percent 0.925926 | loss 1.534077 | interval 0.171273 s
+> o o o o o o o o o
+= x x x x x x x x x
+< l l l l l l l l l l
+
+end of epoch 9 | time: 2.357674 s | loss: 1.534077
+epoch 10 | percent 0.037037 | loss 2.493186 | interval 0.195606 s
+> f
+= s
+< g g g g
+
+epoch 10 | percent 0.111111 | loss 1.212518 | interval 0.191961 s
+> v v v v v v v
+= c c c c c c c
+< t t t
+
+epoch 10 | percent 0.185185 | loss 2.043106 | interval 0.340424 s
+> f
+= g
+< g g g g g g
+
+epoch 10 | percent 0.259259 | loss 1.462780 | interval 0.154752 s
+> s s s s s s s s s
+= o o o o o o o o o
+< o o o o o o
+
+epoch 10 | percent 0.333333 | loss 1.131765 | interval 0.151910 s
+> m m m m m m
+= x x x x x x
+< h h h h
+
+epoch 10 | percent 0.407407 | loss 1.318436 | interval 0.149247 s
+> q
+= r
+< u u u
+
+epoch 10 | percent 0.481481 | loss 1.019176 | interval 0.148220 s
+> b b b b b b b b
+= a a a a a a a a
+< l l l l l l l
+
+epoch 10 | percent 0.555556 | loss 1.004816 | interval 0.158297 s
+> d d d d
+= z z z z
+< 
+
+epoch 10 | percent 0.629630 | loss 2.419214 | interval 0.144712 s
+> n n n
+= w w w
+< 
+
+epoch 10 | percent 0.703704 | loss 2.419173 | interval 0.194035 s
+> g g g g g g g
+= x x x x x x x
+< s s s s s
+
+epoch 10 | percent 0.777778 | loss 2.207393 | interval 0.154306 s
+> a a a a a a a a
+= i i i i i i i i
+< z z z z z z z z z z
+
+epoch 10 | percent 0.851852 | loss 1.418299 | interval 0.152375 s
+> o o o o o o o o o
+= t t t t t t t t t
+< l l l l l l l l l l
+
+epoch 10 | percent 0.925926 | loss 1.148155 | interval 0.155480 s
+> g g g g g
+= v v v v v
+< 
+
+end of epoch 10 | time: 2.415762 s | loss: 1.148155
+epoch 11 | percent 0.037037 | loss 1.346902 | interval 0.206330 s
+> f f f
+= y y y
+< 
+
+epoch 11 | percent 0.111111 | loss 2.453494 | interval 0.147664 s
+> c c c c c c
+= z z z z z z
+< v v v v v v v v v v
+
+epoch 11 | percent 0.185185 | loss 2.107066 | interval 0.152225 s
+> j j
+= h h
+< o o o o o o
+
+epoch 11 | percent 0.259259 | loss 0.970576 | interval 0.152763 s
+> j j j j j
+= g g g g g
+< s s s s s
+
+epoch 11 | percent 0.333333 | loss 1.541587 | interval 0.150065 s
+> f f f f f
+= q q q q q
+< i i i i i i i i i i
+
+epoch 11 | percent 0.407407 | loss 1.030453 | interval 0.151063 s
+> l
+= k
+< o o o o o o o o o o
+
+epoch 11 | percent 0.481481 | loss 0.984275 | interval 0.165592 s
+> u u u u u u u u
+= d d d d d d d d
+< n n n n n n n n n n
+
+epoch 11 | percent 0.555556 | loss 1.231558 | interval 0.150094 s
+> b b b
+= q q q
+< g g g g g g g g g g
+
+epoch 11 | percent 0.629630 | loss 1.947382 | interval 0.154422 s
+> o o o o o o o
+= n n n n n n n
+< j j j j j j j j j j
+
+epoch 11 | percent 0.703704 | loss 2.667933 | interval 0.189891 s
+> y y y y y y y y
+= h h h h h h h h
+< g g g g g g g g g g
+
+epoch 11 | percent 0.777778 | loss 2.270093 | interval 0.150225 s
+> k k k k
+= e e e e
+< 
+
+epoch 11 | percent 0.851852 | loss 1.472873 | interval 0.192976 s
+> s s
+= c c
+< c c c c c c c c c c
+
+epoch 11 | percent 0.925926 | loss 1.201248 | interval 0.196851 s
+> t t
+= s s
+< x x x x x x x x x x
+
+end of epoch 11 | time: 2.245060 s | loss: 1.201248
+epoch 12 | percent 0.037037 | loss 1.605167 | interval 0.195916 s
+> t t
+= s s
+< x x x x x x x x x x
+
+epoch 12 | percent 0.111111 | loss 1.602713 | interval 0.197197 s
+> d d d
+= b b b
+< c c c c c c c c c c
+
+epoch 12 | percent 0.185185 | loss 1.239898 | interval 0.156279 s
+> e e e e e e e e e
+= x x x x x x x x x
+< o o o o o o o o o o
+
+epoch 12 | percent 0.259259 | loss 1.634501 | interval 0.157612 s
+> z z z z z z z z
+= d d d d d d d d
+< n n n n n n n n n n
+
+epoch 12 | percent 0.333333 | loss 1.093007 | interval 0.166568 s
+> u u u u u u u u
+= y y y y y y y y
+< n n n n n n n n n n
+
+epoch 12 | percent 0.407407 | loss 1.641225 | interval 0.157424 s
+> q q q q q q q q q
+= u u u u u u u u u
+< u u u u u u u u u u
+
+epoch 12 | percent 0.481481 | loss 1.356068 | interval 0.203926 s
+> n n n n
+= a a a a
+< z z z z z z z z z z
+
+epoch 12 | percent 0.555556 | loss 1.884606 | interval 0.210220 s
+> j j j j j j j
+= c c c c c c c
+< v v v v v v v v v v
+
+epoch 12 | percent 0.629630 | loss 1.017416 | interval 0.149604 s
+> e e
+= c c
+< p p p p p p p p p p
+
+epoch 12 | percent 0.703704 | loss 1.037046 | interval 0.145349 s
+> z z z z z z z z
+= n n n n n n n n
+< n n n n n n n n n n
+
+epoch 12 | percent 0.777778 | loss 1.754385 | interval 0.159067 s
+> h h h h h h h
+= i i i i i i i
+< m m m m m m m m m m
+
+epoch 12 | percent 0.851852 | loss 1.853137 | interval 0.173646 s
+> z z z z z z z z
+= l l l l l l l l
+< n n n n n n n n n
+
+epoch 12 | percent 0.925926 | loss 2.258112 | interval 0.208181 s
+> s s s s
+= e e e e
+< z z z z z z z z z z
+
+end of epoch 12 | time: 2.367626 s | loss: 2.258112
+epoch 13 | percent 0.037037 | loss 1.022030 | interval 0.198028 s
+> o o o o o o o
+= h h h h h h h
+< n n n n n n n
+
+epoch 13 | percent 0.111111 | loss 1.985778 | interval 0.147421 s
+> l l l l l
+= o o o o o
+< i i i i i i i i i i
+
+epoch 13 | percent 0.185185 | loss 1.588000 | interval 0.160976 s
+> o o o o o o o o o
+= c c c c c c c c c
+< e e e e e e e e e e
+
+epoch 13 | percent 0.259259 | loss 0.997481 | interval 0.210327 s
+> y y y y y y y y
+= g g g g g g g g
+< m m m m m m m m m m
+
+epoch 13 | percent 0.333333 | loss 1.891865 | interval 0.204790 s
+> l l l l l l l
+= k k k k k k k
+< i i i i i i i i i i
+
+epoch 13 | percent 0.407407 | loss 1.407921 | interval 0.206100 s
+> i
+= j
+< f f f f f f f f f f
+
+epoch 13 | percent 0.481481 | loss 1.884383 | interval 0.197547 s
+> c c c c c c c c c
+= t t t t t t t t t
+< t t t t t t t t t t
+
+epoch 13 | percent 0.555556 | loss 1.503675 | interval 0.182370 s
+> x x x x x x x
+= u u u u u u u
+< m m m m m m m m m m
+
+epoch 13 | percent 0.629630 | loss 2.050185 | interval 0.153432 s
+> u u u u u u u
+= k k k k k k k
+< d d d d d d d d d d
+
+epoch 13 | percent 0.703704 | loss 1.711418 | interval 0.156584 s
+> r r r r r r r r
+= v v v v v v v v
+< z z z z z z
+
+epoch 13 | percent 0.777778 | loss 1.025805 | interval 0.155248 s
+> b b b
+= k k k
+< q q q q
+
+epoch 13 | percent 0.851852 | loss 1.043546 | interval 0.170976 s
+> n n n n n
+= k k k k k
+< z z z z z
+
+epoch 13 | percent 0.925926 | loss 1.362979 | interval 0.203300 s
+> p p p p p p
+= v v v v v v
+< i i i i i i i i i i
+
+end of epoch 13 | time: 2.445251 s | loss: 1.362979
+epoch 14 | percent 0.037037 | loss 2.061255 | interval 0.217757 s
+> i i i i
+= a a a a
+< q q q q
+
+epoch 14 | percent 0.111111 | loss 1.094033 | interval 0.152409 s
+> a a a
+= b b b
+< b b b b b b b
+
+epoch 14 | percent 0.185185 | loss 1.503737 | interval 0.147446 s
+> c c c c c c c
+= f f f f f f f
+< t t t t t t t t t t
+
+epoch 14 | percent 0.259259 | loss 1.510949 | interval 0.155311 s
+> s s s s s s
+= x x x x x x
+< v v v v v v v
+
+epoch 14 | percent 0.333333 | loss 1.165047 | interval 0.160809 s
+> t t t t t t t
+= d d d d d d d
+< d d d d d d d
+
+epoch 14 | percent 0.407407 | loss 1.303590 | interval 0.157845 s
+> u u u u u
+= b b b b b
+< x x x x x
+
+epoch 14 | percent 0.481481 | loss 0.995370 | interval 0.155754 s
+> l l l l l l l l l
+= i i i i i i i i i
+< i i i i i i i i i i
+
+epoch 14 | percent 0.555556 | loss 1.384595 | interval 0.150165 s
+> v v v v v v
+= d d d d d d
+< x x x x x x
+
+epoch 14 | percent 0.629630 | loss 0.950419 | interval 0.150020 s
+> w w w w w w w
+= o o o o o o o
+< i i i i i i i i i i
+
+epoch 14 | percent 0.703704 | loss 1.409360 | interval 0.152270 s
+> o o o o
+= h h h h
+< f f f f f f f f f f
+
+epoch 14 | percent 0.777778 | loss 2.059024 | interval 0.145085 s
+> o o o o o
+= b b b b b
+< b b b b b
+
+epoch 14 | percent 0.851852 | loss 1.749572 | interval 0.146091 s
+> z z z z z z z z
+= l l l l l l l l
+< o o o o o o o o o o
+
+epoch 14 | percent 0.925926 | loss 1.017781 | interval 0.157267 s
+> l l
+= d d
+< i i i i i i
+
+end of epoch 14 | time: 2.152352 s | loss: 1.017781
+epoch 15 | percent 0.037037 | loss 1.540783 | interval 0.197017 s
+> x x x x x x
+= d d d d d d
+< t t t t t t t t t t
+
+epoch 15 | percent 0.111111 | loss 0.979859 | interval 0.151916 s
+> y y y y y y y y
+= m m m m m m m m
+< m m m m m m
+
+epoch 15 | percent 0.185185 | loss 0.978424 | interval 0.153182 s
+> z z z z z z z
+= y y y y y y y
+< o o o o o o o o o o
+
+epoch 15 | percent 0.259259 | loss 1.259930 | interval 0.150468 s
+> l l l l l l
+= d d d d d d
+< o o o o o o o o o o
+
+epoch 15 | percent 0.333333 | loss 1.185588 | interval 0.151746 s
+> b b b
+= x x x
+< g g g g g g g
+
+epoch 15 | percent 0.407407 | loss 1.209957 | interval 0.157683 s
+> d d d d d d d d d
+= j j j j j j j j j
+< t t t t t t t t
+
+epoch 15 | percent 0.481481 | loss 1.839344 | interval 0.149131 s
+> l
+= k
+< 
+
+epoch 15 | percent 0.555556 | loss 1.190882 | interval 0.151062 s
+> d d
+= w w
+< 
+
+epoch 15 | percent 0.629630 | loss 0.945221 | interval 0.149808 s
+> j j j
+= b b b
+< b b
+
+epoch 15 | percent 0.703704 | loss 1.666671 | interval 0.149140 s
+> z
+= r
+< 
+
+epoch 15 | percent 0.777778 | loss 1.223792 | interval 0.148770 s
+> l
+= k
+< 
+
+epoch 15 | percent 0.851852 | loss 3.474304 | interval 0.151497 s
+> i i i i i
+= x x x x x
+< j j j j j j
+
+epoch 15 | percent 0.925926 | loss 0.914685 | interval 0.153234 s
+> w w w
+= t t t
+< s s s s
+
+end of epoch 15 | time: 2.117038 s | loss: 0.914685
+epoch 16 | percent 0.037037 | loss 0.984501 | interval 0.191537 s
+> u u u u u
+= b b b b b
+< h h h h h
+
+epoch 16 | percent 0.111111 | loss 0.911327 | interval 0.154774 s
+> l l
+= s s
+< o o o
+
+epoch 16 | percent 0.185185 | loss 1.134248 | interval 0.151786 s
+> e e e e e e e e e
+= d d d d d d d d d
+< p p p p p p
+
+epoch 16 | percent 0.259259 | loss 1.129299 | interval 0.151333 s
+> y y y y y y
+= j j j j j j
+< m m m m m m m m m m
+
+epoch 16 | percent 0.333333 | loss 1.639555 | interval 0.167326 s
+> u u u u u u u u u
+= g g g g g g g g g
+< d d d d d d d d d d
+
+epoch 16 | percent 0.407407 | loss 0.946133 | interval 0.154181 s
+> k k k k k k k
+= d d d d d d d
+< h h h h h h
+
+epoch 16 | percent 0.481481 | loss 1.205073 | interval 0.170102 s
+> t t t t t t t t t
+= c c c c c c c c c
+< d d d d d d d d d d
+
+epoch 16 | percent 0.555556 | loss 1.163656 | interval 0.161777 s
+> r r r r r r r
+= x x x x x x x
+< z z z z z z z z z z
+
+epoch 16 | percent 0.629630 | loss 1.168748 | interval 0.155084 s
+> r r r r r r r
+= c c c c c c c
+< z z z z z z z z z z
+
+epoch 16 | percent 0.703704 | loss 2.275413 | interval 0.153175 s
+> i
+= n
+< 
+
+epoch 16 | percent 0.777778 | loss 1.100654 | interval 0.185953 s
+> v
+= c
+< 
+
+epoch 16 | percent 0.851852 | loss 1.052921 | interval 0.159740 s
+> m m m m m m
+= x x x x x x
+< z z z z z z z z
+
+epoch 16 | percent 0.925926 | loss 1.010900 | interval 0.170600 s
+> b b b b b
+= d d d d d
+< k k k k
+
+end of epoch 16 | time: 2.225481 s | loss: 1.010900

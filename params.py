@@ -31,10 +31,12 @@ def parse_arguments():
                    help='how many stack element to use for predicting')
     p.add_argument('-gpu',type=int,default=0,
                    help='gpu index(if could be used)')
-    p.add_argument('-use_stack',type=bool, default=False,
+    p.add_argument('-use_stack',type=bool, default=True,
                    help='whether to use stack')
     p.add_argument('-teaching', type=float, default=0.5,
                    help='teacher forcing ratio')
+    p.add_argument('-tag', type=str, default='stack',
+                   help='tags to print into the log')
     return p.parse_args()
 
 args=parse_arguments()
@@ -43,6 +45,8 @@ name = ''.join(str(time.time()).split('.'))
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
 log_file = args.log + '/' + 'log_' + name + '.txt'
+with open(log_file,'a+') as f:
+    print(args,file=f)
 
 SOS=0
 EOS=1

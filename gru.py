@@ -18,8 +18,8 @@ class Encoder(nn.Module):
                                       hidden_size,
                                       padding_idx=PAD)
 
-        # self.gru = nn.GRU(hidden_size, hidden_size)
-        self.gru = nn.RNN(hidden_size, hidden_size)
+        self.gru = nn.GRU(hidden_size, hidden_size)
+        # self.gru = nn.RNN(hidden_size, hidden_size)
 
         self.empty_elem = torch.randn(1, args.stack_elem_size, requires_grad=True)
 
@@ -51,8 +51,8 @@ class Decoder(nn.Module):
                                       hidden_size,
                                       padding_idx=PAD)
         self.log_softmax=nn.LogSoftmax(dim=1)
-        # self.gru = nn.GRU(hidden_size, hidden_size)
-        self.gru = nn.RNN(hidden_size, hidden_size)
+        self.gru = nn.GRU(hidden_size, hidden_size)
+        # self.gru = nn.RNN(hidden_size, hidden_size)
         self.out = nn.Linear(hidden_size, output_size)
 
     def forward(self, input, hidden, stacks=None):

@@ -1,0 +1,15 @@
+epoch 0 | percent 0.035714 | loss 3.386809 | interval 0.275812 s
+> g g g g g g
+= g g g g g g
+< u u u x x d m m v k
+
+epoch 0 | percent 0.107143 | loss 3.381253 | interval 0.184777 s
+> u u u u u
+= u u u u u
+< u u u u u u u u u u
+
+epoch 0 | percent 0.178571 | loss 3.325294 | interval 0.186183 s
+> j j j j j j
+= j j j j j j
+< u u u u u u u u u u
+
