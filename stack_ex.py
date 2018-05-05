@@ -39,11 +39,13 @@ class EncoderSRNN(nn.Module):
         self.stack_size=stack_size
         self.stack_depth=stack_depth
         self.stack_elem_size=stack_elem_size
+        # self.embedding = nn.Embedding(input_size,
+        #                               hidden_size,
+        #                               padding_idx=PAD)
         self.embedding = nn.Embedding(input_size,
-                                      hidden_size,
-                                      padding_idx=PAD)
+                                      hidden_size)
+
         self.nonLinear=NONLINEAR()
-        # self.gru = nn.GRU(hidden_size, hidden_size)
         self.hid2hid=nn.Linear(hidden_size,hidden_size)
         self.input2hid=nn.Linear(hidden_size,hidden_size)
         self.hid2act=nn.Linear(hidden_size,nstack*NACT)
@@ -155,11 +157,12 @@ class DecoderSRNN(nn.Module):
         self.stack_size=stack_size
         self.stack_depth=stack_depth
         self.stack_elem_size=stack_elem_size
+        # self.embedding = nn.Embedding(output_size,
+        #                               hidden_size,
+        #                               padding_idx=PAD)
         self.embedding = nn.Embedding(output_size,
-                                      hidden_size,
-                                      padding_idx=PAD)
+                                      hidden_size)
         self.nonLinear=NONLINEAR()
-        # self.gru = nn.GRU(hidden_size, hidden_size)
 
         self.hid2hid = nn.Linear(hidden_size, hidden_size)
         self.input2hid = nn.Linear(hidden_size, hidden_size)

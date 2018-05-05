@@ -14,6 +14,7 @@ from params import device
 import argparse
 from torch.nn.utils import clip_grad_norm
 import gru
+import eval
 
 SOS=params.SOS
 EOS=params.EOS
@@ -32,7 +33,7 @@ def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
 
 def to_batch(input_lang, output_lang,
-             pairs, batch_size, max_length):
+             pairs, batch_size):
     res=[]
     batch_src=[]
     batch_tar=[]
@@ -72,7 +73,7 @@ def to_batch(input_lang, output_lang,
 # input_lang, output_lang, pairs = data.prepareData('spa', 'en', True)
 input_lang, output_lang, pairs = data.prepareData('aa', 'bb', True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
-                     batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
+                     batch_size=BATCH_SIZE)
 
 # enc = stack.EncoderSRNN(input_size=input_lang.n_words,
 #                             hidden_size=args.hidden,
@@ -114,8 +115,10 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
     pre_loss=total_loss
     t=time.time()
 
-    batch_pairs_shuffle=to_batch(input_lang,output_lang,pairs,
-                     batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
+    batch_pairs_shuffle=to_batch(input_lang,
+                                 output_lang,
+                                 pairs,
+                                 batch_size=BATCH_SIZE)
 
     print_every=int(len(batch_pairs)*print_per_percent)
     for i in range(len(batch_pairs_shuffle)):
@@ -171,12 +174,11 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
             t=time.time()
             pre_loss = total_loss
             total_loss=0
-
             eval_randomly(n=1)
 
     return pre_loss
 
-def trans_one_sen(src,max_length=MAX_LENGTH):
+def trans_one_sen(enc,dec,src,max_length=MAX_LENGTH):
     with torch.no_grad():
         indices=indexesFromSentence(input_lang,src)
         # src_batch: length * (batch_size=1)
@@ -210,7 +212,7 @@ def eval_randomly(n=1):
         with open(params.log_file, 'a+') as f:
             print('>', pair[0],file=f)
             print('=', pair[1],file=f)
-            output_words = trans_one_sen(pair[0])
+            output_words = trans_one_sen(enc,dec,pair[0])
             print('<', output_words,file=f)
             print('',file=f)
 
@@ -237,6 +239,9 @@ def train_epochs():
                   (epoch,
                    time.time() - epoch_start_time,
                    loss),file=f)
+            print('accuracy in training: ',
+                  eval.train_accuracy(enc, dec),
+                  file=f)
 
 
 if __name__ == '__main__':

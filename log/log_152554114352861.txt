@@ -1,0 +1,52 @@
+Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=100, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
+epoch 0 | percent 0.064516 | loss 3.372195 | interval 0.773141 s
+> j j j j j
+= j j j j j
+< 
+
+epoch 0 | percent 0.161290 | loss 3.338452 | interval 0.676403 s
+> u u u u u u u u
+= u u u u u u u u
+< 
+
+epoch 0 | percent 0.258065 | loss 3.251283 | interval 0.690559 s
+> i i i
+= i i i
+< 
+
+epoch 0 | percent 0.354839 | loss 3.231040 | interval 0.658576 s
+> f f f f f f f f f
+= f f f f f f f f f
+< 
+
+epoch 0 | percent 0.451613 | loss 3.132106 | interval 0.681484 s
+> n n n n
+= n n n n
+< 
+
+epoch 0 | percent 0.548387 | loss 3.081585 | interval 0.679183 s
+> c c c c c c c
+= c c c c c c c
+< 
+
+epoch 0 | percent 0.645161 | loss 3.115329 | interval 0.677690 s
+> g g g g g g g
+= g g g g g g g
+< 
+
+epoch 0 | percent 0.741935 | loss 2.984389 | interval 0.694017 s
+> k k k k k k k k k k
+= k k k k k k k k k k
+< 
+
+epoch 0 | percent 0.838710 | loss 3.076130 | interval 0.737548 s
+> z z z z z z z
+= z z z z z z z
+< 
+
+epoch 0 | percent 0.935484 | loss 3.047234 | interval 0.696777 s
+> h h h
+= h h h
+< 
+
+end of epoch 0 | time: 7.328724 s | loss: 3.047234

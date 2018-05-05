@@ -1,0 +1,56 @@
+Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=100, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
+epoch 0 | percent 0.064516 | loss 3.379341 | interval 0.786568 s
+accuracy in training:  0.0
+> c
+= c
+< y h t p t p t p t p t p w a
+
+epoch 0 | percent 0.161290 | loss 3.310841 | interval 0.677383 s
+accuracy in training:  0.0
+> u u u
+= u u u
+< t t t p t p t p t p t p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p
+
+epoch 0 | percent 0.258065 | loss 3.276584 | interval 0.787301 s
+accuracy in training:  0.0
+> b b b
+= b b b
+< t t t t t t t t t t t t t t t t t t t
+
+epoch 0 | percent 0.354839 | loss 3.229620 | interval 0.688935 s
+accuracy in training:  0.0
+> f f f f f f f f f f
+= f f f f f f f f f f
+< d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d
+
+epoch 0 | percent 0.451613 | loss 3.162745 | interval 0.725118 s
+accuracy in training:  0.0
+> u u u
+= u u u
+< 
+
+epoch 0 | percent 0.548387 | loss 3.126324 | interval 0.697633 s
+accuracy in training:  0.0
+> u u
+= u u
+< 
+
+epoch 0 | percent 0.645161 | loss 3.079207 | interval 0.681899 s
+accuracy in training:  0.0
+> k k k
+= k k k
+< 
+
+epoch 0 | percent 0.741935 | loss 3.010957 | interval 0.671320 s
+accuracy in training:  0.0
+> b b b
+= b b b
+< 
+
+epoch 0 | percent 0.838710 | loss 3.019195 | interval 0.675513 s
+accuracy in training:  0.0
+> l l l l l
+= l l l l l
+< 
+
+epoch 0 | percent 0.935484 | loss 2.933347 | interval 0.742867 s
