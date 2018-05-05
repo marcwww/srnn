@@ -3,6 +3,7 @@ import torch.nn.functional as F
 import torch
 import random
 import stack
+import stack_ex
 from torch import nn
 from torch import optim
 import time
@@ -70,14 +71,28 @@ input_lang, output_lang, pairs = data.prepareData('aa', 'bb', True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
 
-enc = stack.EncoderSRNN(input_size=input_lang.n_words,
+# enc = stack.EncoderSRNN(input_size=input_lang.n_words,
+#                             hidden_size=args.hidden,
+#                             nstack=args.nstack,
+#                             stack_depth=args.stack_depth,
+#                             stack_size=args.stack_size,
+#                             stack_elem_size=args.stack_elem_size).\
+#                             to(DEVICE)
+# dec = stack.DecoderSRNN(output_size=output_lang.n_words,
+#                             hidden_size=args.hidden,
+#                             nstack=args.nstack,
+#                             stack_depth=args.stack_depth,
+#                             stack_size=args.stack_size,
+#                             stack_elem_size=args.stack_elem_size)\
+#                             .to(DEVICE)
+enc = stack_ex.EncoderSRNN(input_size=input_lang.n_words,
                             hidden_size=args.hidden,
                             nstack=args.nstack,
                             stack_depth=args.stack_depth,
                             stack_size=args.stack_size,
                             stack_elem_size=args.stack_elem_size).\
                             to(DEVICE)
-dec = stack.DecoderSRNN(output_size=output_lang.n_words,
+dec = stack_ex.DecoderSRNN(output_size=output_lang.n_words,
                             hidden_size=args.hidden,
                             nstack=args.nstack,
                             stack_depth=args.stack_depth,
