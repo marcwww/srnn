@@ -256,4 +256,4 @@ class DecoderSRNN(nn.Module):
         output_index = topi
         # output_index: bsz * 1
 
-        return output, hidden, output_index
+        return output, hidden, output_index, stacks

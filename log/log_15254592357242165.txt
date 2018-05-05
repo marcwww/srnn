@@ -1,0 +1,1530 @@
+epoch 0 | percent 0.099432 | loss 6.149208 | interval 37.371806 s
+> el tiene su habitacion propia .
+= he has his own room .
+< i is to .
+
+epoch 0 | percent 0.199219 | loss 4.785834 | interval 28.205211 s
+> perdi el juego .
+= i lost the game .
+< i m t . .
+
+epoch 0 | percent 0.299006 | loss 4.589775 | interval 26.567361 s
+> queremos estar en el grupo .
+= we want to be in the group .
+< i m t . .
+
+epoch 0 | percent 0.398793 | loss 4.402394 | interval 30.111751 s
+> estoy esperando su respuesta .
+= i m looking forward to receiving your reply .
+< i m t .
+
+epoch 0 | percent 0.498580 | loss 4.307882 | interval 28.464488 s
+> anoche robaron el banco .
+= the bank was held up last night .
+< he was a .
+
+epoch 0 | percent 0.598366 | loss 4.210658 | interval 27.298100 s
+> vivo en esta casa solo .
+= i live in this house by myself .
+< i m t . .
+
+epoch 0 | percent 0.698153 | loss 4.133656 | interval 27.307178 s
+>  cuando vamos a hacerlo ?
+= when are we going to do it ?
+< do you have any ? ?
+
+epoch 0 | percent 0.797940 | loss 4.108925 | interval 28.048417 s
+> no hagamos el trabajo .
+= let s not do the work .
+< i was t to the . .
+
+epoch 0 | percent 0.897727 | loss 4.026077 | interval 26.457128 s
+> el va a la escuela caminando .
+= he walks to school .
+< the is was the . .
+
+epoch 0 | percent 0.997514 | loss 3.967659 | interval 25.608397 s
+> huele como tom .
+= it smells like tom .
+< it is a . .
+
+end of epoch 0 | time: 286.202013 s | loss: 3.967659
+epoch 1 | percent 0.099432 | loss 3.878722 | interval 33.581836 s
+> tom no es muy bueno bailando .
+= tom isn t a very good dancer .
+< tom is t . .
+
+epoch 1 | percent 0.199219 | loss 3.873888 | interval 29.109094 s
+>  que tal una chela ?
+= what do you say to a beer ?
+< what you have any gum ?
+
+epoch 1 | percent 0.299006 | loss 3.832027 | interval 29.458990 s
+> los soldados deben cumplir sus ordenes .
+= soldiers must carry out their orders .
+< the is is to .
+
+epoch 1 | percent 0.398793 | loss 3.856717 | interval 28.665577 s
+> tom bajo a la primera planta .
+= tom went down to the first floor .
+< tom is mary .
+
+epoch 1 | percent 0.498580 | loss 3.830137 | interval 27.807822 s
+>  me puedo sentar cerca de ustedes ?
+= may i sit next to you ?
+< how you have you ?
+
+epoch 1 | percent 0.598366 | loss 3.764816 | interval 29.870062 s
+> aqui viene .
+= here he comes .
+< it s a . .
+
+epoch 1 | percent 0.698153 | loss 3.756012 | interval 28.562824 s
+> mucha gente estaria de acuerdo con usted .
+= many people would agree with you .
+< i know that he is .
+
+epoch 1 | percent 0.797940 | loss 3.759434 | interval 28.449045 s
+> el no lo creyo en un comienzo .
+= he didn t believe it at first .
+< the train is very .
+
+epoch 1 | percent 0.897727 | loss 3.788377 | interval 28.979401 s
+> tengo una guitarra electrica .
+= i have an electric guitar .
+< i ve got a . .
+
+epoch 1 | percent 0.997514 | loss 3.744994 | interval 27.005590 s
+> no puedo hacer otra cosa .
+= i can t do anything else .
+< i can t believe you .
+
+end of epoch 1 | time: 291.876452 s | loss: 3.744994
+epoch 2 | percent 0.099432 | loss 3.563036 | interval 35.546794 s
+> recibi una invitacion a la fiesta de cumpleanos .
+= i received an invitation to the birthday party .
+< i went to the the .
+
+epoch 2 | percent 0.199219 | loss 3.603461 | interval 28.561143 s
+> tengo tos .
+= i have a cough .
+< i have a to . .
+
+epoch 2 | percent 0.299006 | loss 3.606828 | interval 30.454568 s
+> de cualquier manera te llamo manana .
+= in any case i ll call you tomorrow .
+< i me to be . .
+
+epoch 2 | percent 0.398793 | loss 3.598477 | interval 28.706729 s
+> ellos viven al lado .
+= they live next door .
+< they were your friends .
+
+epoch 2 | percent 0.498580 | loss 3.585749 | interval 27.848973 s
+> ellos nunca vinieron .
+= they never came .
+< i don never seen your . .
+
+epoch 2 | percent 0.598366 | loss 3.558329 | interval 29.269604 s
+> nunca estaras solo .
+= you ll never be alone .
+< i never never seen anything .
+
+epoch 2 | percent 0.698153 | loss 3.515101 | interval 29.679991 s
+> si tu lo invitas puede que venga .
+= if you invite him he may come .
+< if you can t it .
+
+epoch 2 | percent 0.797940 | loss 3.493501 | interval 29.256908 s
+> lamento haberte entendido mal .
+= i m sorry i misunderstood you .
+< i m sorry i m .
+
+epoch 2 | percent 0.897727 | loss 3.488938 | interval 28.501101 s
+> me dan ganas de comprar un automovil .
+= i want to buy an automobile .
+< i was a a . .
+
+epoch 2 | percent 0.997514 | loss 3.482765 | interval 22.707553 s
+> tom pregunto cuanto habiamos pagado .
+= tom asked how much we had paid .
+< tom s t in his anger .
+
+end of epoch 2 | time: 290.918348 s | loss: 3.482765
+epoch 3 | percent 0.099432 | loss 3.278711 | interval 35.979100 s
+> te ayudaremos de acuerdo ?
+= we ll help you okay ?
+< you re you aren t you ?
+
+epoch 3 | percent 0.199219 | loss 3.413508 | interval 28.181064 s
+> se que hace frio .
+= i know it s cold .
+< i know i m not . .
+
+epoch 3 | percent 0.299006 | loss 3.386501 | interval 26.607259 s
+> no puedo creer todo lo que dice tom .
+= i can t believe everything tom says .
+< i don t want to go tom .
+
+epoch 3 | percent 0.398793 | loss 3.422981 | interval 27.614906 s
+> un poco de jugo por favor .
+= some juice please .
+< it s a a day .
+
+epoch 3 | percent 0.498580 | loss 3.478788 | interval 27.409111 s
+> pense que quizas quisieras saber .
+= i thought you might want to know .
+< i thought you were going to
+
+epoch 3 | percent 0.598366 | loss 3.437201 | interval 27.846416 s
+> esta es la parte importante .
+= this is the important part .
+< this is is the the . .
+
+epoch 3 | percent 0.698153 | loss 3.422764 | interval 28.260999 s
+>  te puedo acompanar ?
+= may i accompany you ?
+< how s your ?
+
+epoch 3 | percent 0.797940 | loss 3.426633 | interval 28.955744 s
+> un piso de madera es hermoso .
+= a wood floor is beautiful .
+< a cat is a .
+
+epoch 3 | percent 0.897727 | loss 3.414532 | interval 30.124277 s
+> no es una pregunta .
+= that s not a question .
+< it s not easy to do .
+
+epoch 3 | percent 0.997514 | loss 3.401522 | interval 28.041909 s
+> tom dijo que lo sentia .
+= tom said that he s sorry .
+< tom said he wanted to be .
+
+end of epoch 3 | time: 289.518939 s | loss: 3.401522
+epoch 4 | percent 0.099432 | loss 3.201613 | interval 34.745015 s
+> necesitais trabajar juntas .
+= you need to work together .
+< we re working .
+
+epoch 4 | percent 0.199219 | loss 3.222961 | interval 29.064976 s
+> no puedo diferenciar a sus hermanas gemelas .
+= i can t tell his twin sisters apart .
+< i can t trust him .
+
+epoch 4 | percent 0.299006 | loss 3.256841 | interval 29.102005 s
+> teneis tres gatos .
+= you have three cats .
+< you have to the . .
+
+epoch 4 | percent 0.398793 | loss 3.258941 | interval 28.893233 s
+> tom echo un vistazo al menu .
+= tom looked through the menu .
+< tom was a .
+
+epoch 4 | percent 0.498580 | loss 3.241877 | interval 29.103164 s
+> esto no encaja .
+= this doesn t fit .
+< this isn t going to . .
+
+epoch 4 | percent 0.598366 | loss 3.218544 | interval 29.128076 s
+> tenemos una brecha de seguridad .
+= we have a security breach .
+< we have a lot of money .
+
+epoch 4 | percent 0.698153 | loss 3.232200 | interval 28.231714 s
+> cambie la bandera .
+= i changed the flag .
+< i ll the .
+
+epoch 4 | percent 0.797940 | loss 3.283927 | interval 29.986144 s
+> extrano mi hogar .
+= i feel homesick .
+< my lungs has a a . .
+
+epoch 4 | percent 0.897727 | loss 3.235829 | interval 28.672135 s
+> ella le dijo que estudiase .
+= she told him to study .
+< she told him to stop him .
+
+epoch 4 | percent 0.997514 | loss 3.251059 | interval 21.043495 s
+> cualquier cosa que diga esta bien .
+= whatever he says goes .
+< what a beautiful movie is that .
+
+end of epoch 4 | time: 288.346870 s | loss: 3.251059
+epoch 5 | percent 0.099432 | loss 3.073846 | interval 35.752692 s
+> ese es el mejor modo de arreglarlo .
+= that s the best way of settling it .
+< that s the the .
+
+epoch 5 | percent 0.199219 | loss 3.091134 | interval 28.528861 s
+> el habla chino fluidamente .
+= he speaks chinese fluently .
+< the train is derailed .
+
+epoch 5 | percent 0.299006 | loss 3.114736 | interval 29.050365 s
+> no tienes nada que perder .
+= you have nothing to lose .
+< you don t have to .
+
+epoch 5 | percent 0.398793 | loss 3.151285 | interval 28.621365 s
+> nadie lo entiende .
+= nobody understands it .
+< nobody cares .
+
+epoch 5 | percent 0.498580 | loss 3.144256 | interval 27.071628 s
+> tom escucha la radio mientras desayuna .
+= tom listens to the radio while eating breakfast .
+< tom has the same age .
+
+epoch 5 | percent 0.598366 | loss 3.126049 | interval 29.313133 s
+> mary es una fiestera .
+= mary is a party girl .
+< mary is a beautiful .
+
+epoch 5 | percent 0.698153 | loss 3.121106 | interval 29.341269 s
+> no me rebajare a su nivel .
+= i won t lower myself to his level .
+< i don t want to to . .
+
+epoch 5 | percent 0.797940 | loss 3.154923 | interval 27.462755 s
+> tom trabaja en boston .
+= tom works in boston .
+< tom works for a . .
+
+epoch 5 | percent 0.897727 | loss 3.172578 | interval 28.664954 s
+> cerre los ojos para tranquilizarme .
+= i closed my eyes to calm down .
+< i used to the the .
+
+epoch 5 | percent 0.997514 | loss 3.152252 | interval 23.496342 s
+>  has llamado a tu amiga de canada ?
+= did you call your friend in canada ?
+< did you remember me to me ?
+
+end of epoch 5 | time: 287.677317 s | loss: 3.152252
+epoch 6 | percent 0.099432 | loss 2.937631 | interval 34.286146 s
+> no conozco a ninguno de ellos .
+= i know neither of them .
+< none of them are not necessarily .
+
+epoch 6 | percent 0.199219 | loss 3.002802 | interval 31.149363 s
+> me gustaria hablar de vuestra situacion .
+= i d like to talk about your situation .
+< i d like to be punctual .
+
+epoch 6 | percent 0.299006 | loss 3.036162 | interval 29.164250 s
+> limpie la mesa .
+= i cleared the table .
+< i ll the the . .
+
+epoch 6 | percent 0.398793 | loss 3.022018 | interval 28.414729 s
+> me sentia excluido .
+= i felt left out .
+< i m just a .
+
+epoch 6 | percent 0.498580 | loss 3.022399 | interval 28.975334 s
+>  estas libre ahora ?
+= are you free now ?
+< are you busy ?
+
+epoch 6 | percent 0.598366 | loss 3.022235 | interval 26.871570 s
+> el animo a su hijo a estudiar mas .
+= he encouraged his son to study harder .
+< he bought me for a present .
+
+epoch 6 | percent 0.698153 | loss 3.023181 | interval 28.212269 s
+> el es facil de alcanzar .
+= he is easy to reach .
+< he is a . .
+
+epoch 6 | percent 0.797940 | loss 3.059420 | interval 27.056428 s
+> usted es eficiente verdad ?
+= you re efficient aren t you ?
+< you re so immature ?
+
+epoch 6 | percent 0.897727 | loss 3.020833 | interval 28.409057 s
+> mary exigio que se le devolviera su dinero .
+= mary demanded her money back .
+< mary wants to a money .
+
+epoch 6 | percent 0.997514 | loss 3.027064 | interval 25.046994 s
+>  puedo pedirte un favor ?
+= could i ask a favor of you ?
+< may i ask you ?
+
+end of epoch 6 | time: 287.977907 s | loss: 3.027064
+epoch 7 | percent 0.099432 | loss 2.870509 | interval 32.773998 s
+>  queres venderlos ?
+= do you want to sell them ?
+< do you like to ? ?
+
+epoch 7 | percent 0.199219 | loss 2.905514 | interval 26.689812 s
+> el es quien probablemente tendra exito .
+= he s the most likely to succeed .
+< he is a .
+
+epoch 7 | percent 0.299006 | loss 2.917997 | interval 29.004355 s
+> esto es muy genial .
+= this is very cool .
+< this is very .
+
+epoch 7 | percent 0.398793 | loss 2.941425 | interval 28.363212 s
+> ella no aparecio .
+= she did not turn up .
+< she didn t mention it .
+
+epoch 7 | percent 0.498580 | loss 2.964269 | interval 28.948504 s
+> eso lo puede hacer cualquiera .
+= anybody can do that .
+< that s be .
+
+epoch 7 | percent 0.598366 | loss 2.958485 | interval 28.622741 s
+>  a que hora es la reunion ?
+= what time is the meeting ?
+< what time is the train ?
+
+epoch 7 | percent 0.698153 | loss 2.973802 | interval 28.798385 s
+> espero que no te importe .
+= i hope you don t mind .
+< i hope you don t see .
+
+epoch 7 | percent 0.797940 | loss 2.970894 | interval 28.460220 s
+> no dejes que eso suceda .
+= don t let that happen .
+< i don t know what she was .
+
+epoch 7 | percent 0.897727 | loss 2.976174 | interval 29.842172 s
+> nos lo pasamos bien juntos .
+= we have fun together .
+< we re moving .
+
+epoch 7 | percent 0.997514 | loss 2.965858 | interval 27.199730 s
+> no hay nada como un paseo .
+= there is nothing like a walk .
+< there s nothing more than a miracle .
+
+end of epoch 7 | time: 289.077099 s | loss: 2.965858
+epoch 8 | percent 0.099432 | loss 2.735932 | interval 33.486625 s
+> el actuo como un lunatico .
+= he acted like a madman .
+< he acted as a as i was .
+
+epoch 8 | percent 0.199219 | loss 2.770833 | interval 27.767187 s
+> tom es tan terco como mary .
+= tom is as stubborn as mary .
+< tom is mary s ex .
+
+epoch 8 | percent 0.299006 | loss 2.853816 | interval 28.087223 s
+>  tienes carro ?
+= do you have a car ?
+< are you have nightmares ?
+
+epoch 8 | percent 0.398793 | loss 2.850730 | interval 30.045821 s
+> escriba aqui por favor .
+= write it down here please .
+< please take off .
+
+epoch 8 | percent 0.498580 | loss 2.833912 | interval 27.976733 s
+> no esta trabajando mucho ahora .
+= he s not working much at the moment .
+< it s not too . .
+
+epoch 8 | percent 0.598366 | loss 2.874893 | interval 29.224986 s
+> los jackson son nuestros vecinos .
+= the jacksons are our neighbors .
+< the are are in the . .
+
+epoch 8 | percent 0.698153 | loss 2.870307 | interval 27.904083 s
+> el dejo japon para nunca volver .
+= he left japan never to come back .
+< the baby needs someone .
+
+epoch 8 | percent 0.797940 | loss 2.844048 | interval 27.982324 s
+> ella es una persona agradable .
+= she is a pleasant person .
+< she is a good swimmer .
+
+epoch 8 | percent 0.897727 | loss 2.887870 | interval 28.209859 s
+> gracias por su ayuda .
+= thank you for your help .
+< thanks for the . .
+
+epoch 8 | percent 0.997514 | loss 2.915804 | interval 28.548525 s
+> creo que ella invento esa historia .
+= i think she made up that story .
+< i think that is a . .
+
+end of epoch 8 | time: 290.038384 s | loss: 2.915804
+epoch 9 | percent 0.099432 | loss 2.686019 | interval 28.168735 s
+> abre la botella .
+= open the bottle .
+< open the window .
+
+epoch 9 | percent 0.199219 | loss 2.741487 | interval 28.379255 s
+> esto es malo para los negocios .
+= this is bad for business .
+< this is your fault .
+
+epoch 9 | percent 0.299006 | loss 2.750246 | interval 26.930266 s
+> esta es la bandera de japon .
+= this is the flag of japan .
+< this is the the the the .
+
+epoch 9 | percent 0.398793 | loss 2.798845 | interval 27.528733 s
+> nadie estaba alli .
+= no one was there .
+< i was aware of the .
+
+epoch 9 | percent 0.498580 | loss 2.809582 | interval 28.760014 s
+> tengo un gato y un perro .
+= i have a cat and a dog .
+< i have a and and a . .
+
+epoch 9 | percent 0.598366 | loss 2.830124 | interval 27.879570 s
+> lo que tom dice tiene sentido .
+= what tom says makes sense .
+< what tom said has done .
+
+epoch 9 | percent 0.698153 | loss 2.828875 | interval 28.643553 s
+> tom necesitaba a mary .
+= tom needed mary .
+< tom saw mary kissing .
+
+epoch 9 | percent 0.797940 | loss 2.837899 | interval 28.016355 s
+> ellos se van de camping todos los veranos .
+= they go camping every summer .
+< they will the the .
+
+epoch 9 | percent 0.897727 | loss 2.799445 | interval 27.941834 s
+>  crees que es estupido ?
+= do you think this is stupid ?
+< what is that ?
+
+epoch 9 | percent 0.997514 | loss 2.843925 | interval 29.066716 s
+> necesito mi coche para mi trabajo .
+= i need my car for my job .
+< i need a lawyer .
+
+end of epoch 9 | time: 282.121966 s | loss: 2.843925
+epoch 10 | percent 0.099432 | loss 2.656268 | interval 28.624429 s
+>  que tienen esos de malo ?
+= what s wrong with those ?
+< what did you do with that ? ?
+
+epoch 10 | percent 0.199219 | loss 2.680507 | interval 28.523207 s
+> te ayudare en todo lo que pueda .
+= i will help you all i can .
+< i ll show you .
+
+epoch 10 | percent 0.299006 | loss 2.717510 | interval 27.890316 s
+> tomas no sabia que es esto .
+= tom didn t know what this is .
+< tom isn t as rich as he .
+
+epoch 10 | percent 0.398793 | loss 2.750321 | interval 27.679189 s
+> tom y yo hemos estado muy ocupados .
+= tom and i have both been very busy .
+< tom and mary have to . .
+
+epoch 10 | percent 0.498580 | loss 2.735678 | interval 27.804769 s
+> es tu culpa que lleguemos tarde .
+= it s your fault that we arrived late .
+< it s very cheap .
+
+epoch 10 | percent 0.598366 | loss 2.759922 | interval 27.309917 s
+> solo queda un dia .
+= there s just one day left .
+< let s a a . .
+
+epoch 10 | percent 0.698153 | loss 2.772772 | interval 27.930531 s
+> mantene un perfil bajo .
+= keep a low profile .
+< look away .
+
+epoch 10 | percent 0.797940 | loss 2.736241 | interval 29.078506 s
+> el instinto de supervivencia es innato .
+= the instinct for survival is innate .
+< the is is popular among us .
+
+epoch 10 | percent 0.897727 | loss 2.782354 | interval 28.520793 s
+>  todos tienen un lapiz ?
+= does everybody have a pencil ?
+< can you tell me a secret ?
+
+epoch 10 | percent 0.997514 | loss 2.789388 | interval 28.660765 s
+> estoy muy preocupada por mi peso .
+= i m very worried about my weight .
+< i m very pleased with my . .
+
+end of epoch 10 | time: 282.816182 s | loss: 2.789388
+epoch 11 | percent 0.099432 | loss 2.561038 | interval 29.621572 s
+>  te llevo la bolsa ?
+= shall i carry your bag for you ?
+< are you busy ?
+
+epoch 11 | percent 0.199219 | loss 2.581003 | interval 26.191463 s
+> tom le dio a mary el abrecartas .
+= tom handed mary the letter opener .
+< tom asked mary to mary .
+
+epoch 11 | percent 0.299006 | loss 2.659719 | interval 27.030403 s
+> ella se ve sola .
+= she looks lonesome .
+< she is getting married .
+
+epoch 11 | percent 0.398793 | loss 2.664335 | interval 29.026437 s
+> se lo peligroso que es tom .
+= i know how dangerous tom is .
+< i know what s tom is . .
+
+epoch 11 | percent 0.498580 | loss 2.651856 | interval 27.921567 s
+> se confiado .
+= be confident .
+< we ll .
+
+epoch 11 | percent 0.598366 | loss 2.683431 | interval 30.591660 s
+> ponga mas sal en la sopa .
+= put more salt in the soup .
+< put the blankets on the book .
+
+epoch 11 | percent 0.698153 | loss 2.681734 | interval 29.590101 s
+> ella lo despierta todos los dias a las .
+= she wakes him up every day at .
+< she decided to go to school .
+
+epoch 11 | percent 0.797940 | loss 2.746968 | interval 28.520647 s
+> cambie mi nombre a tom jackson .
+= i changed my name to tom jackson .
+< i ve my tom this .
+
+epoch 11 | percent 0.897727 | loss 2.750521 | interval 28.035858 s
+> el es muy solitario .
+= he s very lonely .
+< he is very stingy .
+
+epoch 11 | percent 0.997514 | loss 2.784341 | interval 29.395900 s
+> jesus les respondio .
+= jesus answered them .
+< we ll . .
+
+end of epoch 11 | time: 286.684283 s | loss: 2.784341
+epoch 12 | percent 0.099432 | loss 2.487068 | interval 33.135810 s
+> tom ciertamente no esta feliz .
+= tom is definitely not happy .
+< tom isn t religious .
+
+epoch 12 | percent 0.199219 | loss 2.504688 | interval 25.835923 s
+> tom y mary asintieron ambos en acuerdo .
+= tom and mary both nod in agreement .
+< tom and mary detest and other .
+
+epoch 12 | percent 0.299006 | loss 2.572885 | interval 28.442884 s
+> alguno se acerca .
+= someone s coming .
+< they know him .
+
+epoch 12 | percent 0.398793 | loss 2.626121 | interval 27.523545 s
+> tenemos un acuerdo firmado .
+= we have a signed agreement .
+< we have a lot .
+
+epoch 12 | percent 0.498580 | loss 2.682295 | interval 27.024507 s
+> todo el mundo busca la felicidad .
+= everyone seeks happiness .
+< everyone likes soccer .
+
+epoch 12 | percent 0.598366 | loss 2.598080 | interval 27.872324 s
+> tanto tom como mary cogieron una galleta .
+= tom and mary each took one cookie .
+< tom and mary are both both .
+
+epoch 12 | percent 0.698153 | loss 2.657894 | interval 28.123233 s
+> aun te queremos ayudar .
+= we still want to help you .
+< i ll you .
+
+epoch 12 | percent 0.797940 | loss 2.666629 | interval 28.300758 s
+> tom escucho a mary hablando en el sueno .
+= tom heard mary talking in her sleep .
+< tom heard mary mary s room .
+
+epoch 12 | percent 0.897727 | loss 2.687329 | interval 29.656151 s
+> no escucho nada .
+= i don t hear a thing .
+< nothing ventured nothing gained .
+
+epoch 12 | percent 0.997514 | loss 2.689784 | interval 32.427587 s
+> estaba fuera de su alcance .
+= it was out of his reach .
+< i was watching tv .
+
+end of epoch 12 | time: 289.092443 s | loss: 2.689784
+epoch 13 | percent 0.099432 | loss 2.451949 | interval 31.880780 s
+> creia que serias mayor .
+= i thought you d be older .
+< i thought you were married .
+
+epoch 13 | percent 0.199219 | loss 2.485896 | interval 23.471524 s
+> siempre he cumplido las normas .
+= i ve always obeyed the rules .
+< i ve always always preferred in the .
+
+epoch 13 | percent 0.299006 | loss 2.520231 | interval 28.919716 s
+> tarde o temprano sabremos la verdad .
+= sooner or later we ll know the truth .
+< we are the time the time .
+
+epoch 13 | percent 0.398793 | loss 2.556235 | interval 30.132491 s
+>  tiene muchos amigos ?
+= do you have many friends ?
+< do you know that ?
+
+epoch 13 | percent 0.498580 | loss 2.608960 | interval 29.781322 s
+> eso es dificil de decir .
+= that s hard to say .
+< that s immoral .
+
+epoch 13 | percent 0.598366 | loss 2.624633 | interval 32.117481 s
+>  no me digas que me relaje !
+= don t you tell me to relax .
+< don t t you think i m t coming ?
+
+epoch 13 | percent 0.698153 | loss 2.622049 | interval 28.860491 s
+> mira al cielo .
+= look at the sky .
+< it was a trial . .
+
+epoch 13 | percent 0.797940 | loss 2.639180 | interval 29.305853 s
+>  como se llama tu madre ?
+= what s your mother s name ?
+< what s your favorite sport ?
+
+epoch 13 | percent 0.897727 | loss 2.630229 | interval 28.043761 s
+> lo conoci hace tres anos .
+= i got acquainted with him three years ago .
+< i ll go to museums .
+
+epoch 13 | percent 0.997514 | loss 2.588123 | interval 28.508644 s
+>  no tienes nada que hacer ?
+= don t you have anything to do ?
+< do you have to ?
+
+end of epoch 13 | time: 291.982588 s | loss: 2.588123
+epoch 14 | percent 0.099432 | loss 2.423988 | interval 28.829887 s
+> no entiendo vuestra pregunta .
+= i don t understand your question .
+< i don t want to .
+
+epoch 14 | percent 0.199219 | loss 2.440971 | interval 26.608356 s
+> ella le disparo con una pistola .
+= she shot him with a pistol .
+< she hit him a a . .
+
+epoch 14 | percent 0.299006 | loss 2.500981 | interval 28.362703 s
+> estoy casi seguro de eso .
+= i m almost certain about that .
+< i m almost a . .
+
+epoch 14 | percent 0.398793 | loss 2.515285 | interval 30.412635 s
+> ella quiere algo muy especial por su cumpleanos .
+= she wants something very special for her birthday .
+< she spends two too much to her .
+
+epoch 14 | percent 0.498580 | loss 2.544714 | interval 28.600601 s
+> los encaminamos a la estacion .
+= we directed them to the station .
+< i ll the to the the
+
+epoch 14 | percent 0.598366 | loss 2.584241 | interval 28.104197 s
+> puedes ir a la estacion en autobus .
+= you can go to the station by bus .
+< you can go anyplace you want .
+
+epoch 14 | percent 0.698153 | loss 2.564498 | interval 28.785421 s
+> a el se le otorgo un premio especial .
+= he was awarded a special prize .
+< he hid behind the dog .
+
+epoch 14 | percent 0.797940 | loss 2.558261 | interval 29.272207 s
+> su vida esta en peligro .
+= your life is in danger .
+< his life is full of danger .
+
+epoch 14 | percent 0.897727 | loss 2.594409 | interval 27.636247 s
+> aprendemos por el metodo prueba error .
+= we learn by trial and error .
+< we the the .
+
+epoch 14 | percent 0.997514 | loss 2.593382 | interval 29.546111 s
+> dejame ver .
+= let me have a look at it .
+< let me go .
+
+end of epoch 14 | time: 286.833495 s | loss: 2.593382
+epoch 15 | percent 0.099432 | loss 2.368615 | interval 29.891854 s
+> creo que llevas razon .
+= i think you re right .
+< i think i ve done enough .
+
+epoch 15 | percent 0.199219 | loss 2.403118 | interval 26.849926 s
+> elige a una persona .
+= choose one person .
+< choose one person .
+
+epoch 15 | percent 0.299006 | loss 2.415628 | interval 28.451057 s
+> se convirtio en un traidor .
+= he turned traitor .
+< he came in a traitor .
+
+epoch 15 | percent 0.398793 | loss 2.470973 | interval 27.066836 s
+> tom podria desmayarse .
+= tom might faint .
+< tom might faint .
+
+epoch 15 | percent 0.498580 | loss 2.488657 | interval 27.237320 s
+> tom no se iria sin decir adios .
+= tom wouldn t go without saying goodbye .
+< tom didn t mean to hurt you .
+
+epoch 15 | percent 0.598366 | loss 2.544032 | interval 29.619257 s
+> todos se alegraron .
+= everyone cheered .
+< everybody all looked .
+
+epoch 15 | percent 0.698153 | loss 2.557424 | interval 28.590928 s
+> tom trabajo por casi tres horas .
+= tom worked for almost three hours .
+< tom always sings in a shower almost every . .
+
+epoch 15 | percent 0.797940 | loss 2.491024 | interval 29.411114 s
+>  vendras conmigo al concierto ?
+= will you come with me to the concert ?
+< do you have any alternatives ?
+
+epoch 15 | percent 0.897727 | loss 2.566628 | interval 28.032829 s
+>  por que no me elegiste a mi ?
+= why didn t you pick me ?
+< why didn t you ask me ?
+
+epoch 15 | percent 0.997514 | loss 2.570348 | interval 29.807996 s
+> a todos nos gusta montar en bici .
+= we all like cycling .
+< we likes to .
+
+end of epoch 15 | time: 285.786306 s | loss: 2.570348
+epoch 16 | percent 0.099432 | loss 2.328096 | interval 30.447520 s
+> esa es la casa donde naci .
+= this is the house where i was born .
+< that s the only where the station .
+
+epoch 16 | percent 0.199219 | loss 2.398159 | interval 24.472587 s
+> sinceramente no me gustas .
+= frankly speaking i don t like you .
+< frankly speaking i don t like him .
+
+epoch 16 | percent 0.299006 | loss 2.387247 | interval 27.538753 s
+> de vez en cuando se de el .
+= i hear from him once in a while .
+< they lost the .
+
+epoch 16 | percent 0.398793 | loss 2.459941 | interval 28.975066 s
+> amamos a tom .
+= we love tom .
+< she came to tom .
+
+epoch 16 | percent 0.498580 | loss 2.452740 | interval 30.620726 s
+> tom empujo abriendo la puerta mosquitera .
+= tom pushed open the screen door .
+< tom pushed his down the fence .
+
+epoch 16 | percent 0.598366 | loss 2.465576 | interval 29.734951 s
+> el ciervo iba corriendo por si solo .
+= the deer was running by itself .
+< he lay the the . .
+
+epoch 16 | percent 0.698153 | loss 2.448792 | interval 27.925197 s
+> hemos descubierto donde vive .
+= we found out where he lives .
+< we ve been very .
+
+epoch 16 | percent 0.797940 | loss 2.486475 | interval 28.405831 s
+> su auto no tiene ruedas .
+= his car has no wheels .
+< his explanation of your plan won t work .
+
+epoch 16 | percent 0.897727 | loss 2.514142 | interval 28.128834 s
+> tom es amigo tuyo verdad ?
+= tom is a friend of yours right ?
+< tom is strict isn t he ?
+
+epoch 16 | percent 0.997514 | loss 2.464191 | interval 28.638120 s
+> estoy haciendo la carrera de sociologia .
+= i m majoring in sociology .
+< i m majoring forward to the . .
+
+end of epoch 16 | time: 285.653090 s | loss: 2.464191
+epoch 17 | percent 0.099432 | loss 2.264225 | interval 29.879044 s
+> estoy helado .
+= i m freezing .
+< i am packing .
+
+epoch 17 | percent 0.199219 | loss 2.352788 | interval 29.343964 s
+> a tom le gusta tomar cerveza .
+= tom likes to drink beer .
+< tom likes to .
+
+epoch 17 | percent 0.299006 | loss 2.383491 | interval 30.528002 s
+> mi madre rara vez ve television de noche .
+= my mother seldom watches tv at night .
+< my mother died yesterday .
+
+epoch 17 | percent 0.398793 | loss 2.397976 | interval 29.554842 s
+> es tom quien no entiende .
+= tom is the one who doesn t understand .
+< tom isn t babbling .
+
+epoch 17 | percent 0.498580 | loss 2.381652 | interval 29.973725 s
+>  que me aconsejas hacer ?
+= what do you advise me to do ?
+< what are you advise me to do ?
+
+epoch 17 | percent 0.598366 | loss 2.459371 | interval 28.392389 s
+> ese es su coche .
+= that is her car .
+< that s his car .
+
+epoch 17 | percent 0.698153 | loss 2.464161 | interval 28.798994 s
+> alguien llego .
+= somebody came .
+< someone wants to .
+
+epoch 17 | percent 0.797940 | loss 2.481096 | interval 29.240049 s
+> otra vez estas diciendo mentiras .
+= you re telling lies again .
+< you re still single .
+
+epoch 17 | percent 0.897727 | loss 2.461177 | interval 29.450405 s
+> no pude evitar sentir pena por el .
+= i could not help feeling sorry for him .
+< i couldn t know the details .
+
+epoch 17 | percent 0.997514 | loss 2.464150 | interval 29.296648 s
+> eres muy listo .
+= you re very smart .
+< you re very naive .
+
+end of epoch 17 | time: 295.321413 s | loss: 2.464150
+epoch 18 | percent 0.099432 | loss 2.271793 | interval 21.602403 s
+>  quiere usted comprar una camisa ?
+= do you want to buy a shirt ?
+< do you want a demonstration ?
+
+epoch 18 | percent 0.199219 | loss 2.235055 | interval 13.281039 s
+> ese aeropuerto esta en la bahia de osaka .
+= the airport is in osaka bay .
+< that bridge is made of stone .
+
+epoch 18 | percent 0.299006 | loss 2.336508 | interval 13.281916 s
+> hoy hace una semana que la vi .
+= i saw her a week ago today .
+< i know you ll come and waited .
+
+epoch 18 | percent 0.398793 | loss 2.332444 | interval 13.277827 s
+>  no le has dicho nada ?
+= you didn t tell him anything ?
+< do t you want to know anything ?
+
+epoch 18 | percent 0.498580 | loss 2.371937 | interval 13.302388 s
+> prefiero leer libros antes que mirar la television .
+= i prefer reading books to watching television .
+< i prefer reading books books than watching television .
+
+epoch 18 | percent 0.598366 | loss 2.371832 | interval 13.297409 s
+>  cumples diecisiete anos el proximo mes ?
+= will you be seventeen next month ?
+< can you see the picture of the ? ?
+
+epoch 18 | percent 0.698153 | loss 2.428033 | interval 13.293348 s
+>  que prefieres te o cafe ?
+= which do you prefer tea or coffee ?
+< what s you like here ?
+
+epoch 18 | percent 0.797940 | loss 2.414592 | interval 13.292058 s
+> se que puedo hacerlo mejor .
+= i know i can do better .
+< i know you can do it .
+
+epoch 18 | percent 0.897727 | loss 2.395816 | interval 13.296657 s
+> tom es guapo .
+= tom is handsome .
+< tom is a magician .
+
+epoch 18 | percent 0.997514 | loss 2.453199 | interval 13.298072 s
+> solo necesito un poco de apoyo .
+= i just needed a little encouragement .
+< i just need a little .
+
+end of epoch 18 | time: 141.581545 s | loss: 2.453199
+epoch 19 | percent 0.099432 | loss 2.238833 | interval 17.687704 s
+> esa casa es muy pequena .
+= that house is very small .
+< that house is very small house .
+
+epoch 19 | percent 0.199219 | loss 2.271643 | interval 13.298578 s
+>  te estas enamorando de mi ?
+= are you falling in love with me ?
+< are you flirting with me ?
+
+epoch 19 | percent 0.299006 | loss 2.319254 | interval 13.302326 s
+> ayer fueron a pescar .
+= they went fishing yesterday .
+< i met her yesterday .
+
+epoch 19 | percent 0.398793 | loss 2.353798 | interval 13.293535 s
+> volvere a las siete .
+= i ll be back at seven o clock .
+< i ll be back to the moon .
+
+epoch 19 | percent 0.498580 | loss 2.323020 | interval 13.304833 s
+> se indispuso con sus companeros .
+= he had a falling out with his friends .
+< he has been there .
+
+epoch 19 | percent 0.598366 | loss 2.356773 | interval 13.307878 s
+> se lo que oi .
+= i know what i heard .
+< i know what .
+
+epoch 19 | percent 0.698153 | loss 2.325341 | interval 13.299621 s
+> estuve dos veces en los estados unidos .
+= i have been to america twice .
+< i saw the picture of the road .
+
+epoch 19 | percent 0.797940 | loss 2.361502 | interval 13.299427 s
+> eso ha estado cerca .
+= that was a close call .
+< that will be .
+
+epoch 19 | percent 0.897727 | loss 2.412436 | interval 13.307329 s
+> seguramente el llegara tarde a la escuela .
+= he is likely to be late for school .
+< we ll go to the movies .
+
+epoch 19 | percent 0.997514 | loss 2.432666 | interval 13.311130 s
+>  a donde fue tom ?
+= where did tom go ?
+< where did you live last night ?
+
+end of epoch 19 | time: 137.768995 s | loss: 2.432666
+epoch 20 | percent 0.099432 | loss 2.189427 | interval 17.739593 s
+> trae tu taza a la cocina .
+= bring your cup to the kitchen .
+< let your inbox .
+
+epoch 20 | percent 0.199219 | loss 2.229061 | interval 13.308383 s
+> tengo dieciseis anos .
+= i am sixteen years old .
+< i have a big fish .
+
+epoch 20 | percent 0.299006 | loss 2.271057 | interval 13.308969 s
+> ella esta cenando .
+= she is having dinner .
+< she is drawing .
+
+epoch 20 | percent 0.398793 | loss 2.315973 | interval 13.307745 s
+> los delfines y las ballenas no son peces .
+= dolphins and whales are not fish .
+< dolphins are not perfect .
+
+epoch 20 | percent 0.498580 | loss 2.337276 | interval 13.300287 s
+> eso no es gracioso .
+= that s not funny .
+< that s not funny .
+
+epoch 20 | percent 0.598366 | loss 2.341328 | interval 13.305500 s
+> portate bien .
+= be a good girl .
+< let s only a party .
+
+epoch 20 | percent 0.698153 | loss 2.342549 | interval 13.308416 s
+> tom llego el ultimo .
+= tom arrived last .
+< tom arrived at the .
+
+epoch 20 | percent 0.797940 | loss 2.354237 | interval 13.308623 s
+> tom esta durmiendo no ?
+= tom is sleeping isn t he ?
+< tom is t isn t he ?
+
+epoch 20 | percent 0.897727 | loss 2.375750 | interval 13.303234 s
+> estoy esperando a la mujer correcta .
+= i m waiting for the right woman .
+< i m fed up with the .
+
+epoch 20 | percent 0.997514 | loss 2.365934 | interval 13.307543 s
+> tuve que quedarme en casa .
+= i had to stay home .
+< i had to go to with him .
+
+end of epoch 20 | time: 137.856538 s | loss: 2.365934
+epoch 21 | percent 0.099432 | loss 2.132463 | interval 17.785878 s
+> debes prestar atencion a sus consejos .
+= you must pay attention to his advice .
+< you must be your elders .
+
+epoch 21 | percent 0.199219 | loss 2.195434 | interval 13.293247 s
+> las vacaciones estan a punto de terminar .
+= the vacation is close to an end .
+< the vacation is very useful .
+
+epoch 21 | percent 0.299006 | loss 2.244786 | interval 13.288581 s
+>  que esta haciendo el alla ?
+= what s he doing there ?
+< what is the meaning of this ?
+
+epoch 21 | percent 0.398793 | loss 2.219888 | interval 13.299607 s
+>  quien es el que esta tocando guitarra ?
+= who is playing the guitar ?
+< who s the that ?
+
+epoch 21 | percent 0.498580 | loss 2.304637 | interval 13.297682 s
+>  puedo preguntar por que ?
+= may i ask why ?
+< can i ask you what you ? ?
+
+epoch 21 | percent 0.598366 | loss 2.300838 | interval 13.303654 s
+> esa fue una idea estupida .
+= that was a stupid idea .
+< this is a very good idea .
+
+epoch 21 | percent 0.698153 | loss 2.345302 | interval 13.307865 s
+> podria estar en cualquier lado .
+= it could be anywhere .
+< it was in when i was young .
+
+epoch 21 | percent 0.797940 | loss 2.370532 | interval 13.303035 s
+> no cedio en su empeno .
+= he wouldn t give in .
+< i don t know his own .
+
+epoch 21 | percent 0.897727 | loss 2.335704 | interval 13.294725 s
+> la bomba destruyo tres casas .
+= the bomb destroyed three houses .
+< the nurse destroyed three houses .
+
+epoch 21 | percent 0.997514 | loss 2.335064 | interval 13.296927 s
+> tom nacio y crecio en una granja .
+= tom was born and raised on a farm .
+< tom saw him and and faces .
+
+end of epoch 21 | time: 137.828546 s | loss: 2.335064
+epoch 22 | percent 0.099432 | loss 2.119583 | interval 17.717227 s
+> yo tuve varicela cuando nino .
+= i had chicken pox as a kid .
+< i had a pox to .
+
+epoch 22 | percent 0.199219 | loss 2.181307 | interval 13.296835 s
+> baila con garbo .
+= he dances gracefully .
+< he drive carefully .
+
+epoch 22 | percent 0.299006 | loss 2.247843 | interval 13.300459 s
+> cuando desperte mi maletin habia desaparecido .
+= i awoke to find my suitcase gone .
+< i had my suitcase .
+
+epoch 22 | percent 0.398793 | loss 2.243216 | interval 13.298365 s
+> tom no sabia donde estaba su familia .
+= tom didn t know where his family was .
+< tom doesn t know where to live .
+
+epoch 22 | percent 0.498580 | loss 2.251018 | interval 13.305609 s
+> entraron cuidadosamente .
+= they entered cautiously .
+< let me .
+
+epoch 22 | percent 0.598366 | loss 2.256314 | interval 13.308655 s
+> no me llames tan tarde de noche .
+= don t call me so late at night .
+< don t disturb me .
+
+epoch 22 | percent 0.698153 | loss 2.273097 | interval 13.307168 s
+> no hay respuesta correcta .
+= there s no right answer .
+< there is no breakthroughs .
+
+epoch 22 | percent 0.797940 | loss 2.341151 | interval 13.307889 s
+>  es increible !
+= it s incredible !
+< unbelievable !
+
+epoch 22 | percent 0.897727 | loss 2.301720 | interval 13.309470 s
+> somos jugadores de baloncesto .
+= we are basketball players .
+< it s basketball players .
+
+epoch 22 | percent 0.997514 | loss 2.294777 | interval 13.302525 s
+> tom tiene tres hermanos .
+= tom has three brothers .
+< tom has three brothers brothers .
+
+end of epoch 22 | time: 137.809669 s | loss: 2.294777
+epoch 23 | percent 0.099432 | loss 2.085914 | interval 17.714055 s
+> tom acaba de llamar para agradecernos .
+= tom just called to thank us .
+< tom was a silk teammate .
+
+epoch 23 | percent 0.199219 | loss 2.124568 | interval 13.300055 s
+> el estruendo desperto a los ninos .
+= the loud noise woke up the children .
+< the noise continued the . .
+
+epoch 23 | percent 0.299006 | loss 2.202588 | interval 13.309069 s
+> obedecieron .
+= they obeyed .
+< they rained .
+
+epoch 23 | percent 0.398793 | loss 2.230199 | interval 13.305615 s
+> tom no esta muy de acuerdo con mary .
+= tom doesn t quite agree with mary .
+< tom isn t in mary .
+
+epoch 23 | percent 0.498580 | loss 2.256006 | interval 13.301244 s
+> no comprometan ustedes su fortuna en eso .
+= don t risk your fortune on that .
+< i didn t see him .
+
+epoch 23 | percent 0.598366 | loss 2.240549 | interval 13.292304 s
+> nuestro equipo llevaba camisetas rojas .
+= our team were wearing red shirts .
+< our teacher a teacher .
+
+epoch 23 | percent 0.698153 | loss 2.202038 | interval 13.296672 s
+> estoy harto de tus estupidos comentarios .
+= i m sick of your stupid remarks .
+< i m squeezing a a . .
+
+epoch 23 | percent 0.797940 | loss 2.243136 | interval 13.299302 s
+>  puedes decir eso otra vez ?
+= can you say that again ?
+< can you tell me ?
+
+epoch 23 | percent 0.897727 | loss 2.247005 | interval 13.292841 s
+>  gracias por las hermosas rosas !
+= thank you for the beautiful roses .
+< thank you for the gift .
+
+epoch 23 | percent 0.997514 | loss 2.265435 | interval 13.295801 s
+> el se parece a su abuelo .
+= he looks like his grandfather .
+< he looks like his mother .
+
+end of epoch 23 | time: 137.764404 s | loss: 2.265435
+epoch 24 | percent 0.099432 | loss 2.090783 | interval 17.761164 s
+>  cual es tu vino frances preferido ?
+= what s your favorite french wine ?
+< how s your favorite ?
+
+epoch 24 | percent 0.199219 | loss 2.123441 | interval 13.310513 s
+> eres muy perspicaz .
+= you re very perceptive .
+< you re very smart .
+
+epoch 24 | percent 0.299006 | loss 2.174623 | interval 13.316503 s
+> ninguno vino a ayudarme .
+= no one came to help me .
+< none of us could share .
+
+epoch 24 | percent 0.398793 | loss 2.170046 | interval 13.309613 s
+> el publico parecia aburrido .
+= the audience appeared bored .
+< he adapted himself .
+
+epoch 24 | percent 0.498580 | loss 2.245065 | interval 13.351670 s
+> habia varios objetos en el cuarto .
+= there were various objects in the room .
+< there was a objects in the room .
+
+epoch 24 | percent 0.598366 | loss 2.236583 | interval 13.311628 s
+> vuelve .
+= just get back here .
+< come back .
+
+epoch 24 | percent 0.698153 | loss 2.256535 | interval 13.309962 s
+> el administra un monton de hoteles .
+= he runs a lot of hotels .
+< he gave a book book to book .
+
+epoch 24 | percent 0.797940 | loss 2.206187 | interval 13.309118 s
+> estamos ocupados .
+= we re busy .
+< we re pooped .
+
+epoch 24 | percent 0.897727 | loss 2.268388 | interval 13.307748 s
+> gane otra vez .
+= i won again .
+< i won t drink .
+
+epoch 24 | percent 0.997514 | loss 2.273584 | interval 13.305704 s
+> no sabes lo que estas haciendo .
+= you don t know what you re doing .
+< you know i don t you are busy .
+
+end of epoch 24 | time: 137.892207 s | loss: 2.273584
+epoch 25 | percent 0.099432 | loss 2.113744 | interval 17.726640 s
+> adios . hasta manana .
+= goodbye . see you tomorrow .
+< let me go . .
+
+epoch 25 | percent 0.199219 | loss 2.103458 | interval 13.301002 s
+> un perro le mordio en la pierna .
+= a dog bit her leg .
+< a dog came into the tree .
+
+epoch 25 | percent 0.299006 | loss 2.147503 | interval 13.299686 s
+> solo estoy viendo tele .
+= i m just watching tv .
+< i m just watching .
+
+epoch 25 | percent 0.398793 | loss 2.132592 | interval 13.293846 s
+> lo he intentado todo .
+= i ve tried everything .
+< i ve decided to do it .
+
+epoch 25 | percent 0.498580 | loss 2.156978 | interval 13.294424 s
+> es lo que realmente quiero .
+= that s what i really want .
+< it s what i want to be .
+
+epoch 25 | percent 0.598366 | loss 2.162427 | interval 13.284275 s
+> muchos ninos en esta escuela estan malnutridos .
+= many children at this school are malnourished .
+< many tourists are in the the . .
+
+epoch 25 | percent 0.698153 | loss 2.182300 | interval 13.293346 s
+> le dire a la mujer lo que se .
+= i will tell the woman what i know .
+< i ll tell you and i .
+
+epoch 25 | percent 0.797940 | loss 2.240592 | interval 13.289894 s
+>  metete en tus cosas !
+= mind your own business !
+< grandpa bought a great boyfriend !
+
+epoch 25 | percent 0.897727 | loss 2.229677 | interval 13.295123 s
+> las clases comenzaron el mes pasado .
+= classes started last month .
+< cows give milk .
+
+epoch 25 | percent 0.997514 | loss 2.253830 | interval 13.283162 s
+> he oido que no vienes .
+= i heard that you re not coming .
+< i ve no to do it .
+
+end of epoch 25 | time: 137.718467 s | loss: 2.253830
+epoch 26 | percent 0.099432 | loss 2.012733 | interval 17.709164 s
+> se que diste lo mejor .
+= i know that you did your best .
+< i know what i do .
+
+epoch 26 | percent 0.199219 | loss 2.073913 | interval 13.292171 s
+> solo quiero tomar una foto .
+= i just want to take a picture .
+< i want to be a a . .
+
+epoch 26 | percent 0.299006 | loss 2.103416 | interval 13.305770 s
+> esa casa necesita otra mano de pintura .
+= that house needs repainting .
+< that shirt needs repainting .
+
+epoch 26 | percent 0.398793 | loss 2.127241 | interval 13.297243 s
+> solo faltan unos dias para navidad .
+= christmas is only a few days away .
+< it was be hard with his time .
+
+epoch 26 | percent 0.498580 | loss 2.179732 | interval 13.302024 s
+> ella tiene unos grandes ojos azules .
+= she has large blue eyes .
+< she has blue eyes .
+
+epoch 26 | percent 0.598366 | loss 2.154954 | interval 13.310162 s
+> tom hizo a mary lavar el carro .
+= tom had mary wash the car .
+< tom s mary s wife .
+
+epoch 26 | percent 0.698153 | loss 2.276162 | interval 13.311460 s
+> a ella le gustan los tigres .
+= she likes tigers .
+< she likes him .
+
+epoch 26 | percent 0.797940 | loss 2.218353 | interval 13.311953 s
+> mi comida favorita es el helado .
+= my favorite food is ice cream .
+< my house is similar to yours .
+
+epoch 26 | percent 0.897727 | loss 2.242291 | interval 13.315288 s
+> sacate eso de la cabeza .
+= take that off your head .
+< you ll be with the . .
+
+epoch 26 | percent 0.997514 | loss 2.239089 | interval 13.313432 s
+> ella me hablo en espanol .
+= she spoke to me in spanish .
+< she has convulsions .
+
+end of epoch 26 | time: 137.824401 s | loss: 2.239089
+epoch 27 | percent 0.099432 | loss 2.016617 | interval 17.720882 s
+> quiero lucir distinto .
+= i want to look different .
+< i want to divorce .
+
+epoch 27 | percent 0.199219 | loss 2.057846 | interval 13.302238 s
+> eres el lider .
+= you re the leader .
+< you re the leader .
+
+epoch 27 | percent 0.299006 | loss 2.071661 | interval 13.291026 s
+> tomas entiende .
+= tom understands .
+< tom understands .
+
+epoch 27 | percent 0.398793 | loss 2.119879 | interval 13.294215 s
+> el nino agarro una piedrita .
+= the child picked up a small stone .
+< the boy picked up the the tree .
+
+epoch 27 | percent 0.498580 | loss 2.156261 | interval 13.306003 s
+> los jefes esperan que sus empleados rindan un .
+= employers expect their employees to give percent .
+< the workers cut a short hair .
+
+epoch 27 | percent 0.598366 | loss 2.220706 | interval 13.311354 s
+> tengo muchos problemas que tengo que resolver .
+= i have a lot of problems to solve .
+< i have many esperanto .
+
+epoch 27 | percent 0.698153 | loss 2.142380 | interval 13.302357 s
+>  ya has acabado el puzzle ?
+= have you finished the puzzle yet ?
+< have you eaten breakfast ?
+
+epoch 27 | percent 0.797940 | loss 2.214239 | interval 13.307732 s
+>  por cuanto tiempo has vivido en kobe ?
+= how long have you lived in kobe ?
+< how long have you been learning hungarian ?
+
+epoch 27 | percent 0.897727 | loss 2.202488 | interval 13.300136 s
+> la reunion casi habia terminado .
+= the meeting was almost over .
+< the meeting was almost over .
+
+epoch 27 | percent 0.997514 | loss 2.237502 | interval 13.303051 s
+> la ayuda ya esta en camino .
+= help is already on the way .
+< the is is mysteries .
+
+end of epoch 27 | time: 137.794862 s | loss: 2.237502
+epoch 28 | percent 0.099432 | loss 1.995626 | interval 17.605724 s
+>  tienes tambien esto en otros colores ?
+= do you also have this in other colors ?
+< do you have enough experience ?
+
+epoch 28 | percent 0.199219 | loss 2.066339 | interval 13.301561 s
+> tienes que parar .
+= you need to stop .
+< you must do it .
+
+epoch 28 | percent 0.299006 | loss 2.076470 | interval 13.304450 s
+> no le conozco .
+= i don t know him .
+< don t deceive him .
+
+epoch 28 | percent 0.398793 | loss 2.101561 | interval 13.299486 s
+> el es popular entre nosotros .
+= he is popular among us .
+< he is guilty of murder .
+
+epoch 28 | percent 0.498580 | loss 2.146418 | interval 13.302815 s
+> tom quiere meditarlo .
+= tom wants to think it over .
+< tom wants to be racist .
+
+epoch 28 | percent 0.598366 | loss 2.120762 | interval 13.309997 s
+> el ve la television todos los dias .
+= he watches tv every day .
+< he timed marathon race .
+
+epoch 28 | percent 0.698153 | loss 2.135817 | interval 13.301032 s
+>  este computador es tuyo no es asi ?
+= this computer is yours isn t it ?
+< isn t that your knife ?
+
+epoch 28 | percent 0.797940 | loss 2.182396 | interval 13.307625 s
+> te estuve esperando .
+= i waited for you .
+< i ll you you .
+
+epoch 28 | percent 0.897727 | loss 2.187553 | interval 13.297376 s
+> estoy ocupado hoy de otra manera aceptaria .
+= i m busy today otherwise i would accept .
+< i m very excited .
+
+epoch 28 | percent 0.997514 | loss 2.211381 | interval 13.295746 s
+> feliz pascua .
+= happy easter !
+< let s go to .
+
+end of epoch 28 | time: 137.681903 s | loss: 2.211381
+epoch 29 | percent 0.099432 | loss 1.994871 | interval 17.720542 s
+> la cuestion es donde comprar ese libro .
+= the question is where to buy the book .
+< the book is interesting interesting journey .
+
+epoch 29 | percent 0.199219 | loss 2.028885 | interval 13.294459 s
+> eso es mas de lo que puedo aguantar .
+= it is more than i can stand .
+< it s more complicated than i .
+
+epoch 29 | percent 0.299006 | loss 2.030316 | interval 13.286156 s
+>  te gusto tu primera clase ?
+= did you like your first class ?
+< do you have your coat ?
+
+epoch 29 | percent 0.398793 | loss 2.094872 | interval 13.295518 s
+> no tenia por que haber venido tan temprano .
+= you didn t have to come so early .
+< i didn t have to leave my friends .
+
+epoch 29 | percent 0.498580 | loss 2.081770 | interval 13.298307 s
+> esta muy guay .
+= it s pretty cool .
+< it s very .
+
+epoch 29 | percent 0.598366 | loss 2.111128 | interval 13.302951 s
+> esto es un harpa .
+= it s a harp .
+< this is a .
+
+epoch 29 | percent 0.698153 | loss 2.143846 | interval 13.298192 s
+>  estas conduciendo como un maniaco !
+= you re driving like a maniac !
+< you re always joking !
+
+epoch 29 | percent 0.797940 | loss 2.171446 | interval 13.299067 s
+> tom intento salvarle la vida a maria .
+= tom tried to save mary s life .
+< tom really remember mary s summer .
+
+epoch 29 | percent 0.897727 | loss 2.163760 | interval 13.318110 s
+> el clima esta helado ahora .
+= the weather is cold now .
+< the weather is closed now .
+
+epoch 29 | percent 0.997514 | loss 2.202384 | interval 13.305248 s
+> no me gusta ese nombre .
+= i don t like that name .
+< i don t like that name .
+
+end of epoch 29 | time: 137.775737 s | loss: 2.202384

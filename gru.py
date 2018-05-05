@@ -71,4 +71,4 @@ class Decoder(nn.Module):
         # output_index = topi
         # output_index: bsz * 1
 
-        return output, hidden, top1
+        return output, hidden, top1, stacks

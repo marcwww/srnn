@@ -69,24 +69,24 @@ input_lang, output_lang, pairs = data.prepareData('spa', 'en', True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE,max_length=MAX_LENGTH)
 
-# enc = stack.EncoderSRNN(input_size=input_lang.n_words,
-#                             hidden_size=args.hidden,
-#                             nstack=args.nstack,
-#                             stack_depth=args.stack_depth,
-#                             stack_size=args.stack_size,
-#                             stack_elem_size=args.stack_elem_size).\
-#                             to(DEVICE)
-# dec = stack.DecoderSRNN(output_size=output_lang.n_words,
-#                             hidden_size=args.hidden,
-#                             nstack=args.nstack,
-#                             stack_depth=args.stack_depth,
-#                             stack_size=args.stack_size,
-#                             stack_elem_size=args.stack_elem_size)\
-#                             .to(DEVICE)
-enc = gru.Encoder(input_size=input_lang.n_words,
-                  hidden_size=args.hidden).to(DEVICE)
-dec = gru.Decoder(output_size=output_lang.n_words,
-                  hidden_size=args.hidden).to(DEVICE)
+enc = stack.EncoderSRNN(input_size=input_lang.n_words,
+                            hidden_size=args.hidden,
+                            nstack=args.nstack,
+                            stack_depth=args.stack_depth,
+                            stack_size=args.stack_size,
+                            stack_elem_size=args.stack_elem_size).\
+                            to(DEVICE)
+dec = stack.DecoderSRNN(output_size=output_lang.n_words,
+                            hidden_size=args.hidden,
+                            nstack=args.nstack,
+                            stack_depth=args.stack_depth,
+                            stack_size=args.stack_size,
+                            stack_elem_size=args.stack_elem_size)\
+                            .to(DEVICE)
+# enc = gru.Encoder(input_size=input_lang.n_words,
+#                   hidden_size=args.hidden).to(DEVICE)
+# dec = gru.Decoder(output_size=output_lang.n_words,
+#                   hidden_size=args.hidden).to(DEVICE)
 
 
 def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
@@ -122,7 +122,7 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
             if random.random() < args.teaching and \
                     output_index is not None:
                 dec_input = output_index.squeeze(1)
-            output, hidden, output_index = dec(dec_input,hidden,stacks)
+            output, hidden, output_index, stacks = dec(dec_input,hidden,stacks)
             outputs.append(output)
             output_indices.append(output_index)
 
@@ -176,7 +176,7 @@ def trans_one_sen(src,max_length=MAX_LENGTH):
         output_indices=[]
         while len(output_indices)<max_length:
             # dec_input: shape of [batch_size=1]
-            _, hidden, output_index = dec(dec_input, hidden, stacks)
+            _, hidden, output_index, stacks = dec(dec_input, hidden, stacks)
             if output_index.item()==EOS:
                 break
             output_indices.append(output_index.item())
