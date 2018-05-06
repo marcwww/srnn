@@ -1,1 +1,2 @@
-# srnn
+# Seq2seq stack RNN
+
