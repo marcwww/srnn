@@ -1,2 +1,0 @@
-Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=100, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
-epoch 0 | percent 0.064516 | loss 3.366062 | interval 0.783186 s

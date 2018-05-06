@@ -1,7 +1,0 @@
-Namespace(batch_size=32, epochs=1000, gpu=0, grad_clip=10.0, hidden=256, log='log', lr=0.0001, max_length=20, nstack=2, output='output', stack_depth=2, stack_elem_size=256, stack_size=10, tag='stack', teaching=0.5, use_stack=True)
-epoch 0 | percent 0.064516 | loss 3.348907 | interval 0.859239 s
-> w w w w w
-= w w w w w
-< u j w w w w w w w i <PAD> q q q q q q q q q
-
-epoch 0 | percent 0.161290 | loss 3.304059 | interval 0.903243 s
