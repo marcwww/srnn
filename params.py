@@ -42,8 +42,13 @@ def parse_arguments():
                    help='train or test')
     p.add_argument('-add_pad',type=bool, default=False,
                    help='whether add one additional <PAD> for each source sentence')
-    p.add_argument('-model',type=str, default='stack_ex',
+    p.add_argument('-model', type=str, default='stack_ex',
                    help='stack_ex, stack or gru')
+    p.add_argument('-train_file', type=str, default='aa-bb',
+                   help='file for training, file name format: [source name]-[target name].txt')
+    p.add_argument('-test_file', type=str, default='aa-bb',
+                   help='file for testing, file name format: [source name]-[target name].test')
+
     return p.parse_args()
 
 args=parse_arguments()

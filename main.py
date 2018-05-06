@@ -29,6 +29,8 @@ USE_STACK=args.use_stack
 DEVICE=device
 TEACHING_RATIO=args.teaching
 ADD_PAD=args.add_pad
+TRAIN_FILE=args.train_file
+TEST_FILE=args.test_file
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -71,8 +73,9 @@ def to_batch(input_lang, output_lang,
     # res: list of batch pairs
     return res
 
+src_name, tar_name = TRAIN_FILE.split('-')
 # input_lang, output_lang, pairs = data.prepareData('spa', 'en', True)
-input_lang, output_lang, pairs = data.prepareData('aa', 'bb', True)
+input_lang, output_lang, pairs = data.prepareData(src_name, tar_name, True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE)
 
@@ -304,7 +307,7 @@ def train_epochs(test_per_percent=0.01):
                    time.time() - epoch_start_time,
                    loss),file=f)
             if (epoch+1) % test_per == 0:
-                test_accu=eval.test_accuracy(enc, dec, 'aa-bb')
+                test_accu=eval.test_accuracy(enc, dec, TEST_FILE)
                 print('accuracy in training: ',
                       test_accu)
                 print('accuracy in training: ',
