@@ -286,19 +286,22 @@ def train_epochs():
                   (epoch,
                    time.time() - epoch_start_time,
                    loss),file=f)
-            print('accuracy in training: ',
-                  eval.train_accuracy(enc, dec),
-                  file=f)
+            # print('accuracy in training: ',
+            #       eval.train_accuracy(enc, dec),
+            #       file=f)
 
 
 if __name__ == '__main__':
-    # name='15254220464367697'
-    # with open(params.enc_file, 'rb') as f:
-    #     enc=torch.load(f,map_location='cpu')
-    # with open(params.dec_file, 'rb') as f:
-    #     dec=torch.load(f,map_location='cpu')
+    name='152554821744345'
+    enc_file = args.output + '/' + 'enc_' + name + '.pt'
+    dec_file = args.output + '/' + 'dec_' + name + '.pt'
 
-    train_epochs()
-    # eval_randomly(100)
+    with open(enc_file, 'rb') as f:
+        enc=torch.load(f,map_location='cpu')
+    with open(dec_file, 'rb') as f:
+        dec=torch.load(f,map_location='cpu')
+
+    # train_epochs()
+    eval_randomly(100)
 
 

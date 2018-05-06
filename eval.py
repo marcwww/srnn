@@ -25,7 +25,6 @@ def train_accuracy(enc,dec):
             if tar[i]==EOS:
                 return True
 
-
     for i in range(len(batch_pairs)):
         src = batch_pairs[i][0]
         tar = batch_pairs[i][1]
