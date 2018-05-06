@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import argparse
 import time
+import os
 
 def parse_arguments():
     p = argparse.ArgumentParser(description='Hyperparams')
@@ -41,6 +42,15 @@ def parse_arguments():
 
 args=parse_arguments()
 device = torch.device(args.gpu if torch.cuda.is_available() else "cpu")
+
+output='./output'
+log='./log'
+if not os.path.exists(output):
+    os.makedirs(output)
+if not os.path.exists(log):
+    os.makedirs(log)
+
+
 name = ''.join(str(time.time()).split('.'))
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
