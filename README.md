@@ -187,7 +187,13 @@ epoch 20 | percent 0.354839 | loss 0.144057 | interval 0.917457 s
 #enc_1525592478714675_stack_ex.pt
 ```
 
+### 模型结构图
 
+#### stack:
 
+![stack](img/stack.png)
 
+#### stack_ex:
+
+![stack_ex](img/stack_ex.png)
 
