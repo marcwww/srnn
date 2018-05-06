@@ -14,7 +14,7 @@ def parse_arguments():
                    help='initial learning rate')
     p.add_argument('-grad_clip', type=float, default=10.0,
                    help='initial learning rate')
-    p.add_argument('-max_length', type=int, default=20,
+    p.add_argument('-max_length', type=int, default=50,
                    help='maximum sequence length')
     p.add_argument('-output', type=str, default='output',
                    help='output directory for model saving')
@@ -38,9 +38,16 @@ def parse_arguments():
                    help='teacher forcing ratio')
     p.add_argument('-tag', type=str, default='stack',
                    help='tags to print into the log')
+    p.add_argument('-mode', type=str, default='train',
+                   help='train or test')
+    p.add_argument('-add_pad',type=bool, default=False,
+                   help='whether add one additional <PAD> for each source sentence')
+    p.add_argument('-model',type=str, default='stack_ex',
+                   help='stack_ex, stack or gru')
     return p.parse_args()
 
 args=parse_arguments()
+device_str=args.gpu if torch.cuda.is_available() else "cpu"
 device = torch.device(args.gpu if torch.cuda.is_available() else "cpu")
 
 output='./output'
@@ -51,12 +58,13 @@ if not os.path.exists(log):
     os.makedirs(log)
 
 
-name = ''.join(str(time.time()).split('.'))
+name = ''.join(str(time.time()).split('.'))+'_'+args.tag
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
 log_file = args.log + '/' + 'log_' + name + '.txt'
-with open(log_file,'a+') as f:
-    print(args,file=f)
+if args.mode=='train':
+    with open(log_file,'a+') as f:
+        print(args,file=f)
 
 SOS=0
 EOS=1

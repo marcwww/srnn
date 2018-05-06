@@ -31,7 +31,6 @@ class Lang:
         else:
             self.word2count[word] += 1
 
-
 ######################################################################
 # The files are all in Unicode, to simplify we will turn Unicode
 # characters to ASCII, make everything lowercase, and trim most

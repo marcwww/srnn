@@ -28,6 +28,7 @@ OUTPUT=args.output
 USE_STACK=args.use_stack
 DEVICE=device
 TEACHING_RATIO=args.teaching
+ADD_PAD=args.add_pad
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -50,7 +51,7 @@ def to_batch(input_lang, output_lang,
             max_length_tar = max([len(tar) for tar in batch_tar])
 
             padded_src=[F.pad(torch.LongTensor(sen+[EOS]),
-                              (0,max_length_src+1+len([PAD])-len(sen+[EOS])),
+                              (0,max_length_src+1+int(ADD_PAD)-len(sen+[EOS])),
                               value=PAD)
                         for sen in batch_src]
             padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),
@@ -75,40 +76,43 @@ input_lang, output_lang, pairs = data.prepareData('aa', 'bb', True)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE)
 
-# enc = stack.EncoderSRNN(input_size=input_lang.n_words,
-#                             hidden_size=args.hidden,
-#                             nstack=args.nstack,
-#                             stack_depth=args.stack_depth,
-#                             stack_size=args.stack_size,
-#                             stack_elem_size=args.stack_elem_size).\
-#                             to(DEVICE)
-# dec = stack.DecoderSRNN(output_size=output_lang.n_words,
-#                             hidden_size=args.hidden,
-#                             nstack=args.nstack,
-#                             stack_depth=args.stack_depth,
-#                             stack_size=args.stack_size,
-#                             stack_elem_size=args.stack_elem_size)\
-#                             .to(DEVICE)
-enc = stack_ex.EncoderSRNN(input_size=input_lang.n_words,
-                            hidden_size=args.hidden,
-                            nstack=args.nstack,
-                            stack_depth=args.stack_depth,
-                            stack_size=args.stack_size,
-                            stack_elem_size=args.stack_elem_size).\
-                            to(DEVICE)
-dec = stack_ex.DecoderSRNN(output_size=output_lang.n_words,
-                            hidden_size=args.hidden,
-                            nstack=args.nstack,
-                            stack_depth=args.stack_depth,
-                            stack_size=args.stack_size,
-                            stack_elem_size=args.stack_elem_size)\
-                            .to(DEVICE)
-# enc = gru.Encoder(input_size=input_lang.n_words,
-#                   hidden_size=args.hidden).to(DEVICE)
-# dec = gru.Decoder(output_size=output_lang.n_words,
-#                   hidden_size=args.hidden).to(DEVICE)
+if args.model=='stack':
+    enc = stack.EncoderSRNN(input_size=input_lang.n_words,
+                                hidden_size=args.hidden,
+                                nstack=args.nstack,
+                                stack_depth=args.stack_depth,
+                                stack_size=args.stack_size,
+                                stack_elem_size=args.stack_elem_size).\
+                                to(DEVICE)
+    dec = stack.DecoderSRNN(output_size=output_lang.n_words,
+                                hidden_size=args.hidden,
+                                nstack=args.nstack,
+                                stack_depth=args.stack_depth,
+                                stack_size=args.stack_size,
+                                stack_elem_size=args.stack_elem_size)\
+                                .to(DEVICE)
+elif args.model=='stack_ex':
+    enc = stack_ex.EncoderSRNN(input_size=input_lang.n_words,
+                                hidden_size=args.hidden,
+                                nstack=args.nstack,
+                                stack_depth=args.stack_depth,
+                                stack_size=args.stack_size,
+                                stack_elem_size=args.stack_elem_size).\
+                                to(DEVICE)
+    dec = stack_ex.DecoderSRNN(output_size=output_lang.n_words,
+                                hidden_size=args.hidden,
+                                nstack=args.nstack,
+                                stack_depth=args.stack_depth,
+                                stack_size=args.stack_size,
+                                stack_elem_size=args.stack_elem_size)\
+                                .to(DEVICE)
+elif args.model=='gru':
+    enc = gru.Encoder(input_size=input_lang.n_words,
+                      hidden_size=args.hidden).to(DEVICE)
+    dec = gru.Decoder(output_size=output_lang.n_words,
+                      hidden_size=args.hidden).to(DEVICE)
 
-def no_teaching(hidden,stacks,dec,max_length=MAX_LENGTH):
+def no_teaching(hidden,stacks,dec,mode='train',max_length=MAX_LENGTH):
     dec_input = torch.LongTensor([SOS]).\
         expand(BATCH_SIZE).to(DEVICE)
 
@@ -129,8 +133,8 @@ def no_teaching(hidden,stacks,dec,max_length=MAX_LENGTH):
         output_indices.append(output_index)
         for i in range(BATCH_SIZE):
             if output_index[i].item() == EOS:
-                batch_ends[i] = False
-        if ends(batch_ends):
+                batch_ends[i] = True
+        if ends(batch_ends) and mode=='test':
             break
 
         dec_input = output_index.squeeze(1)
@@ -175,9 +179,9 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
                 output, hidden, output_index, stacks = dec(dec_input,hidden,stacks)
                 outputs.append(output)
         else:
-            outputs,_ =no_teaching(hidden,stacks,dec)
-            outputs=outputs[:len(dec_tar)]
+            outputs,_ =no_teaching(hidden,stacks,dec,mode='train',max_length=len(dec_tar))
 
+        # outputs: (length * bsz) * n_words
         outputs=torch.stack(outputs).view(-1,output_lang.n_words)
         loss=F.cross_entropy(outputs,dec_tar.view(-1),ignore_index=PAD)
         clip_grad_norm(enc.parameters(), max_norm=GRAD_CLIP)
@@ -194,6 +198,11 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
         if (i+1) % print_every == 0:
             total_loss=total_loss/print_every
             with open(params.log_file,'a+') as f:
+                print('epoch %d | percent %f | loss %f | interval %f s' %
+                      (epoch,
+                       i / len(batch_pairs),
+                       total_loss,
+                       time.time() - t))
                 print('epoch %d | percent %f | loss %f | interval %f s' %
                       (epoch,
                        i/len(batch_pairs),
@@ -214,7 +223,7 @@ def trans_one_batch(enc,dec,src_batch,max_length=MAX_LENGTH):
 
         _, hidden, stacks = enc(src_batch, hidden, stacks)
 
-        outputs, output_indices = no_teaching(hidden,stacks,dec)
+        outputs, output_indices = no_teaching(hidden,stacks,dec,mode='test')
 
         res=[]
         for i in range(BATCH_SIZE):
@@ -235,7 +244,8 @@ def trans_one_sen(enc,dec,src,max_length=MAX_LENGTH):
         # padded_src = F.pad(torch.LongTensor(indices + [EOS]),
         #                    (0, max_length + 1 - len(indices)),
         #                    value=PAD)
-        padded_src = torch.LongTensor(indices + [EOS]+ [PAD])
+        padded_src = torch.LongTensor(indices + [EOS]+ [PAD]
+                                      if ADD_PAD else indices + [EOS])
         padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
@@ -265,7 +275,7 @@ def eval_randomly(n=1):
             print('<', output_words,file=f)
             print('',file=f)
 
-def train_epochs():
+def train_epochs(test_per_percent=0.01):
     # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
     # dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
     # enc_optim = optim.SGD(enc.parameters(), lr=LR)
@@ -273,6 +283,7 @@ def train_epochs():
     enc_optim = optim.Adam(enc.parameters(), lr=LR)
     dec_optim = optim.Adam(dec.parameters(), lr=LR)
     best_loss = None
+    test_per=NEPOCHS*test_per_percent
 
     for epoch in range(NEPOCHS):
         epoch_start_time = time.time()
@@ -287,11 +298,18 @@ def train_epochs():
             print('end of epoch %d | time: %f s | loss: %f' %
                   (epoch,
                    time.time() - epoch_start_time,
+                   loss))
+            print('end of epoch %d | time: %f s | loss: %f' %
+                  (epoch,
+                   time.time() - epoch_start_time,
                    loss),file=f)
-            # print('accuracy in training: ',
-            #       eval.train_accuracy(enc, dec),
-            #       file=f)
-
+            if (epoch+1) % test_per == 0:
+                test_accu=eval.test_accuracy(enc, dec, 'aa-bb')
+                print('accuracy in training: ',
+                      test_accu)
+                print('accuracy in training: ',
+                      test_accu,
+                      file=f)
 
 if __name__ == '__main__':
     # name='152554821744345'
