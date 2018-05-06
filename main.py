@@ -50,7 +50,7 @@ def to_batch(input_lang, output_lang,
             max_length_tar = max([len(tar) for tar in batch_tar])
 
             padded_src=[F.pad(torch.LongTensor(sen+[EOS]),
-                              (0,max_length_src+1-len(sen+[EOS])),
+                              (0,max_length_src+1+len([PAD])-len(sen+[EOS])),
                               value=PAD)
                         for sen in batch_src]
             padded_tar=[F.pad(torch.LongTensor([SOS]+sen+[EOS]),
@@ -235,7 +235,7 @@ def trans_one_sen(enc,dec,src,max_length=MAX_LENGTH):
         # padded_src = F.pad(torch.LongTensor(indices + [EOS]),
         #                    (0, max_length + 1 - len(indices)),
         #                    value=PAD)
-        padded_src = torch.LongTensor(indices + [EOS])
+        padded_src = torch.LongTensor(indices + [EOS]+ [PAD])
         padded_src=padded_src.unsqueeze(0).t().to(DEVICE)
 
         hidden = enc.init_hidden(batch_size=1)
