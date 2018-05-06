@@ -140,7 +140,8 @@ def no_teaching(hidden,stacks,dec,max_length=MAX_LENGTH):
 def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
     total_loss=0
-    pre_loss=total_loss
+    output_loss=total_loss
+    num=0
     t=time.time()
 
     # batch_pairs_shuffle=to_batch(input_lang,
@@ -199,11 +200,12 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
                        total_loss,
                        time.time()-t),file=f)
             t=time.time()
-            pre_loss = total_loss
+            output_loss += total_loss
+            num += 1
             total_loss=0
             eval_randomly(n=1)
 
-    return pre_loss
+    return output_loss/num
 
 def trans_one_batch(enc,dec,src_batch,max_length=MAX_LENGTH):
     with torch.no_grad():
