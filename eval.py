@@ -17,7 +17,7 @@ def train_accuracy(enc,dec):
     def cmp(pre,tar):
         pre=list(pre)
         tar=list(tar)
-        print(pre[:len(tar)],tar)
+        # print(pre[:len(tar)],tar)
         for i in range(len(tar)):
             if tar[i]!=pre[i]:
                 return False

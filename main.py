@@ -292,14 +292,14 @@ def train_epochs():
 
 
 if __name__ == '__main__':
-    name='152554821744345'
-    enc_file = args.output + '/' + 'enc_' + name + '.pt'
-    dec_file = args.output + '/' + 'dec_' + name + '.pt'
-
-    with open(enc_file, 'rb') as f:
-        enc=torch.load(f,map_location='cpu')
-    with open(dec_file, 'rb') as f:
-        dec=torch.load(f,map_location='cpu')
+    # name='152554821744345'
+    # enc_file = args.output + '/' + 'enc_' + name + '.pt'
+    # dec_file = args.output + '/' + 'dec_' + name + '.pt'
+    #
+    # with open(enc_file, 'rb') as f:
+    #     enc=torch.load(f,map_location='cpu')
+    # with open(dec_file, 'rb') as f:
+    #     dec=torch.load(f,map_location='cpu')
 
     # train_epochs()
     eval_randomly(100)
