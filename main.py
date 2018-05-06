@@ -308,9 +308,9 @@ def train_epochs(test_per_percent=0.01):
                    loss),file=f)
             if (epoch+1) % test_per == 0:
                 test_accu=eval.test_accuracy(enc, dec, TEST_FILE)
-                print('accuracy in training: ',
+                print('accuracy in testing: ',
                       test_accu)
-                print('accuracy in training: ',
+                print('accuracy in testing: ',
                       test_accu,
                       file=f)
 
