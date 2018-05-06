@@ -34,6 +34,15 @@ def accuracy(enc,dec,batch_pairs):
         for i in range(BATCH_SIZE):
             if cmp(np.array((res[i])),dec_tar[:,i].cpu().numpy()):
                num+=1
+               x=list(np.array((res[i])))
+               l=0
+               for i in x:
+                 if i==EOS:
+                     break
+                 l+=1
+                 if l>10:
+                     print('a')
+                 print(l)
 
         total+=BATCH_SIZE
 
@@ -50,7 +59,7 @@ def test_accuracy(enc,dec,name):
     return accuracy(enc,dec,batch_pairs)
 
 if __name__ == '__main__':
-    name='1525581007799974'
+    name='1525594849358548_stack'
     enc_file = args.output + '/' + 'enc_' + name + '.pt'
     dec_file = args.output + '/' + 'dec_' + name + '.pt'
 

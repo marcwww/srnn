@@ -122,12 +122,12 @@ p.add_argument('-epochs', type=int, default=30,
                    help='file for testing, file name format: [source name]-[target name].test')
 ```
 
-### 结果
+### 一次实验
 
 #### 命令：
 
 ```bash
-python main.py -epochs 1000 -batch_size 32 -model stack_ex -tag stack_ex
+python main.py -epochs 1000 -batch_size 32 -model stack_ex -tag stack_ex -stack_size 10
 ```
 
 #### Log:
@@ -186,6 +186,46 @@ epoch 20 | percent 0.354839 | loss 0.144057 | interval 0.917457 s
 #dec_1525592478714675_stack_ex.pt
 #enc_1525592478714675_stack_ex.pt
 ```
+
+### 栈容量
+
+改变栈容量为100，可以发现模型容量显著增加，在第39个epoch时，在测试集上准确率达到1.0（相比‘一次实验’，继续进行试验发现到几百epoch时准确率仍为0.38左右）
+
+```bas
+python main.py -epochs 1000 -batch_size 32 -model stack_ex -tag long -stack_size 100
+```
+
+```bash
+#log_15255970188129146_long.txt
+epoch 39 | percent 0.741935 | loss 0.000033 | interval 1.071045 s
+> q q q q q q
+= q q q q q q
+< q q q q q q
+
+epoch 39 | percent 0.838710 | loss 0.000087 | interval 1.300662 s
+> g g
+= g g
+< g g
+
+epoch 39 | percent 0.935484 | loss 0.000041 | interval 1.163238 s
+> v v v v v v v v
+= v v v v v v v v
+< v v v v v v v v
+
+end of epoch 39 | time: 12.392203 s | loss: 0.000047
+accuracy in testing:  1.0
+epoch 40 | percent 0.064516 | loss 0.000060 | interval 1.328768 s
+> d d d d d d d d d
+= d d d d d d d d d
+< d d d d d d d d d
+
+epoch 40 | percent 0.161290 | loss 0.000017 | interval 1.382405 s
+> z z z z
+= z z z z
+< z z z z
+```
+
+
 
 ### 模型结构图
 
