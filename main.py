@@ -301,7 +301,7 @@ if __name__ == '__main__':
     # with open(dec_file, 'rb') as f:
     #     dec=torch.load(f,map_location='cpu')
 
-    # train_epochs()
-    eval_randomly(100)
+    train_epochs()
+    # eval_randomly(100)
 
 
