@@ -105,6 +105,17 @@ class EncoderSRNN(nn.Module):
 
 
             if USE_STACK:
+                # # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
+                # stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
+                #     view(batch_size,
+                #          self.nstack,
+                #          self.stack_depth * self.stack_elem_size)
+                #
+                # # read_res: bsz * nstack * hidden_size
+                # read_res = self.read_stack(stack_vals)
+                # # read_res: bsz * (nstack * hidden_size)
+                # read_res = read_res.view(batch_size, -1)
+
                 act = self.hid2act(hidden)
                 act = act.view(-1, self.nstack, NACT)
                 # act: bsz * nstack * 3
@@ -118,18 +129,6 @@ class EncoderSRNN(nn.Module):
                 # push_vals: bsz * nstack * stack_elem_size
                 push_vals = self.nonLinear(push_vals)
                 stacks = self.update_stack(stacks, p_push, p_pop, p_noop, push_vals)
-
-                # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
-                stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
-                    view(batch_size,
-                         self.nstack,
-                         self.stack_depth * self.stack_elem_size)
-
-                # read_res: bsz * nstack * hidden_size
-                read_res = self.read_stack(stack_vals)
-                # read_res: bsz * (nstack * hidden_size)
-                read_res = read_res.view(batch_size,-1)
-
 
             hidden=cur_hidden
             output = hidden
@@ -230,6 +229,20 @@ class DecoderSRNN(nn.Module):
         output = self.hid2out(cur_hidden)
 
         if USE_STACK:
+            # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
+            stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
+                view(batch_size,
+                     self.nstack,
+                     self.stack_depth * self.stack_elem_size)
+
+            # read_res: bsz * nstack * hidden_size
+            read_res = self.stack2hid(stack_vals)
+            # read_res: bsz * (nstack * hidden_size)
+            read_res = read_res.view(batch_size, -1)
+            # cat_res: bsz * (nstack * hidden_size+hidden_size)
+            cat_res = torch.cat([read_res, cur_hidden], dim=1)
+            output = self.out(cat_res)
+
             act = self.hid2act(hidden)
             act = act.view(-1, self.nstack, NACT)
             # act: bsz * nstack * 3
@@ -243,20 +256,6 @@ class DecoderSRNN(nn.Module):
             # push_vals: bsz * nstack * stack_elem_size
             push_vals = self.nonLinear(push_vals)
             stacks = self.update_stack(stacks, p_push, p_pop, p_noop, push_vals)
-
-            # stack_vals: bsz * nstack * (stack_depth * stack_elem_size)
-            stack_vals = stacks[:, :, :self.stack_depth, :].contiguous(). \
-                view(batch_size,
-                     self.nstack,
-                     self.stack_depth * self.stack_elem_size)
-
-            # read_res: bsz * nstack * hidden_size
-            read_res = self.stack2hid(stack_vals)
-            # read_res: bsz * (nstack * hidden_size)
-            read_res = read_res.view(batch_size,-1)
-            # cat_res: bsz * (nstack * hidden_size+hidden_size)
-            cat_res = torch.cat([read_res,cur_hidden],dim=1)
-            output=self.out(cat_res)
 
         output = self.log_softmax(output)
         # output: bsz * tar_vacabulary_size
