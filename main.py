@@ -289,6 +289,9 @@ def train_epochs(test_per_percent=0.01):
     test_per= max(NEPOCHS*test_per_percent,1)
 
     for epoch in range(NEPOCHS):
+        with open(params.log_file, 'a+') as f:
+            print('-' * 15 + ('train_epoch_%d' % epoch) + '-' * 15)
+            print('-' * 15 + ('train_epoch_%d' % epoch) + '-' * 15,file=f)
         epoch_start_time = time.time()
         loss = train(enc_optim, dec_optim, epoch)
         if best_loss is None or loss < best_loss:
@@ -308,6 +311,8 @@ def train_epochs(test_per_percent=0.01):
                    loss),file=f)
             if (epoch+1) % test_per == 0:
                 test_accu=eval.test_accuracy(enc, dec, TEST_FILE)
+                print('-' * 15 + ('test_epoch_%d' % epoch) + '-' * 15 )
+                print('-' * 15 + ('test_epoch_%d' % epoch) + '-' * 15,file=f)
                 print('accuracy in testing: ',
                       test_accu)
                 print('accuracy in testing: ',
