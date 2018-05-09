@@ -8,7 +8,7 @@ SOS=params.SOS
 EOS=params.EOS
 PAD=params.PAD
 MAX_LENGTH=args.max_length
-
+IS_NL=args.is_nl
 
 class Lang:
     def __init__(self, name):
@@ -50,16 +50,17 @@ def unicodeToAscii(s):
 
 def normalizeString(s):
     s = unicodeToAscii(s.lower().strip())
-    s = re.sub(r"([.!?])", r" \1", s)
-    s = re.sub(r"[^a-zA-Z.!?]+", r" ", s)
+    if IS_NL:
+        s = re.sub(r"([.!?])", r" \1", s)
+        s = re.sub(r"[^a-zA-Z.!?]+", r" ", s)
     return s
 
 
-def readLangs(lang1, lang2, reverse=False):
+def readLangs(fname, lang1, lang2, reverse=False):
     print("Reading lines...")
 
     # Read the file and split into lines
-    lines = open('data/%s-%s.txt' % (lang1, lang2), encoding='utf-8').\
+    lines = open('data/%s' % fname, encoding='utf-8').\
         read().strip().split('\n')
 
     # Split every line into pairs and normalize
@@ -92,13 +93,12 @@ def filterPair(p):
         len(p[1].split(' ')) < MAX_LENGTH
         # and p[1].startswith(eng_prefixes)
 
-
 def filterPairs(pairs):
     return [pair for pair in pairs if filterPair(pair)]
 
-def prepareData(lang1, lang2, reverse=False):
-    input_lang, output_lang, pairs = readLangs(lang1, lang2, reverse)
-    print("Read %s sentence pairs" % len(pairs))
+def prepareData(fname, lang1='src', lang2='tar', reverse=False):
+    input_lang, output_lang, pairs = readLangs(fname, lang1, lang2, reverse)
+    print("Read %s sentence pairs from %s." % (len(pairs),fname))
     pairs = filterPairs(pairs)
     print("Trimmed to %s sentence pairs" % len(pairs))
     print("Counting words...")

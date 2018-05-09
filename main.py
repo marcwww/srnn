@@ -73,9 +73,9 @@ def to_batch(input_lang, output_lang,
     # res: list of batch pairs
     return res
 
-src_name, tar_name = TRAIN_FILE.split('-')
+# src_name, tar_name = TRAIN_FILE.split('-')
 # input_lang, output_lang, pairs = data.prepareData('spa', 'en', True)
-input_lang, output_lang, pairs = data.prepareData(src_name, tar_name, True)
+input_lang, output_lang, pairs = data.prepareData(TRAIN_FILE, reverse=False)
 batch_pairs=to_batch(input_lang,output_lang,pairs,
                      batch_size=BATCH_SIZE)
 
@@ -286,7 +286,7 @@ def train_epochs(test_per_percent=0.01):
     enc_optim = optim.Adam(enc.parameters(), lr=LR)
     dec_optim = optim.Adam(dec.parameters(), lr=LR)
     best_loss = None
-    test_per=NEPOCHS*test_per_percent
+    test_per= max(NEPOCHS*test_per_percent,1)
 
     for epoch in range(NEPOCHS):
         epoch_start_time = time.time()
