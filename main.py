@@ -160,6 +160,9 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
 
     print_every=int(len(batch_pairs)*print_per_percent)
     for i in range(len(batch_pairs_shuffle)):
+        enc_optim.zero_grad()
+        dec_optim.zero_grad()
+
         # one source batch and one target batch:
         # src: length * batch_size
         # tar: length * batch_size
