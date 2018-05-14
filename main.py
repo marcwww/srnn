@@ -31,6 +31,7 @@ TEACHING_RATIO=args.teaching
 ADD_PAD=args.add_pad
 TRAIN_FILE=args.train_file
 TEST_FILE=args.test_file
+TEST_PER=args.test_per_epoch
 
 def indexesFromSentence(lang, sentence):
     return [lang.word2index[word] for word in sentence.split(' ')]
@@ -281,7 +282,7 @@ def eval_randomly(n=1):
             print('<', output_words,file=f)
             print('',file=f)
 
-def train_epochs(test_per_percent=0.01):
+def train_epochs(test_per=TEST_PER):
     # enc_optim=optim.Adagrad(enc.parameters(),lr=LR)
     # dec_optim=optim.Adagrad(dec.parameters(),lr=LR)
     # enc_optim = optim.SGD(enc.parameters(), lr=LR)
@@ -289,7 +290,7 @@ def train_epochs(test_per_percent=0.01):
     enc_optim = optim.Adam(enc.parameters(), lr=LR)
     dec_optim = optim.Adam(dec.parameters(), lr=LR)
     best_loss = None
-    test_per= max(NEPOCHS*test_per_percent,1)
+    test_per= min(NEPOCHS,test_per)
 
     for epoch in range(NEPOCHS):
         with open(params.log_file, 'a+') as f:

@@ -3,6 +3,7 @@ import torch.nn as nn
 import argparse
 import time
 import os
+import sys
 
 def parse_arguments():
     p = argparse.ArgumentParser(description='Hyperparams')
@@ -50,6 +51,8 @@ def parse_arguments():
                    help='file for testing, file name format: [source name]-[target name].test')
     p.add_argument('-is_nl', type=bool, default=False,
                    help='whether the data is natural language')
+    p.add_argument('-test_per_epoch', type=int, default=1,
+                   help='every how many epoches the model test once')
 
     return p.parse_args()
 
@@ -65,7 +68,7 @@ if not os.path.exists(log):
     os.makedirs(log)
 
 
-name = ''.join(str(time.time()).split('.'))+'_'+args.tag
+name = ''.join(str(time.time()).split('.'))+'_'+' '.join(sys.argv[1:])
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
 log_file = args.log + '/' + 'log_' + name + '.txt'
