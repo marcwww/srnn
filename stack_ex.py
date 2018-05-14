@@ -99,7 +99,7 @@ class EncoderSRNN(nn.Module):
         outputs=[]
         for input in embs:
             # input: bsz * embdsz
-            input=self.input2hid(input)
+            # input=self.input2hid(input)
 
             # hidden: bsz * hidden_size
             cur_hidden=self.gru(input,hidden)
@@ -223,7 +223,7 @@ class DecoderSRNN(nn.Module):
         batch_size = input.shape[0]
 
         # emb: bsz * embdsz
-        emb=self.input2hid(emb)
+        # emb=self.input2hid(emb)
 
         # hidden: bsz * hidden_size
         cur_hidden=self.gru(emb,hidden)
