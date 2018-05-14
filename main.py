@@ -152,12 +152,12 @@ def train(enc_optim,dec_optim,epoch,print_per_percent=0.1):
     num=0
     t=time.time()
 
-    batch_pairs_shuffle=to_batch(input_lang,
-                                 output_lang,
-                                 pairs,
-                                 batch_size=BATCH_SIZE)
-
-    # batch_pairs_shuffle=batch_pairs
+    # batch_pairs_shuffle=to_batch(input_lang,
+    #                              output_lang,
+    #                              pairs,
+    #                              batch_size=BATCH_SIZE)
+    #
+    batch_pairs_shuffle=batch_pairs
 
     print_every=int(len(batch_pairs)*print_per_percent)
     for i in range(len(batch_pairs_shuffle)):
