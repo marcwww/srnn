@@ -68,7 +68,7 @@ if not os.path.exists(log):
     os.makedirs(log)
 
 
-name = ''.join(str(time.time()).split('.'))+'_'+' '.join(sys.argv[1:])
+name = ''.join(str(time.time()).split('.'))+'_'+'_'.join(sys.argv[1:])
 enc_file = args.output + '/' + 'enc_' + name + '.pt'
 dec_file = args.output + '/' + 'dec_' + name + '.pt'
 log_file = args.log + '/' + 'log_' + name + '.txt'
